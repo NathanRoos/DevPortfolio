@@ -1,7 +1,7 @@
 "use client";
 import { useLanguage } from '../context/LanguageContext';
 import { useState, useEffect } from 'react';
-import AdminGuard from '../../../components/AdminGuard';
+import AdminGuard from './AdminGuard';
 import Link from 'next/link';
 
 interface DashboardStats {
