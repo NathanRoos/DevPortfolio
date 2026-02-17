@@ -13,8 +13,9 @@ export default function AdminHobbies() {
   const [hobbies, setHobbies] = useState<Hobby[]>([]);
   const [formData, setFormData] = useState({
     name: '',
-    icon: ''
+    icon: '' // Will be used for emoji/SVG fallback
   });
+  const [iconFile, setIconFile] = useState<File | null>(null);
 
   useEffect(() => {
     fetchHobbies();
@@ -33,14 +34,22 @@ export default function AdminHobbies() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      const form = new FormData();
+      form.append('name', formData.name);
+      if (iconFile) {
+        form.append('icon', iconFile);
+      } else if (formData.icon) {
+        form.append('icon', formData.icon); // fallback for emoji/SVG
+      }
+
       const response = await fetch('/api/hobbies', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: form,
       });
 
       if (response.ok) {
         setFormData({ name: '', icon: '' });
+        setIconFile(null);
         fetchHobbies();
       }
     } catch (error) {
@@ -69,7 +78,7 @@ export default function AdminHobbies() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="glass-card p-6 rounded-2xl h-fit">
             <h3 className="text-2xl font-bold text-white mb-6">Add Hobby</h3>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4" encType="multipart/form-data">
               <input
                 type="text"
                 placeholder="Hobby Name"
@@ -78,7 +87,14 @@ export default function AdminHobbies() {
                 className="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded-lg text-white"
                 required
               />
-               <input
+              <input
+                type="file"
+                accept="image/png"
+                onChange={e => setIconFile(e.target.files && e.target.files[0] ? e.target.files[0] : null)}
+                className="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded-lg text-white"
+              />
+              <div className="text-gray-400 text-xs">Or enter emoji/SVG below (will be ignored if PNG is uploaded):</div>
+              <input
                 type="text"
                 placeholder="Icon (Optional emoji or SVG)"
                 value={formData.icon}
@@ -99,7 +115,11 @@ export default function AdminHobbies() {
                 {hobbies.map((hobby) => (
                 <div key={hobby.id} className="glass-card p-4 rounded-2xl flex items-center justify-between group">
                     <div className="flex items-center gap-3">
-                        <span className="text-2xl">{hobby.icon || '✨'}</span>
+                        {hobby.icon && hobby.icon.startsWith('http') ? (
+                          <img src={hobby.icon} alt={hobby.name} className="w-8 h-8 object-contain inline-block align-middle" />
+                        ) : (
+                          <span className="text-2xl">{hobby.icon || '✨'}</span>
+                        )}
                         <span className="font-semibold text-white">{hobby.name}</span>
                     </div>
                     <button
