@@ -19,16 +19,14 @@ export default function Navbar() {
           setScrollY(currentScrollY);
           setScrolled(currentScrollY > 50);
           ticking = false;
-              [
-                { href: '/projects', label: 'Projects' },
-                { href: '/skills', label: 'Skills' },
-                { href: '/experience', label: 'Experience' },
-                { href: '/education', label: 'Education' },
-                { href: '/hobbies', label: 'Hobbies' },
-                { href: '/cv', label: 'CV' },
-                { href: '/testimonials', label: 'Testimonials' },
-                { href: '/contact', label: 'Contact' }
-              ].map((item) => (
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const navMenu = [
     { href: '/projects', label: 'Projects' },
     { href: '/skills', label: 'Skills' },
@@ -76,15 +74,7 @@ export default function Navbar() {
             </div>
             
             <div className="hidden lg:flex items-center space-x-1">
-              {[
-                { href: '/projects', label: 'Projects' },
-                { href: '/skills', label: 'Skills' },
-                { href: '/experience', label: 'Experience' },
-                { href: '/education', label: 'Education' },
-                { href: '/hobbies', label: 'Hobbies' },
-                { href: '/testimonials', label: 'Testimonials' },
-                { href: '/contact', label: 'Contact' }
-              ].map((item) => (
+              {navMenu.map((item) => (
                 <Link 
                   key={item.href}
                   href={item.href} 
