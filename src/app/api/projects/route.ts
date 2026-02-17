@@ -1,3 +1,16 @@
+export async function DELETE(request: Request) {
+  try {
+    const { id } = await request.json();
+    if (!id) {
+      return NextResponse.json({ error: 'Project ID is required' }, { status: 400 });
+    }
+    await prisma.project.delete({ where: { id } });
+    return NextResponse.json({ message: 'Project deleted' });
+  } catch (error) {
+    console.error('Error deleting project:', error);
+    return NextResponse.json({ error: 'Failed to delete project' }, { status: 500 });
+  }
+}
 import { NextResponse } from 'next/server';
 import { prisma } from '../../../lib/prisma';
 

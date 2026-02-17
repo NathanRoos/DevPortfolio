@@ -356,13 +356,29 @@ export default function AdminProjects() {
                         </div>
                       </div>
                       <div className="flex flex-col space-y-2 ml-6">
-                        <button className="px-4 py-2 bg-primary-500/20 text-primary-300 rounded-xl hover:bg-primary-500/30 transition-all duration-300 font-semibold hover:scale-105 border border-primary-500/30 text-sm flex items-center gap-2">
+                        <button className="px-4 py-2 bg-primary-500/20 text-primary-300 rounded-xl hover:bg-primary-500/30 transition-all duration-300 font-semibold hover:scale-105 border border-primary-500/30 text-sm flex items-center gap-2" onClick={() => alert('Edit functionality coming soon!')}>
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                           </svg>
                           Edit
                         </button>
-                        <button className="px-4 py-2 bg-dark-800/50 text-gray-400 rounded-xl hover:bg-dark-700/50 transition-all duration-300 font-semibold hover:scale-105 border border-gray-600/30 text-sm flex items-center gap-2">
+                        <button className="px-4 py-2 bg-dark-800/50 text-gray-400 rounded-xl hover:bg-dark-700/50 transition-all duration-300 font-semibold hover:scale-105 border border-gray-600/30 text-sm flex items-center gap-2" onClick={async () => {
+                          if (!confirm('Are you sure you want to delete this project?')) return;
+                          try {
+                            const response = await fetch('/api/projects', {
+                              method: 'DELETE',
+                              headers: { 'Content-Type': 'application/json' },
+                              body: JSON.stringify({ id: project.id }),
+                            });
+                            if (response.ok) {
+                              await fetchProjects();
+                            } else {
+                              alert('Failed to delete project');
+                            }
+                          } catch (err) {
+                            alert('Failed to delete project');
+                          }
+                        }}>
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                           </svg>
