@@ -1,5 +1,6 @@
 import './globals.css'
 import ClientWrapper from '../components/ClientWrapper'
+  import { LanguageProvider } from '../context/LanguageContext'
 
 export const metadata = {
   title: 'Nathan Roos | Full Stack Developer & Cloud Infrastructure Specialist',
@@ -11,13 +12,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  return (
-    <html lang="en">
-      <body className="min-h-screen">
-        <ClientWrapper>
-          {children}
-        </ClientWrapper>
-      </body>
-    </html>
-  )
+    return (
+      <html lang="en">
+        <body className="min-h-screen">
+          <LanguageProvider>
+            <ClientWrapper>
+              {children}
+            </ClientWrapper>
+          </LanguageProvider>
+        </body>
+      </html>
+    )
 }
