@@ -1,0 +1,107 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String       @id @default(cuid())
+  email         String       @unique
+  auth0Id       String       @unique
+  name          String?
+  role          Role         @default(USER)
+  createdAt     DateTime     @default(now())
+  testimonials  Testimonial[]
+  messages      ContactMessage[]
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  repoUrl     String?
+  liveUrl     String?
+  tags        String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Testimonial {
+  id        String          @id @default(cuid())
+  userId    String?
+  user      User?           @relation(fields: [userId], references: [id])
+  author    String
+  text      String
+  rating    Int               @default(5)
+  status    TestimonialStatus @default(PENDING)
+  createdAt DateTime        @default(now())
+}
+
+enum TestimonialStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  name      String
+  email     String
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model Skill {
+  id        String   @id @default(cuid())
+  name      String
+  category  String   // e.g. "Frontend", "Backend", "DevOps"
+  proficiency Int    @default(0) // 0-100 or 1-5 
+  icon      String?  // Optional icon class or name
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Experience {
+  id          String   @id @default(cuid())
+  position    String
+  company     String
+  startDate   DateTime
+  endDate     DateTime? // Null means "Present"
+  description String
+  location    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Education {
+  id          String   @id @default(cuid())
+  degree      String
+  institution String
+  startDate   DateTime
+  endDate     DateTime?
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Hobby {
+  id        String   @id @default(cuid())
+  name      String
+  icon      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
