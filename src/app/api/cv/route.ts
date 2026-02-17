@@ -40,6 +40,7 @@ export async function POST(req: NextRequest) {
       {
         folder: CV_FOLDER,
         resource_type: 'raw',
+        type: 'upload', // ensure public access
         format: 'pdf',
         public_id: 'cv', // always overwrite the same file
         overwrite: true,
