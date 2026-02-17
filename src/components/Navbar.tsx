@@ -3,8 +3,11 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useUser } from '../context/AuthContext';
+import { useLanguage } from '../context/LanguageContext';
+import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Navbar() {
+  const { t } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [scrollY, setScrollY] = useState(0);
@@ -28,14 +31,14 @@ export default function Navbar() {
   }, []);
 
   const navMenu = [
-    { href: '/projects', label: 'Projects' },
-    { href: '/skills', label: 'Skills' },
-    { href: '/experience', label: 'Experience' },
-    { href: '/education', label: 'Education' },
-    { href: '/hobbies', label: 'Hobbies' },
-    { href: '/cv', label: 'CV' },
-    { href: '/testimonials', label: 'Testimonials' },
-    { href: '/contact', label: 'Contact' }
+    { href: '/projects', label: t('nav.projects') },
+    { href: '/skills', label: t('nav.skills') },
+    { href: '/experience', label: t('nav.experience') },
+    { href: '/education', label: t('nav.education') },
+    { href: '/hobbies', label: t('nav.hobbies') },
+    { href: '/cv', label: t('nav.cv') },
+    { href: '/testimonials', label: t('nav.testimonials') },
+    { href: '/contact', label: t('nav.contact') }
   ];
 
   // Calculate dynamic opacity and blur based on scroll position
@@ -58,7 +61,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-20">
           <div className="flex items-center space-x-8">
-            <div>
+            <div className="flex items-center">
               <Link href="/" className="flex items-center group">
                 <div className="relative">
                   <span className="font-black text-3xl gradient-text hover:scale-105 transition-transform duration-300 pulse-glow">
@@ -71,8 +74,8 @@ export default function Navbar() {
                   <div className="text-xs text-neon-orange font-mono font-semibold drop-shadow-md">&lt;DevOps Developer/&gt;</div>
                 </div>
               </Link>
+              <LanguageSwitcher />
             </div>
-            
             <div className="hidden lg:flex items-center space-x-1">
               {navMenu.map((item) => (
                 <Link 
@@ -154,9 +157,9 @@ export default function Navbar() {
         } overflow-hidden`}>
           <div className="glass-card m-4 p-6 space-y-4 will-change-transform">
             {[
-              { href: '/projects', label: 'Projects' },
-              { href: '/testimonials', label: 'Testimonials' },
-              { href: '/contact', label: 'Contact' },
+              { href: '/projects', label: t('nav.projects') },
+              { href: '/testimonials', label: t('nav.testimonials') },
+              { href: '/contact', label: t('nav.contact') },
               { href: '/architecture', label: 'Architecture' }
             ].map((item) => (
               <Link 
