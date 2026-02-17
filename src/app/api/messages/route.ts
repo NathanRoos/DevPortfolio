@@ -54,6 +54,8 @@ export async function GET() {
   }
 }
 
+
+export async function POST(request: Request) {
   try {
     // Get IP address (fallback to 'unknown')
     const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
