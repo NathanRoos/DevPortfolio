@@ -22,7 +22,9 @@ export default async function CVPage() {
           Download CV
         </a>
       ) : (
-        <p className="text-red-500">No CV available for download.</p>
+        <div className="py-8 text-center text-gray-400 text-lg font-semibold">
+          No CV available yet.
+        </div>
       )}
     </div>
   );
