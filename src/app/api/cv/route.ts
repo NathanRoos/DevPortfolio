@@ -1,14 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { promises as fs } from 'fs';
-import path from 'path';
+import { v2 as cloudinary } from 'cloudinary';
 
-const CV_STORAGE_PATH = path.join(process.cwd(), 'public', 'cv.pdf');
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
-// GET: Return the current CV URL if exists
+const CV_FOLDER = 'portfolio-cv';
+
+// GET: Return the current CV URL if exists (fetch latest from Cloudinary)
 export async function GET() {
   try {
-    await fs.access(CV_STORAGE_PATH);
-    return NextResponse.json({ url: '/cv.pdf' });
+    const res = await cloudinary.search
+      .expression(`folder:${CV_FOLDER} AND resource_type:raw`)
+      .sort_by('uploaded_at','desc')
+      .max_results(1)
+      .execute();
+    const file = res.resources?.[0];
+    return NextResponse.json({ url: file ? file.secure_url : '' });
   } catch {
     return NextResponse.json({ url: '' });
   }
@@ -22,14 +32,38 @@ export async function POST(req: NextRequest) {
   if (file.type !== 'application/pdf') return NextResponse.json({ error: 'Only PDF allowed' }, { status: 400 });
 
   const arrayBuffer = await file.arrayBuffer();
-  await fs.writeFile(CV_STORAGE_PATH, Buffer.from(arrayBuffer));
-  return NextResponse.json({ url: '/cv.pdf' });
+  const buffer = Buffer.from(arrayBuffer);
+
+  // Upload to Cloudinary as raw file
+  const uploadPromise = new Promise((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(
+      {
+        folder: CV_FOLDER,
+        resource_type: 'raw',
+        format: 'pdf',
+        public_id: 'cv', // always overwrite the same file
+        overwrite: true,
+      },
+      (error, result) => {
+        if (error || !result) reject(error || new Error('Cloudinary upload failed'));
+        else resolve(result);
+      }
+    );
+    stream.end(buffer);
+  });
+
+  try {
+    const result: any = await uploadPromise;
+    return NextResponse.json({ url: result.secure_url });
+  } catch (error) {
+    return NextResponse.json({ error: 'Cloudinary upload failed' }, { status: 500 });
+  }
 }
 
-// DELETE: Remove the current CV
+// DELETE: Remove the current CV from Cloudinary
 export async function DELETE() {
   try {
-    await fs.unlink(CV_STORAGE_PATH);
+    await cloudinary.uploader.destroy(`${CV_FOLDER}/cv`, { resource_type: 'raw' });
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json({ error: 'No CV to delete' }, { status: 404 });
