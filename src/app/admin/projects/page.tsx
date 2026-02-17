@@ -24,32 +24,7 @@ interface Project {
 }
 
 export default function AdminProjects() {
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [showForm, setShowForm] = useState(false);
-  const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    repoUrl: '',
-    liveUrl: '',
-    tags: '' // Will be converted to array
-  });
-  const [submitting, setSubmitting] = useState(false);
-  const [editState, setEditState] = useState<EditState | null>(null);
-  const [editSubmitting, setEditSubmitting] = useState(false);
 
-  const fetchProjects = async () => {
-    try {
-      const response = await fetch('/api/projects');
-      if (!response.ok) throw new Error('Failed to fetch projects');
-      const data = await response.json();
-      setProjects(data);
-    } catch (error) {
-      console.error('Error fetching projects:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleEditSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
