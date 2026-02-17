@@ -11,6 +11,8 @@ interface EditState {
 }
   const [editState, setEditState] = useState<EditState | null>(null);
   const [editSubmitting, setEditSubmitting] = useState(false);
+
+  // Move handleEditSubmit below fetchProjects so fetchProjects is in scope
   const handleEditSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editState) return;
