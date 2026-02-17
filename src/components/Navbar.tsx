@@ -21,15 +21,16 @@ export default function Navbar() {
           setScrollY(currentScrollY);
           setScrolled(currentScrollY > 50);
           ticking = false;
-        });
-        ticking = true;
-      }
-    };
-    
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
+              [
+                { href: '/projects', label: 'Projects' },
+                { href: '/skills', label: 'Skills' },
+                { href: '/experience', label: 'Experience' },
+                { href: '/education', label: 'Education' },
+                { href: '/hobbies', label: 'Hobbies' },
+                { href: '/cv', label: 'CV' },
+                { href: '/testimonials', label: 'Testimonials' },
+                { href: '/contact', label: 'Contact' }
+              ].map((item) => (
   // Calculate dynamic opacity and blur based on scroll position
   const navOpacity = Math.min(scrollY / 100, 0.95);
   const blurIntensity = Math.min(scrollY / 50, 20);
