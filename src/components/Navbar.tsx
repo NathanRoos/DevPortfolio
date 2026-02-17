@@ -19,15 +19,16 @@ export default function Navbar() {
           setScrollY(currentScrollY);
           setScrolled(currentScrollY > 50);
           ticking = false;
-        });
-        ticking = true;
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Navigation menu items
+              [
+                { href: '/projects', label: 'Projects' },
+                { href: '/skills', label: 'Skills' },
+                { href: '/experience', label: 'Experience' },
+                { href: '/education', label: 'Education' },
+                { href: '/hobbies', label: 'Hobbies' },
+                { href: '/cv', label: 'CV' },
+                { href: '/testimonials', label: 'Testimonials' },
+                { href: '/contact', label: 'Contact' }
+              ].map((item) => (
   const navMenu = [
     { href: '/projects', label: 'Projects' },
     { href: '/skills', label: 'Skills' },
