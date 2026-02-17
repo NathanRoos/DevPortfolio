@@ -12,14 +12,15 @@ export default async function CVPage() {
   return (
     <div className="max-w-2xl mx-auto py-16 px-4">
       <h1 className="text-4xl font-bold mb-6">Curriculum Vitae</h1>
-      <p className="mb-8 text-lg text-gray-300">Download my latest CV below.</p>
+        <p className="mb-8 text-lg text-gray-300">Download or view my latest CV below.</p>
       {cvUrl ? (
         <a
           href={cvUrl}
-          download
+            target="_blank"
+            rel="noopener noreferrer"
           className="inline-block px-6 py-3 bg-primary-600 text-white font-semibold rounded-lg shadow hover:bg-primary-500 transition"
         >
-          Download CV
+            View / Download CV
         </a>
       ) : (
         <div className="py-8 text-center text-gray-400 text-lg font-semibold">
