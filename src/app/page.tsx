@@ -16,7 +16,7 @@ export default function Home() {
                 textShadow: '0 0 40px rgba(0,0,0,1), 0 6px 12px rgba(0,0,0,1), 0 0 80px rgba(255,255,255,0.3)',
                 filter: 'contrast(1.2) brightness(1.1)'
               }}>
-                Jeremy Roos
+                Nathan Roos
               </h1>
             </div>
             <div className="h-1 w-32 bg-gradient-to-r from-primary-500 to-neon-orange mx-auto mb-6 animate-bar-reveal"></div>
