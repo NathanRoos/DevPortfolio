@@ -1,6 +1,8 @@
-'use client';
+"use client";
 
 import { useState, useEffect } from 'react';
+import AdminGuard from '../../../components/AdminGuard';
+
 interface EditState {
   id: string;
   title: string;
@@ -9,6 +11,18 @@ interface EditState {
   liveUrl: string;
   tags: string;
 }
+
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  repoUrl: string;
+  liveUrl: string;
+  tags: string[];
+  createdAt: string;
+  updatedAt: string;
+}
+
 export default function AdminProjects() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
