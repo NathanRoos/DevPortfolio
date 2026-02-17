@@ -1,7 +1,9 @@
 
+
 export default async function CVPage() {
-  // Fetch the latest CV metadata from the API
-  const res = await fetch('/api/cv', { cache: 'no-store' });
+  // Use absolute URL for fetch in server component
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nathandevprogrammer.info';
+  const res = await fetch(`${baseUrl}/api/cv`, { cache: 'no-store' });
   let cvUrl = '';
   if (res.ok) {
     const data = await res.json();
