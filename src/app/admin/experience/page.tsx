@@ -2,17 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import AdminGuard from '../../../components/AdminGuard';
-
-interface Experience {
-  id: string;
-  position: string;
-  company: string;
-  startDate: string;
-  endDate: string | null;
-  description: string;
-  location: string;
-}
-
+import AdminExperienceHeader from '../../../components/AdminExperienceHeader';
+import AdminExperienceForm from '../../../components/AdminExperienceForm';
+import AdminExperienceList from '../../../components/AdminExperienceList';
 export default function AdminExperience() {
   const [experiences, setExperiences] = useState<Experience[]>([]);
   const [formData, setFormData] = useState({
@@ -87,49 +79,15 @@ export default function AdminExperience() {
   return (
     <AdminGuard>
       <div>
-        <div className="mb-12 text-center animate-fade-in">
-          <h2 className="text-5xl font-black gradient-text mb-4">💼 Work Experience</h2>
-          <p className="text-xl text-gray-300">Manage your professional journey</p>
-        </div>
-
+        <AdminExperienceHeader />
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="glass-card p-6 rounded-2xl h-fit">
-            <h3 className="text-2xl font-bold text-white mb-6">Add Experience</h3>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <input
-                type="text"
-                placeholder="Position"
-                value={formData.position}
-                onChange={(e) => setFormData({ ...formData, position: e.target.value })}
-                className="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded-lg text-white"
-                required
-              />
-              <input
-                type="text"
-                placeholder="Company"
-                value={formData.company}
-                onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                className="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded-lg text-white"
-                required
-              />
-               <input
-                type="text"
-                placeholder="Location"
-                value={formData.location}
-                onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                className="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded-lg text-white"
-              />
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="text-xs text-gray-400">Start Date</label>
-                  <input
-                    type="date"
-                    value={formData.startDate}
-                    onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
-                    className="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded-lg text-white"
-                    required
-                  />
-                </div>
+          <AdminExperienceForm formData={formData} setFormData={setFormData} handleSubmit={handleSubmit} />
+          <AdminExperienceList experiences={experiences} handleDelete={handleDelete} />
+        </div>
+      </div>
+    </AdminGuard>
+  );
+}
                 <div>
                   <label className="text-xs text-gray-400">End Date (Leave empty if current)</label>
                   <input
