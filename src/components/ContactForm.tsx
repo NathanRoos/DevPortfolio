@@ -14,11 +14,13 @@ export default function ContactForm() {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [errorList, setErrorList] = useState<string[]>([]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
     setError(null);
+    setErrorList([]);
 
     try {
       // Validate form data on client for fast feedback
@@ -34,7 +36,8 @@ export default function ContactForm() {
         const errorData = await response.json();
         // If validation failed on server, show all issues
         if (errorData.issues && Array.isArray(errorData.issues)) {
-          setError(errorData.issues.map((i: any) => i.message).join(' '));
+          setError('Please fix the following:');
+          setErrorList(errorData.issues.map((i: any) => i.message));
         } else if (errorData.error) {
           setError(errorData.error);
         } else {
@@ -49,7 +52,8 @@ export default function ContactForm() {
     } catch (error: any) {
       // Zod validation error on client
       if (error.errors && Array.isArray(error.errors)) {
-        setError(error.errors.map((i: any) => i.message).join(' '));
+        setError('Please fix the following:');
+        setErrorList(error.errors.map((i: any) => i.message));
       } else if (error instanceof Error) {
         setError(error.message);
       } else {
@@ -88,9 +92,16 @@ export default function ContactForm() {
       </div>
       
       <form onSubmit={handleSubmit} className="space-y-6">
-        {error && (
+        {(error || errorList.length > 0) && (
           <div className="bg-red-500/20 border border-red-500/50 text-red-300 px-4 py-3 rounded-xl animate-fade-in">
-            {error}
+            {error && <div>{error}</div>}
+            {errorList.length > 0 && (
+              <ul className="list-disc list-inside mt-1">
+                {errorList.map((msg, idx) => (
+                  <li key={idx}>{msg}</li>
+                ))}
+              </ul>
+            )}
           </div>
         )}
       
