@@ -12,29 +12,37 @@ export default function Navbar() {
 
   useEffect(() => {
     let ticking = false;
-    
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
       if (!ticking) {
         requestAnimationFrame(() => {
           setScrollY(currentScrollY);
           setScrolled(currentScrollY > 50);
           ticking = false;
-              [
-                { href: '/projects', label: 'Projects' },
-                { href: '/skills', label: 'Skills' },
-                { href: '/experience', label: 'Experience' },
-                { href: '/education', label: 'Education' },
-                { href: '/hobbies', label: 'Hobbies' },
-                { href: '/cv', label: 'CV' },
-                { href: '/testimonials', label: 'Testimonials' },
-                { href: '/contact', label: 'Contact' }
-              ].map((item) => (
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Navigation menu items
+  const navMenu = [
+    { href: '/projects', label: 'Projects' },
+    { href: '/skills', label: 'Skills' },
+    { href: '/experience', label: 'Experience' },
+    { href: '/education', label: 'Education' },
+    { href: '/hobbies', label: 'Hobbies' },
+    { href: '/cv', label: 'CV' },
+    { href: '/testimonials', label: 'Testimonials' },
+    { href: '/contact', label: 'Contact' }
+  ];
+
   // Calculate dynamic opacity and blur based on scroll position
   const navOpacity = Math.min(scrollY / 100, 0.95);
   const blurIntensity = Math.min(scrollY / 50, 20);
-  
+
   return (
     <nav 
       className="fixed w-full z-50 smooth-navbar"
