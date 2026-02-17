@@ -93,19 +93,8 @@ export default function AdminHobbies() {
                 accept="image/png"
                 onChange={e => setIconFile(e.target.files && e.target.files[0] ? e.target.files[0] : null)}
                 className="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded-lg text-white cursor-pointer"
+                required
               />
-              {!iconFile && (
-                <>
-                  <div className="text-gray-400 text-xs">Or enter emoji/SVG below (will be ignored if PNG is uploaded):</div>
-                  <input
-                    type="text"
-                    placeholder="Icon (Optional emoji or SVG)"
-                    value={formData.icon}
-                    onChange={(e) => setFormData({ ...formData, icon: e.target.value })}
-                    className="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded-lg text-white"
-                  />
-                </>
-              )}
               <button
                 type="submit"
                 className="w-full py-3 bg-primary-600 hover:bg-primary-500 text-white font-bold rounded-lg transition-colors"
