@@ -28,10 +28,21 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   }
   
   if (action === 'logout') {
-    // Handle logout - clear session and redirect to Auth0 logout
-    const response = NextResponse.redirect(process.env.AUTH0_BASE_URL!);
+    // Determine the return URL after logout
+    const returnTo = process.env.AUTH0_BASE_URL;
     
-    // Clear session cookie
+    // Construct Auth0 logout URL
+    const issuerBaseUrl = process.env.AUTH0_ISSUER_BASE_URL;
+    // Remove protocol if present to handle potential formatting issues
+    const domain = issuerBaseUrl ? issuerBaseUrl.replace(/^https?:\/\//, '') : '';
+    
+    // Create the logout URL that clears Auth0 session and redirects back to your homepage
+    const logoutUrl = `https://${domain}/v2/logout?client_id=${process.env.AUTH0_CLIENT_ID}&returnTo=${encodeURIComponent(returnTo!)}`;
+
+    // Prepare the response (redirect to Auth0 logout)
+    const response = NextResponse.redirect(logoutUrl);
+    
+    // Clear local session cookie
     response.cookies.set('appSession', '', {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',

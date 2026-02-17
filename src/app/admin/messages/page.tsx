@@ -129,15 +129,6 @@ export default function AdminMessages() {
                         </p>
                       </div>
                       <div className="flex gap-2">
-                        <a 
-                          href={`mailto:${message.email}?subject=Re: Portfolio Inquiry`}
-                          className="px-4 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl hover:from-primary-400 hover:to-primary-500 transition-all duration-300 font-semibold hover:-translate-y-1 shadow-lg flex items-center gap-2"
-                        >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
-                          </svg>
-                          Reply
-                        </a>
                         <button 
                           onClick={() => handleDelete(message.id)}
                           disabled={deletingId === message.id}
