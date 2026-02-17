@@ -44,8 +44,16 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     // Prepare the response (redirect to Auth0 logout)
     const response = NextResponse.redirect(logoutUrl);
     
-    // Clear local session cookie
-    response.cookies.delete('appSession');
+    // Force delete the session cookie by setting maxAge to 0 and empty value
+    // This overrides any existing cookie with the same name
+    response.cookies.set('appSession', '', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      path: '/',
+      maxAge: 0,
+      expires: new Date(0)
+    });
     
     return response;
   }
