@@ -18,6 +18,14 @@ const translations = {
         "nav.contact": "Contact",
         "hero.greeting": "Welcome!",
         // Homepage keys
+        // Admin Dashboard keys
+        "admin.dashboard.welcome": "Welcome Back",
+        "admin.dashboard.manage": "Manage your portfolio content and view analytics",
+        "admin.dashboard.features": "• Real-time Data • Modern Interface",
+        "admin.dashboard.totalProjects": "Total Projects",
+        "admin.dashboard.totalTestimonials": "Total Testimonials",
+        "admin.dashboard.totalMessages": "Total Messages",
+        "admin.dashboard.pendingTestimonials": "Pending Testimonials",
         // Admin Education keys
         "admin.education.title": "Education",
         "admin.education.subtitle": "Academic background and certifications",
@@ -60,6 +68,14 @@ const translations = {
         "nav.contact": "Contact",
         "hero.greeting": "Bienvenue!",
         // Homepage keys
+        // Admin Dashboard keys
+        "admin.dashboard.welcome": "Bon retour !",
+        "admin.dashboard.manage": "Gérez le contenu de votre portfolio et consultez les analyses",
+        "admin.dashboard.features": "• Données en temps réel • Interface moderne",
+        "admin.dashboard.totalProjects": "Projets totaux",
+        "admin.dashboard.totalTestimonials": "Témoignages totaux",
+        "admin.dashboard.totalMessages": "Messages totaux",
+        "admin.dashboard.pendingTestimonials": "Témoignages en attente",
         // Admin Education keys
         "admin.education.title": "Éducation",
         "admin.education.subtitle": "Parcours académique et certifications",

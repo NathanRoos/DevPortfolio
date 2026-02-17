@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import AdminGuard from '../../../components/AdminGuard';
+import AdminDashboardHeader from '../../../components/AdminDashboardHeader';
+import AdminDashboardStats from '../../../components/AdminDashboardStats';
 import Link from 'next/link';
 
 interface DashboardStats {
@@ -41,12 +43,7 @@ export default function AdminDashboard() {
   return (
     <AdminGuard>
       <div>
-        <div className="mb-12 text-center animate-fade-in">
-          <h2 className="text-5xl font-black gradient-text mb-4">Welcome Back</h2>
-          <p className="text-xl text-gray-300">Manage your portfolio content and view analytics
-            <span className="gradient-text-alt font-semibold"> • Real-time Data • Modern Interface</span>
-          </p>
-        </div>
+        <AdminDashboardHeader />
 
         {loading ? (
           <div className="flex items-center justify-center py-20">
@@ -127,72 +124,13 @@ export default function AdminDashboard() {
                   className="group glass-card p-6 rounded-xl border border-primary-500/30 hover:border-primary-400/50 transition-all duration-300 hover:-translate-y-1"
                 >
                   <div className="flex items-center">
-                    <div className="flex-1">
-                      <h4 className="font-bold text-primary-400 mb-2 text-lg flex items-center gap-2">
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                        </svg>
-                        Manage Projects
-                      </h4>
-                      <p className="text-sm text-gray-300">Add, edit, and organize portfolio projects</p>
-                    </div>
-                    <svg className="h-6 w-6 text-primary-400 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
-                  </div>
-                </Link>
-
-                <Link 
-                  href="/admin/testimonials" 
-                  className="group glass-card p-6 rounded-xl border border-primary-500/30 hover:border-primary-400/50 transition-all duration-300 hover:-translate-y-1"
-                >
-                  <div className="flex items-center">
-                    <div className="flex-1">
-                      <h4 className="font-bold text-primary-400 mb-2 text-lg flex items-center gap-2">
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                        </svg>
-                        Review Testimonials
-                      </h4>
-                      <p className="text-sm text-gray-300">Approve or reject pending testimonials</p>
-                    </div>
-                    <svg className="h-6 w-6 text-primary-400 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
-                  </div>
-                </Link>
-
-                <Link 
-                  href="/admin/messages" 
-                  className="group glass-card p-6 rounded-xl border border-primary-500/30 hover:border-primary-400/50 transition-all duration-300 hover:-translate-y-1"
-                >
-                  <div className="flex items-center">
-                    <div className="flex-1">
-                      <h4 className="font-bold text-primary-400 mb-2 text-lg flex items-center gap-2">
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                        View Messages
-                      </h4>
-                      <p className="text-sm text-gray-300">Check contact form submissions</p>
-                    </div>
-                    <svg className="h-6 w-6 text-primary-400 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
-                  </div>
-                </Link>
-              </div>
-            </div>
-              
-            <div className="glass-card rounded-2xl p-8">
-              <h3 className="text-2xl font-bold text-white mb-6 gradient-text flex items-center gap-3">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                </svg>
-                External Links
-              </h3>
-              <Link 
-                href="/" 
+                    {loading ? (
+                      <div className="flex items-center justify-center py-20">
+                        <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-primary-500 shadow-neon"></div>
+                      </div>
+                    ) : (
+                      <AdminDashboardStats stats={stats} />
+                    )}
                 className="group glass-card p-6 rounded-xl border border-primary-500/30 hover:border-primary-400/50 transition-all duration-300 hover:-translate-y-1 block"
               >
                 <div className="flex items-center">
