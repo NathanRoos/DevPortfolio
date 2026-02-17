@@ -25,6 +25,19 @@ interface Project {
 
 export default function AdminProjects() {
 
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    repoUrl: '',
+    liveUrl: '',
+    tags: '' // Will be converted to array
+  });
+  const [submitting, setSubmitting] = useState(false);
+  const [editState, setEditState] = useState<EditState | null>(null);
+  const [editSubmitting, setEditSubmitting] = useState(false);
 
   const handleEditSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,17 +66,6 @@ export default function AdminProjects() {
       setEditSubmitting(false);
     }
   };
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [showForm, setShowForm] = useState(false);
-  const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    repoUrl: '',
-    liveUrl: '',
-    tags: '' // Will be converted to array
-  });
-  const [submitting, setSubmitting] = useState(false);
 
   const fetchProjects = async () => {
     try {
