@@ -21,27 +21,39 @@ export default function ContactForm() {
     setError(null);
 
     try {
-      // Validate form data
-      const validatedData = contactMessageSchema.parse(formData);
-      
+      // Validate form data on client for fast feedback
+      contactMessageSchema.parse(formData);
+
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(validatedData),
+        body: JSON.stringify(formData),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to send message');
+        // If validation failed on server, show all issues
+        if (errorData.issues && Array.isArray(errorData.issues)) {
+          setError(errorData.issues.map((i: any) => i.message).join(' '));
+        } else if (errorData.error) {
+          setError(errorData.error);
+        } else {
+          setError('Failed to send message');
+        }
+        setSubmitting(false);
+        return;
       }
 
       setSuccess(true);
       setFormData({ name: '', email: '', message: '' });
-    } catch (error) {
-      if (error instanceof Error && 'issues' in error) {
-        setError('Please check your input and try again.');
+    } catch (error: any) {
+      // Zod validation error on client
+      if (error.errors && Array.isArray(error.errors)) {
+        setError(error.errors.map((i: any) => i.message).join(' '));
+      } else if (error instanceof Error) {
+        setError(error.message);
       } else {
-        setError(error instanceof Error ? error.message : 'An error occurred');
+        setError('An error occurred');
       }
     } finally {
       setSubmitting(false);
