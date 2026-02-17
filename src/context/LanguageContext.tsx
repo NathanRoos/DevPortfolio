@@ -17,7 +17,24 @@ const translations = {
         "nav.testimonials": "Testimonials",
         "nav.contact": "Contact",
         "hero.greeting": "Welcome!",
-        // ...add more keys as needed
+        // Homepage keys
+        "home.name": "Nathan Roos",
+        "home.title": "Full Stack Developer & DevOps Developer",
+        "home.subtitle": "Crafting scalable applications with cutting-edge technologies.",
+        "home.stack": "Next.js • Kubernetes • Modern Cloud Infrastructure",
+        "home.exploreProjects": "Explore Projects",
+        "home.getInTouch": "Get In Touch",
+        "home.projects": "Projects",
+        "home.projectsDesc": "Explore cutting-edge applications and technical implementations",
+        "home.cv": "CV",
+        "home.cvDesc": "Download my latest Curriculum Vitae (CV)",
+        "home.testimonials": "Testimonials",
+        "home.testimonialsDesc": "Read authentic feedback from clients and collaborators",
+        "home.contact": "Contact",
+        "home.contactDesc": "Let's collaborate on your next innovative project",
+        "home.architecture": "Architecture",
+        "home.architectureDesc": "View live cluster topology and infrastructure",
+        "home.techArsenal": "Technology Arsenal",
     },
     fr: {
         "nav.home": "Accueil",
@@ -30,7 +47,24 @@ const translations = {
         "nav.testimonials": "Témoignages",
         "nav.contact": "Contact",
         "hero.greeting": "Bienvenue!",
-        // ...add more keys as needed
+        // Homepage keys
+        "home.name": "Nathan Roos",
+        "home.title": "Développeur Full Stack & DevOps",
+        "home.subtitle": "Créer des applications évolutives avec des technologies de pointe.",
+        "home.stack": "Next.js • Kubernetes • Infrastructure Cloud Moderne",
+        "home.exploreProjects": "Voir les Projets",
+        "home.getInTouch": "Contactez-moi",
+        "home.projects": "Projets",
+        "home.projectsDesc": "Découvrez des applications innovantes et des implémentations techniques",
+        "home.cv": "CV",
+        "home.cvDesc": "Téléchargez mon dernier Curriculum Vitae (CV)",
+        "home.testimonials": "Témoignages",
+        "home.testimonialsDesc": "Lisez les retours authentiques de clients et collaborateurs",
+        "home.contact": "Contact",
+        "home.contactDesc": "Collaborons sur votre prochain projet innovant",
+        "home.architecture": "Architecture",
+        "home.architectureDesc": "Voir la topologie du cluster et l'infrastructure en direct",
+        "home.techArsenal": "Arsenal Technologique",
     }
 };
 
