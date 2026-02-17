@@ -76,7 +76,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     // Get IP address (fallback to 'unknown')
-    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || request.ip || 'unknown';
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
     const rate = checkRateLimit(ip, 'testimonial', 3, 5); // 3 per min, 5 min block
     if (rate.blocked) {
       return NextResponse.json({ error: `Rate limit exceeded. Try again in ${Math.ceil(rate.retryAfter/60)} minutes.` }, { status: 429 });
