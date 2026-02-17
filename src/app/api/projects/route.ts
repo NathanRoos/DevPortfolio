@@ -1,3 +1,19 @@
+export async function PATCH(request: Request) {
+  try {
+    const { id, title, description, repoUrl, liveUrl, tags } = await request.json();
+    if (!id) {
+      return NextResponse.json({ error: 'Project ID is required' }, { status: 400 });
+    }
+    const updated = await prisma.project.update({
+      where: { id },
+      data: { title, description, repoUrl, liveUrl, tags },
+    });
+    return NextResponse.json(updated);
+  } catch (error) {
+    console.error('Error updating project:', error);
+    return NextResponse.json({ error: 'Failed to update project' }, { status: 500 });
+  }
+}
 export async function DELETE(request: Request) {
   try {
     const { id } = await request.json();

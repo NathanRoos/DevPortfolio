@@ -1,6 +1,43 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+interface EditState {
+  id: string;
+  title: string;
+  description: string;
+  repoUrl: string;
+  liveUrl: string;
+  tags: string;
+}
+  const [editState, setEditState] = useState<EditState | null>(null);
+  const [editSubmitting, setEditSubmitting] = useState(false);
+  const handleEditSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editState) return;
+    setEditSubmitting(true);
+    try {
+      const tagsArray = editState.tags.split(',').map(tag => tag.trim()).filter(tag => tag);
+      const response = await fetch('/api/projects', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: editState.id,
+          title: editState.title,
+          description: editState.description,
+          repoUrl: editState.repoUrl,
+          liveUrl: editState.liveUrl,
+          tags: tagsArray
+        }),
+      });
+      if (!response.ok) throw new Error('Failed to update project');
+      setEditState(null);
+      await fetchProjects();
+    } catch (error) {
+      alert('Failed to update project');
+    } finally {
+      setEditSubmitting(false);
+    }
+  };
 import AdminGuard from '../../../components/AdminGuard';
 
 interface Project {
@@ -84,6 +121,9 @@ export default function AdminProjects() {
   return (
     <AdminGuard>
       <div>
+        <div className="w-full bg-red-600 text-white text-center py-4 text-2xl font-extrabold mb-8 rounded-xl shadow-lg animate-pulse">
+          TEST BANNER: DEPLOYMENT UPDATED
+        </div>
         <div className="mb-12 text-center animate-fade-in">
           <h2 className="text-5xl font-black gradient-text mb-4 flex items-center gap-4">
             <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -356,7 +396,83 @@ export default function AdminProjects() {
                         </div>
                       </div>
                       <div className="flex flex-col space-y-2 ml-6">
-                        <button className="px-4 py-2 bg-primary-500/20 text-primary-300 rounded-xl hover:bg-primary-500/30 transition-all duration-300 font-semibold hover:scale-105 border border-primary-500/30 text-sm flex items-center gap-2" onClick={() => alert('Edit functionality coming soon!')}>
+                        <button className="px-4 py-2 bg-primary-500/20 text-primary-300 rounded-xl hover:bg-primary-500/30 transition-all duration-300 font-semibold hover:scale-105 border border-primary-500/30 text-sm flex items-center gap-2" onClick={() => setEditState({
+                          id: project.id,
+                          title: project.title,
+                          description: project.description,
+                          repoUrl: project.repoUrl,
+                          liveUrl: project.liveUrl,
+                          tags: project.tags.join(', ')
+                        })}>
+                                          {/* Edit Project Modal */}
+                                          {editState && (
+                                            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+                                              <div className="glass-card p-8 rounded-2xl w-full max-w-2xl relative animate-fade-in">
+                                                <button className="absolute top-4 right-4 text-gray-400 hover:text-red-400" onClick={() => setEditState(null)}>
+                                                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                                  </svg>
+                                                </button>
+                                                <h3 className="text-2xl font-bold gradient-text mb-6">Edit Project</h3>
+                                                <form onSubmit={handleEditSubmit} className="space-y-6">
+                                                  <input
+                                                    type="text"
+                                                    placeholder="Project Title"
+                                                    value={editState.title}
+                                                    onChange={e => setEditState({ ...editState, title: e.target.value })}
+                                                    className="w-full px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
+                                                    required
+                                                  />
+                                                  <textarea
+                                                    placeholder="Description"
+                                                    value={editState.description}
+                                                    onChange={e => setEditState({ ...editState, description: e.target.value })}
+                                                    rows={4}
+                                                    className="w-full px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
+                                                    required
+                                                  />
+                                                  <input
+                                                    type="url"
+                                                    placeholder="Repository URL"
+                                                    value={editState.repoUrl}
+                                                    onChange={e => setEditState({ ...editState, repoUrl: e.target.value })}
+                                                    className="w-full px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
+                                                  />
+                                                  <input
+                                                    type="url"
+                                                    placeholder="Live Demo URL"
+                                                    value={editState.liveUrl}
+                                                    onChange={e => setEditState({ ...editState, liveUrl: e.target.value })}
+                                                    className="w-full px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
+                                                  />
+                                                  <input
+                                                    type="text"
+                                                    placeholder="Tags (comma-separated)"
+                                                    value={editState.tags}
+                                                    onChange={e => setEditState({ ...editState, tags: e.target.value })}
+                                                    className="w-full px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
+                                                    required
+                                                  />
+                                                  <div className="flex space-x-4 pt-4">
+                                                    <button
+                                                      type="submit"
+                                                      disabled={editSubmitting}
+                                                      className="px-8 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl font-semibold hover:scale-105 transition-all duration-300 disabled:opacity-50"
+                                                    >
+                                                      {editSubmitting ? 'Saving...' : 'Save Changes'}
+                                                    </button>
+                                                    <button
+                                                      type="button"
+                                                      onClick={() => setEditState(null)}
+                                                      className="px-8 py-3 bg-gray-700 text-white rounded-xl font-semibold hover:scale-105 transition-all duration-300"
+                                                    >
+                                                      Cancel
+                                                    </button>
+                                                  </div>
+                                                </form>
+                                              </div>
+                                            </div>
+                                          )}
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                           </svg>
