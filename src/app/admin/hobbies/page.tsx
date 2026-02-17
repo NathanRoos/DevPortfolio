@@ -87,7 +87,7 @@ export default function AdminHobbies() {
                 className="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded-lg text-white"
                 required
               />
-              <label className="block text-gray-300 font-medium mb-1">Choose Image (PNG)</label>
+              <label className="block text-gray-300 font-medium mb-1">Upload PNG Image Here (GitHub Test)</label>
               <input
                 type="file"
                 accept="image/png"
