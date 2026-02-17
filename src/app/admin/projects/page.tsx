@@ -78,20 +78,6 @@ export default function AdminProjects() {
       setEditSubmitting(false);
     }
   };
-import AdminGuard from '../../../components/AdminGuard';
-
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  repoUrl: string;
-  liveUrl: string;
-  tags: string[];
-  createdAt: string;
-  updatedAt: string;
-}
-
-export default function AdminProjects() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
