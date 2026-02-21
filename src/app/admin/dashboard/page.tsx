@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -5,6 +6,7 @@ import AdminGuard from '../../../components/AdminGuard';
 import AdminDashboardHeader from '../../../components/AdminDashboardHeader';
 import AdminDashboardStats from '../../../components/AdminDashboardStats';
 import Link from 'next/link';
+import { useLanguage } from '../../../context/LanguageContext';
 
 interface DashboardStats {
   projectCount: number;
@@ -21,6 +23,7 @@ export default function AdminDashboard() {
     pendingTestimonials: 0,
   });
   const [loading, setLoading] = useState(true);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const fetchStats = async () => {
