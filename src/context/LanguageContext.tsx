@@ -86,6 +86,10 @@ const translations = {
         "admin.hobbies.title": "Loisirs & Centres d'intérêt",
         "admin.hobbies.subtitle": "Partagez votre personnalité en dehors du travail",
         "admin.hobbies.addTitle": "Ajouter un loisir",
+        // Admin Dashboard Quick Actions
+        "admin.dashboard.quickActions": "Actions rapides",
+        "admin.dashboard.viewProjects": "Voir les projets",
+        "admin.dashboard.manageProjects": "Gérez vos projets de portfolio",
         "admin.hobbies.namePlaceholder": "Nom du loisir",
         "admin.hobbies.iconPlaceholder": "Icône (emoji ou SVG)",
         "admin.hobbies.addButton": "Ajouter",
