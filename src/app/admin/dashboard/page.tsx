@@ -39,6 +39,8 @@ export default function AdminDashboard() {
         setLoading(false);
       }
     };
+    fetchStats();
+  }, []);
   return (
     <AdminGuard>
       <div>
@@ -86,4 +88,4 @@ export default function AdminDashboard() {
         )}
       </div>
     </AdminGuard>
-          );
+  );
