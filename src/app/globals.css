@@ -102,9 +102,10 @@ a {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
-  line-height: 1.35;
+  line-height: 1.4;
   vertical-align: middle;
   padding-top: 0.18em;
+  padding-bottom: 0.18em;
 }
 
 .gradient-text-alt {
@@ -113,9 +114,10 @@ a {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  line-height: 1.35;
+  line-height: 1.4;
   vertical-align: middle;
   padding-top: 0.18em;
+  padding-bottom: 0.18em;
 }
 
 /* Modern Glass Morphism */
