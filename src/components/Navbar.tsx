@@ -63,9 +63,9 @@ export default function Navbar() {
           <div className="flex items-center space-x-8">
             <div className="flex items-center">
               <Link href="/" className="flex items-center group">
-                <div className="ml-4 flex flex-col justify-center">
+                <div className="ml-4 flex flex-row items-center space-x-4">
                   <span className="text-white font-bold text-2xl drop-shadow-lg leading-tight">Nathan Roos</span>
-                  <div className="mt-1 text-xs text-neon-orange font-mono font-semibold drop-shadow-md">&lt;DevOps Developer/&gt;</div>
+                  <span className="text-xs text-neon-orange font-mono font-semibold drop-shadow-md">&lt;DevOps Developer/&gt;</span>
                 </div>
               </Link>
               <div className="ml-6">
