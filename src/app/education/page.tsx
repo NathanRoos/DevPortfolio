@@ -1,13 +1,20 @@
-import { prisma } from '../../lib/prisma';
+"use client";
+import { useEffect, useState } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 
-export const dynamic = 'force-dynamic';
+export default function EducationPage() {
+  const { t } = useLanguage();
+  const [education, setEducation] = useState<any[]>([]);
 
-export default async function EducationPage() {
-  const education = await prisma.education.findMany({
-    orderBy: {
-      startDate: 'desc',
-    },
-  });
+  useEffect(() => {
+    async function fetchEducation() {
+      const res = await fetch('/api/education');
+      if (res.ok) {
+        setEducation(await res.json());
+      }
+    }
+    fetchEducation();
+  }, []);
 
   return (
     <div className="min-h-screen bg-mesh-gradient relative overflow-hidden">
@@ -16,18 +23,18 @@ export default async function EducationPage() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-8">
         <div className="text-center mb-16 animate-fade-in">
           <div className="mb-8 animate-slide-up">
-            <h1 className="text-6xl md:text-7xl font-black gradient-text mb-6">Education</h1>
+            <h1 className="text-6xl md:text-7xl font-black gradient-text mb-6">{t('education.title')}</h1>
             <div className="h-1 w-32 bg-gradient-to-r from-primary-500 to-neon-orange mx-auto mb-6 animate-bar-reveal"></div>
           </div>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Academic qualifications and certifications.
+            {t('education.intro')}
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {education.length === 0 ? (
             <div className="col-span-full text-center text-gray-400 py-12 glass-card rounded-2xl">
-              No education listed yet. Check back soon!
+              {t('education.empty')}
             </div>
           ) : (
             education.map((edu, index) => (
