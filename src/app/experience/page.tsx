@@ -1,13 +1,20 @@
-import { prisma } from '../../lib/prisma';
+"use client";
+import { useEffect, useState } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 
-export const dynamic = 'force-dynamic';
+export default function ExperiencePage() {
+  const { t } = useLanguage();
+  const [experiences, setExperiences] = useState<any[]>([]);
 
-export default async function ExperiencePage() {
-  const experiences = await prisma.experience.findMany({
-    orderBy: {
-      startDate: 'desc',
-    },
-  });
+  useEffect(() => {
+    async function fetchExperiences() {
+      const res = await fetch('/api/experience');
+      if (res.ok) {
+        setExperiences(await res.json());
+      }
+    }
+    fetchExperiences();
+  }, []);
 
   return (
     <div className="min-h-screen bg-mesh-gradient relative overflow-hidden">
@@ -16,11 +23,11 @@ export default async function ExperiencePage() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-8">
         <div className="text-center mb-16 animate-fade-in">
           <div className="mb-8 animate-slide-up">
-            <h1 className="text-6xl md:text-7xl font-black gradient-text mb-6">Work Experience</h1>
+            <h1 className="text-6xl md:text-7xl font-black gradient-text mb-6">{t('experience.title')}</h1>
             <div className="h-1 w-32 bg-gradient-to-r from-primary-500 to-neon-orange mx-auto mb-6 animate-bar-reveal"></div>
           </div>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            My professional journey and career milestones.
+            {t('experience.intro')}
           </p>
         </div>
 
@@ -31,7 +38,7 @@ export default async function ExperiencePage() {
           <div className="space-y-12">
             {experiences.length === 0 ? (
                <div className="text-center text-gray-400 py-12 glass-card rounded-2xl relative z-10">
-                No experience added yet. Check back soon!
+                {t('experience.empty')}
               </div>
             ) : (
               experiences.map((exp, index) => (

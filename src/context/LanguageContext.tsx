@@ -8,6 +8,10 @@ export type Language = "en" | "fr";
 const translations = {
         // ...existing code...
     en: {
+        // Public Experience page keys
+        "experience.title": "Work Experience",
+        "experience.intro": "My professional journey and career milestones.",
+        "experience.empty": "No experience added yet. Check back soon!",
         // Public Education page keys
         "education.title": "Education",
         "education.intro": "Academic qualifications and certifications.",
@@ -206,6 +210,10 @@ const translations = {
         "home.techArsenal": "Technology Arsenal",
     },
     fr: {
+        // Public Experience page keys
+        "experience.title": "Expérience professionnelle",
+        "experience.intro": "Mon parcours professionnel et mes étapes de carrière.",
+        "experience.empty": "Aucune expérience ajoutée pour le moment.",
         // Public Education page keys
         "education.title": "Éducation",
         "education.intro": "Parcours académique et certifications.",
