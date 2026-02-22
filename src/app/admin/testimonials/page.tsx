@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useLanguage } from '../../../context/LanguageContext';
 import AdminGuard from '../../../components/AdminGuard';
 
 interface Testimonial {
