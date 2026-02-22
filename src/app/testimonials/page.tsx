@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import TestimonialCard from '../../components/TestimonialCard';
-import { useUser } from '../../context/AuthContext';
+import { useLanguage } from '../../context/LanguageContext';
 
 interface Testimonial {
   id: string;
@@ -23,6 +23,7 @@ export default function Testimonials() {
   const [submitting, setSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const { user } = useUser();
+  const { t } = useLanguage();
 
   const fetchTestimonials = async () => {
     try {
@@ -89,6 +90,7 @@ export default function Testimonials() {
         <div className="absolute inset-0 cyber-grid opacity-30"></div>
         <div className="relative z-10 flex items-center justify-center min-h-[400px]">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
+          <span className="ml-4 text-primary-400 text-lg font-semibold">{t('testimonials.loading')}</span>
         </div>
       </div>
     );
@@ -104,12 +106,11 @@ export default function Testimonials() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-8">
         <div className="text-center mb-12 animate-fade-in">
           <div className="mb-8 animate-slide-up">
-            <h1 className="text-6xl md:text-7xl font-black gradient-text mb-6">Testimonials</h1>
+            <h1 className="text-6xl md:text-7xl font-black gradient-text mb-6">{t('testimonials.title')}</h1>
             <div className="h-1 w-32 bg-gradient-to-r from-primary-500 to-neon-orange mx-auto mb-6 animate-bar-reveal"></div>
           </div>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed">
-            What clients and collaborators say about working with me.
-            <span className="text-white font-semibold"> Trusted Partnerships • Proven Results</span>
+            {t('testimonials.intro')}
           </p>
         
         {submitSuccess && (
@@ -127,18 +128,18 @@ export default function Testimonials() {
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
           </svg>
-          {showForm ? 'Cancel' : 'Share Your Experience'}
+          {showForm ? t('testimonials.cancel') || 'Cancel' : t('testimonials.button') || 'Share Your Experience'}
         </button>
       </div>
 
       {/* Testimonial Submission Form */}
       {showForm && (
         <div className="glass-card p-8 rounded-2xl border border-primary-500/20 mb-12 max-w-2xl mx-auto">
-          <h3 className="text-2xl font-bold text-white mb-6 gradient-text">Share Your Testimonial</h3>
+          <h3 className="text-2xl font-bold text-white mb-6 gradient-text">{t('testimonials.button')}</h3>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="author" className="block text-sm font-semibold text-primary-400 mb-2">
-                Your Name *
+                {t('testimonials.author')} *
               </label>
               <input
                 type="text"
@@ -147,14 +148,14 @@ export default function Testimonials() {
                 value={formData.author}
                 onChange={handleInputChange}
                 className="w-full px-4 py-3 bg-dark-800/50 border border-primary-500/30 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-400 transition-all duration-300 backdrop-blur-sm"
-                placeholder="Your full name"
+                placeholder={t('testimonials.author')}
                 required
               />
             </div>
 
             <div>
               <label htmlFor="rating" className="block text-sm font-semibold text-primary-400 mb-2">
-                Rating
+                {t('testimonials.rating')}
               </label>
               <div className="flex items-center gap-4">
                 <input
@@ -174,7 +175,7 @@ export default function Testimonials() {
 
             <div>
               <label htmlFor="text" className="block text-sm font-semibold text-primary-400 mb-2">
-                Your Testimonial *
+                {t('testimonials.textLabel') || 'Your Testimonial'} *
               </label>
               <textarea
                 id="text"
@@ -183,7 +184,7 @@ export default function Testimonials() {
                 onChange={handleInputChange}
                 rows={4}
                 className="w-full px-4 py-3 bg-dark-800/50 border border-primary-500/30 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-400 transition-all duration-300 backdrop-blur-sm resize-none"
-                placeholder="Share your experience working with me..."
+                placeholder={t('testimonials.textPlaceholder') || 'Share your experience working with me...'}
                 required
               />
             </div>
@@ -197,14 +198,14 @@ export default function Testimonials() {
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                 </svg>
-                {submitting ? 'Submitting...' : 'Submit Testimonial'}
+                {submitting ? t('testimonials.submitting') || 'Submitting...' : t('testimonials.submitButton') || 'Submit Testimonial'}
               </button>
               <button
                 type="button"
                 onClick={() => setShowForm(false)}
                 className="px-6 py-3 bg-dark-700/50 text-gray-300 rounded-xl hover:bg-dark-600/50 transition-all duration-300 border border-gray-600/30"
               >
-                Cancel
+                {t('testimonials.cancel') || 'Cancel'}
               </button>
             </div>
           </form>
@@ -222,9 +223,9 @@ export default function Testimonials() {
             <svg className="w-16 h-16 text-primary-400 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
             </svg>
-            <h3 className="text-2xl font-bold text-white mb-4">Be the First!</h3>
+            <h3 className="text-2xl font-bold text-white mb-4">{t('testimonials.empty')}</h3>
             <p className="text-gray-300">
-              No testimonials available yet. Share your experience above!
+              {t('testimonials.emptyDesc') || 'Share your experience above!'}
             </p>
           </div>
         )}

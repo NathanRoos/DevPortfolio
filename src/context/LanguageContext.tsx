@@ -8,6 +8,16 @@ export type Language = "en" | "fr";
 const translations = {
     en: {
         // CV page keys
+        // Public Testimonials page keys
+        "testimonials.title": "Testimonials",
+        "testimonials.intro": "Read authentic feedback from clients and collaborators.",
+        "testimonials.empty": "No testimonials yet.",
+        "testimonials.button": "Add Testimonial",
+        "testimonials.loading": "Loading testimonials...",
+        "testimonials.error": "Failed to load testimonials.",
+        "testimonials.rating": "Rating",
+        "testimonials.date": "Date",
+        "testimonials.author": "Author",
         "cv.title": "Resume",
         "cv.intro": "Download or view my latest CV below.",
         "cv.button": "View / Download CV",
@@ -187,6 +197,16 @@ const translations = {
     },
     fr: {
         // CV page keys
+        // Public Testimonials page keys
+        "testimonials.title": "Témoignages",
+        "testimonials.intro": "Lisez les retours authentiques de clients et collaborateurs.",
+        "testimonials.empty": "Aucun témoignage pour le moment.",
+        "testimonials.button": "Ajouter un témoignage",
+        "testimonials.loading": "Chargement des témoignages...",
+        "testimonials.error": "Échec du chargement des témoignages.",
+        "testimonials.rating": "Note",
+        "testimonials.date": "Date",
+        "testimonials.author": "Auteur",
         "cv.title": "CV",
         "cv.intro": "Téléchargez ou consultez mon dernier CV ci-dessous.",
         "cv.button": "Voir / Télécharger le CV",
