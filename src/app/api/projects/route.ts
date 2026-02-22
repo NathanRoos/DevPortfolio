@@ -77,17 +77,30 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { title, description, repoUrl, liveUrl, tags } = body;
+    const { tags, translations } = body;
 
+    // Create the project
     const project = await prisma.project.create({
       data: {
-        title,
-        description,
-        repoUrl,
-        liveUrl,
         tags
       }
     });
+
+    // Create translations for each language
+    if (translations && Array.isArray(translations)) {
+      for (const t of translations) {
+        await prisma.projectTranslation.create({
+          data: {
+            projectId: project.id,
+            title: t.title,
+            description: t.description,
+            repoUrl: t.repoUrl,
+            liveUrl: t.liveUrl,
+            language: t.language
+          }
+        });
+      }
+    }
 
     return NextResponse.json(project);
   } catch (error) {
