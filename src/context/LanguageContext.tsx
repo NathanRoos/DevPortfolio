@@ -7,6 +7,22 @@ export type Language = "en" | "fr";
 // 2. Define the dictionary of words
 const translations = {
     en: {
+        // Admin Messages keys
+        "admin.messages.title": "Messages",
+        "admin.messages.subtitle": "View and manage contact form messages",
+        "admin.messages.cta": "Stay connected with your audience",
+        "admin.messages.sectionTitle": "Inbox",
+        "admin.messages.deleteButton": "Delete",
+        "admin.messages.confirmDelete": "Are you sure you want to delete this message?",
+        "admin.messages.empty": "No messages yet.",
+        "admin.messages.emptyDesc": "Messages submitted through your contact form will appear here.",
+        "admin.messages.registeredUser": "Registered User",
+        "admin.messages.loading": "Loading messages...",
+        "admin.messages.error": "Failed to load messages.",
+        "admin.messages.email": "Email",
+        "admin.messages.name": "Name",
+        "admin.messages.date": "Date",
+        "admin.messages.message": "Message",
         // Admin Skills keys
         "admin.skills.title": "Skills",
         "admin.skills.subtitle": "Add, edit, and organize your technical skills",
@@ -150,6 +166,22 @@ const translations = {
         "home.techArsenal": "Technology Arsenal",
     },
     fr: {
+        // Admin Messages keys
+        "admin.messages.title": "Messages",
+        "admin.messages.subtitle": "Consultez et gérez les messages du formulaire de contact",
+        "admin.messages.cta": "Restez connecté avec votre audience",
+        "admin.messages.sectionTitle": "Boîte de réception",
+        "admin.messages.deleteButton": "Supprimer",
+        "admin.messages.confirmDelete": "Êtes-vous sûr de vouloir supprimer ce message ?",
+        "admin.messages.empty": "Aucun message pour le moment.",
+        "admin.messages.emptyDesc": "Les messages soumis via votre formulaire de contact apparaîtront ici.",
+        "admin.messages.registeredUser": "Utilisateur enregistré",
+        "admin.messages.loading": "Chargement des messages...",
+        "admin.messages.error": "Échec du chargement des messages.",
+        "admin.messages.email": "Email",
+        "admin.messages.name": "Nom",
+        "admin.messages.date": "Date",
+        "admin.messages.message": "Message",
         // Admin Skills keys
         "admin.skills.title": "Compétences",
         "admin.skills.subtitle": "Ajoutez, modifiez et organisez vos compétences techniques",
