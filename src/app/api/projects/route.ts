@@ -1,14 +1,30 @@
 export async function PATCH(request: Request) {
   try {
-    const { id, title, description, repoUrl, liveUrl, tags } = await request.json();
+    const { id, translations, tags } = await request.json();
     if (!id) {
       return NextResponse.json({ error: 'Project ID is required' }, { status: 400 });
     }
-    const updated = await prisma.project.update({
+    // Update tags in Project
+    const updatedProject = await prisma.project.update({
       where: { id },
-      data: { title, description, repoUrl, liveUrl, tags },
+      data: { tags },
     });
-    return NextResponse.json(updated);
+    // Update translations
+    if (translations && Array.isArray(translations)) {
+      for (const t of translations) {
+        await prisma.projectTranslation.update({
+          where: { id: t.id },
+          data: {
+            title: t.title,
+            description: t.description,
+            repoUrl: t.repoUrl,
+            liveUrl: t.liveUrl,
+            language: t.language
+          }
+        });
+      }
+    }
+    return NextResponse.json(updatedProject);
   } catch (error) {
     console.error('Error updating project:', error);
     return NextResponse.json({ error: 'Failed to update project' }, { status: 500 });
