@@ -16,33 +16,86 @@ async function main() {
     skipDuplicates: true, // safe to re-run
   });
 
-  // Seed sample projects
-  await prisma.project.createMany({
-    data: [
-      {
-        title: 'E-commerce Platform',
-        description: 'A full-stack e-commerce platform built with Next.js, PostgreSQL, and Stripe integration.',
-        repoUrl: 'https://github.com/example/ecommerce-platform',
-        liveUrl: 'https://ecommerce-demo.vercel.app',
-        tags: ['Next.js', 'PostgreSQL', 'Stripe', 'TypeScript'],
-      },
-      {
-        title: 'Task Management App',
-        description: 'A collaborative task management application with real-time updates using WebSockets.',
-        repoUrl: 'https://github.com/example/task-manager',
-        liveUrl: 'https://task-manager-demo.vercel.app',
-        tags: ['React', 'Node.js', 'Socket.io', 'MongoDB'],
-      },
-      {
-        title: 'Weather Dashboard',
-        description: 'A responsive weather dashboard that displays current weather and forecasts for multiple cities.',
-        repoUrl: 'https://github.com/example/weather-dashboard',
-        liveUrl: 'https://weather-dashboard-demo.vercel.app',
-        tags: ['Vue.js', 'OpenWeather API', 'Chart.js', 'CSS3'],
-      },
-    ],
-    skipDuplicates: true,
-  });
+  // Seed sample projects (bilingual)
+  const sampleProjects = [
+    {
+      tags: ['Next.js', 'PostgreSQL', 'Stripe', 'TypeScript'],
+      translations: [
+        {
+          language: 'en',
+          title: 'E-commerce Platform',
+          description: 'A full-stack e-commerce platform built with Next.js, PostgreSQL, and Stripe integration.',
+          repoUrl: 'https://github.com/example/ecommerce-platform',
+          liveUrl: 'https://ecommerce-demo.vercel.app',
+        },
+        {
+          language: 'fr',
+          title: 'Plateforme E-commerce',
+          description: 'Une plateforme e-commerce complète construite avec Next.js, PostgreSQL et Stripe.',
+          repoUrl: 'https://github.com/example/ecommerce-platform',
+          liveUrl: 'https://ecommerce-demo.vercel.app',
+        }
+      ]
+    },
+    {
+      tags: ['React', 'Node.js', 'Socket.io', 'MongoDB'],
+      translations: [
+        {
+          language: 'en',
+          title: 'Task Management App',
+          description: 'A collaborative task management application with real-time updates using WebSockets.',
+          repoUrl: 'https://github.com/example/task-manager',
+          liveUrl: 'https://task-manager-demo.vercel.app',
+        },
+        {
+          language: 'fr',
+          title: 'Gestionnaire de tâches',
+          description: 'Une application collaborative de gestion de tâches avec mises à jour en temps réel via WebSockets.',
+          repoUrl: 'https://github.com/example/task-manager',
+          liveUrl: 'https://task-manager-demo.vercel.app',
+        }
+      ]
+    },
+    {
+      tags: ['Vue.js', 'OpenWeather API', 'Chart.js', 'CSS3'],
+      translations: [
+        {
+          language: 'en',
+          title: 'Weather Dashboard',
+          description: 'A responsive weather dashboard that displays current weather and forecasts for multiple cities.',
+          repoUrl: 'https://github.com/example/weather-dashboard',
+          liveUrl: 'https://weather-dashboard-demo.vercel.app',
+        },
+        {
+          language: 'fr',
+          title: 'Tableau météo',
+          description: 'Un tableau météo réactif affichant la météo actuelle et les prévisions pour plusieurs villes.',
+          repoUrl: 'https://github.com/example/weather-dashboard',
+          liveUrl: 'https://weather-dashboard-demo.vercel.app',
+        }
+      ]
+    }
+  ];
+
+  for (const project of sampleProjects) {
+    const created = await prisma.project.create({
+      data: {
+        tags: project.tags,
+      }
+    });
+    for (const translation of project.translations) {
+      await prisma.projectTranslation.create({
+        data: {
+          projectId: created.id,
+          language: translation.language,
+          title: translation.title,
+          description: translation.description,
+          repoUrl: translation.repoUrl,
+          liveUrl: translation.liveUrl,
+        }
+      });
+    }
+  }
 
   console.log('Seeded database with default admin and sample projects');
 }
