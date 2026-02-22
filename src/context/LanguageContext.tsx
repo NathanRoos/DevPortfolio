@@ -6,16 +6,7 @@ export type Language = "en" | "fr";
 
 // 2. Define the dictionary of words
 const translations = {
-        // Public Education page keys
-        "education.title": "Education",
-        "education.intro": "Academic qualifications and certifications.",
-        "education.empty": "No education listed yet. Check back soon!",
-        "education.sectionTitle": "Education",
-        // Public Education page keys
-        "education.title": "Éducation",
-        "education.intro": "Parcours académique et certifications.",
-        "education.empty": "Aucune formation ajoutée pour le moment.",
-        "education.sectionTitle": "Éducation",
+        // ...existing code...
     en: {
         // CV page keys
         // Public Testimonials page keys
