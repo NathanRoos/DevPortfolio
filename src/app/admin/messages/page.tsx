@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import AdminGuard from '../../../components/AdminGuard';
+import { useLanguage } from '../../../context/LanguageContext';
 
 interface ContactMessage {
   id: string;
@@ -16,6 +17,7 @@ interface ContactMessage {
 }
 
 export default function AdminMessages() {
+    const { t } = useLanguage();
   const [messages, setMessages] = useState<ContactMessage[]>([]);
   const [loading, setLoading] = useState(true);
   const [deletingId, setDeletingId] = useState<string | null>(null);
@@ -38,7 +40,7 @@ export default function AdminMessages() {
   }, []);
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this message?')) return;
+    if (!confirm(t('admin.messages.confirmDelete'))) return;
 
     setDeletingId(id);
     try {
@@ -64,9 +66,9 @@ export default function AdminMessages() {
     <AdminGuard>
       <div>
         <div className="mb-12 text-center animate-fade-in">
-          <h2 className="text-5xl font-black gradient-text mb-4">📬 Contact Messages</h2>
-          <p className="text-xl text-gray-300">View and manage contact form submissions
-            <span className="gradient-text-alt font-semibold"> • Real-time Updates • Customer Communications</span>
+          <h2 className="text-5xl font-black gradient-text mb-4">📬 {t('admin.messages.title')}</h2>
+          <p className="text-xl text-gray-300">{t('admin.messages.subtitle')}
+            <span className="gradient-text-alt font-semibold"> • {t('admin.messages.cta')}</span>
           </p>
         </div>
 
@@ -81,8 +83,8 @@ export default function AdminMessages() {
                 <svg className="w-16 h-16 text-primary-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                 </svg>
-                <h3 className="text-2xl font-bold text-white mb-2">No Messages Yet</h3>
-                <p className="text-gray-300">Contact messages will appear here once submitted.</p>
+                <h3 className="text-2xl font-bold text-white mb-2">{t('admin.messages.empty')}</h3>
+                <p className="text-gray-300">{t('admin.messages.emptyDesc')}</p>
               </div>
             ) : (
               <div className="space-y-6">
@@ -91,7 +93,7 @@ export default function AdminMessages() {
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
-                    Messages 
+                    {t('admin.messages.sectionTitle')}
                     <span className="ml-3 px-3 py-1 bg-primary-500/20 text-primary-300 rounded-full text-sm font-medium border border-primary-500/30">
                       {messages.length}
                     </span>
@@ -111,7 +113,7 @@ export default function AdminMessages() {
                               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                               </svg>
-                              Registered User
+                              {t('admin.messages.registeredUser')}
                             </span>
                           )}
                         </h4>
@@ -144,7 +146,7 @@ export default function AdminMessages() {
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                             </svg>
                           )}
-                          Delete
+                          {t('admin.messages.deleteButton')}
                         </button>
                       </div>
                     </div>
