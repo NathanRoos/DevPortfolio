@@ -17,7 +17,7 @@ interface Testimonial {
 }
 
 export default function AdminTestimonials() {
-    const { t } = require('../../../context/LanguageContext');
+    const { t } = useLanguage();
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
