@@ -20,9 +20,9 @@ export default function Projects() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchProjects = async () => {
+  const fetchProjects = async (lang: string) => {
     try {
-      const response = await fetch('/api/projects');
+      const response = await fetch(`/api/projects?lang=${lang}`);
       if (!response.ok) throw new Error('Failed to fetch projects');
       const data = await response.json();
       setProjects(data);
@@ -33,9 +33,10 @@ export default function Projects() {
     }
   };
 
+  const { language } = useLanguage();
   useEffect(() => {
-    fetchProjects();
-  }, []);
+    fetchProjects(language);
+  }, [language]);
 
   if (loading) {
     return (

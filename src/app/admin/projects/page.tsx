@@ -32,11 +32,19 @@ export default function AdminProjects() {
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    repoUrl: '',
-    liveUrl: '',
-    tags: '' // Will be converted to array
+    tags: '', // Will be converted to array
+    en: {
+      title: '',
+      description: '',
+      repoUrl: '',
+      liveUrl: '',
+    },
+    fr: {
+      title: '',
+      description: '',
+      repoUrl: '',
+      liveUrl: '',
+    }
   });
   const [submitting, setSubmitting] = useState(false);
   const [editState, setEditState] = useState<EditState | null>(null);
@@ -113,11 +121,16 @@ export default function AdminProjects() {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, lang: 'en' | 'fr') => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [lang]: {
+        ...prev[lang],
+        [name]: value
+      }
+    }));
+  };
   };
 
   useEffect(() => {
@@ -188,76 +201,96 @@ export default function AdminProjects() {
                 </h4>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div className="lg:col-span-2">
-                      <label htmlFor="title" className="flex items-center gap-2 text-sm font-semibold text-primary-400 mb-3">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-                        </svg>
-                        {t('admin.projects.form.title')}
-                      </label>
+                    {/* English Fields */}
+                    <div className="glass-card p-4 rounded-xl border border-primary-500/20">
+                      <h5 className="text-lg font-bold mb-2">English</h5>
+                      <label htmlFor="en-title" className="text-sm font-semibold text-primary-400 mb-2 block">{t('admin.projects.form.title')}</label>
                       <input
                         type="text"
-                        id="title"
+                        id="en-title"
                         name="title"
-                        value={formData.title}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 transition-all duration-300"
+                        value={formData.en.title}
+                        onChange={e => handleInputChange(e, 'en')}
+                        className="w-full mb-3 px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
                         placeholder={t('admin.projects.form.titlePlaceholder')}
                         required
                       />
-                    </div>
-
-                    <div className="lg:col-span-2">
-                      <label htmlFor="description" className="flex items-center gap-2 text-sm font-semibold text-primary-400 mb-3">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h7" />
-                        </svg>
-                        {t('admin.projects.form.description')}
-                      </label>
+                      <label htmlFor="en-description" className="text-sm font-semibold text-primary-400 mb-2 block">{t('admin.projects.form.description')}</label>
                       <textarea
-                        id="description"
+                        id="en-description"
                         name="description"
-                        value={formData.description}
-                        onChange={handleInputChange}
+                        value={formData.en.description}
+                        onChange={e => handleInputChange(e, 'en')}
                         rows={4}
-                        className="w-full px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 transition-all duration-300 resize-none"
+                        className="w-full mb-3 px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
                         placeholder={t('admin.projects.form.descriptionPlaceholder')}
                         required
                       />
-                    </div>
-
-                    <div>
-                      <label htmlFor="repoUrl" className="flex items-center gap-2 text-sm font-semibold text-primary-400 mb-3">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                        </svg>
-                        {t('admin.projects.form.repoUrl')}
-                      </label>
+                      <label htmlFor="en-repoUrl" className="text-sm font-semibold text-primary-400 mb-2 block">{t('admin.projects.form.repoUrl')}</label>
                       <input
                         type="url"
-                        id="repoUrl"
+                        id="en-repoUrl"
                         name="repoUrl"
-                        value={formData.repoUrl}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 transition-all duration-300"
+                        value={formData.en.repoUrl}
+                        onChange={e => handleInputChange(e, 'en')}
+                        className="w-full mb-3 px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
                         placeholder={t('admin.projects.form.repoUrlPlaceholder')}
+                      />
+                      <label htmlFor="en-liveUrl" className="text-sm font-semibold text-primary-400 mb-2 block">{t('admin.projects.form.liveUrl')}</label>
+                      <input
+                        type="url"
+                        id="en-liveUrl"
+                        name="liveUrl"
+                        value={formData.en.liveUrl}
+                        onChange={e => handleInputChange(e, 'en')}
+                        className="w-full px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
+                        placeholder={t('admin.projects.form.liveUrlPlaceholder')}
                       />
                     </div>
 
-                    <div>
-                      <label htmlFor="liveUrl" className="flex items-center gap-2 text-sm font-semibold text-primary-400 mb-3">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-                        </svg>
-                        {t('admin.projects.form.liveUrl')}
-                      </label>
+                    {/* French Fields */}
+                    <div className="glass-card p-4 rounded-xl border border-primary-500/20">
+                      <h5 className="text-lg font-bold mb-2">Français</h5>
+                      <label htmlFor="fr-title" className="text-sm font-semibold text-primary-400 mb-2 block">{t('admin.projects.form.title')}</label>
+                      <input
+                        type="text"
+                        id="fr-title"
+                        name="title"
+                        value={formData.fr.title}
+                        onChange={e => handleInputChange(e, 'fr')}
+                        className="w-full mb-3 px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
+                        placeholder={t('admin.projects.form.titlePlaceholder')}
+                        required
+                      />
+                      <label htmlFor="fr-description" className="text-sm font-semibold text-primary-400 mb-2 block">{t('admin.projects.form.description')}</label>
+                      <textarea
+                        id="fr-description"
+                        name="description"
+                        value={formData.fr.description}
+                        onChange={e => handleInputChange(e, 'fr')}
+                        rows={4}
+                        className="w-full mb-3 px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
+                        placeholder={t('admin.projects.form.descriptionPlaceholder')}
+                        required
+                      />
+                      <label htmlFor="fr-repoUrl" className="text-sm font-semibold text-primary-400 mb-2 block">{t('admin.projects.form.repoUrl')}</label>
                       <input
                         type="url"
-                        id="liveUrl"
+                        id="fr-repoUrl"
+                        name="repoUrl"
+                        value={formData.fr.repoUrl}
+                        onChange={e => handleInputChange(e, 'fr')}
+                        className="w-full mb-3 px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
+                        placeholder={t('admin.projects.form.repoUrlPlaceholder')}
+                      />
+                      <label htmlFor="fr-liveUrl" className="text-sm font-semibold text-primary-400 mb-2 block">{t('admin.projects.form.liveUrl')}</label>
+                      <input
+                        type="url"
+                        id="fr-liveUrl"
                         name="liveUrl"
-                        value={formData.liveUrl}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 transition-all duration-300"
+                        value={formData.fr.liveUrl}
+                        onChange={e => handleInputChange(e, 'fr')}
+                        className="w-full px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
                         placeholder={t('admin.projects.form.liveUrlPlaceholder')}
                       />
                     </div>

@@ -30,53 +30,31 @@ export async function DELETE(request: Request) {
 import { NextResponse } from 'next/server';
 import { prisma } from '../../../lib/prisma';
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const url = new URL(request.url);
+    const lang = url.searchParams.get('lang') || 'en';
     const projects = await prisma.project.findMany({
-      orderBy: {
-        createdAt: 'desc'
+      orderBy: { createdAt: 'desc' },
+      include: {
+        translations: true
       }
     });
-    
-    return NextResponse.json(projects);
+    // Filter to only the translation matching the language
+    const projectsWithTranslation = projects.map(project => {
+      const translation = project.translations.find(t => t.language === lang);
+      return translation ? {
+        id: project.id,
+        tags: project.tags,
+        createdAt: project.createdAt,
+        updatedAt: project.updatedAt,
+        ...translation
+      } : null;
+    }).filter(Boolean);
+    return NextResponse.json(projectsWithTranslation);
   } catch (error) {
     console.error('Database error:', error);
-    
-    // Fallback data if database is not available
-    const fallbackProjects = [
-      {
-        id: '1',
-        title: 'Portfolio Website',
-        description: 'A modern portfolio website built with Next.js, featuring authentication, admin dashboard, and database integration.',
-        repoUrl: 'https://github.com/nathanroos/portfolio',
-        liveUrl: 'https://nathanroos.dev',
-        tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Auth0', 'PostgreSQL'],
-        createdAt: new Date('2024-01-15'),
-        updatedAt: new Date('2024-01-15')
-      },
-      {
-        id: '2',
-        title: 'Kubernetes Dashboard',
-        description: 'Custom Kubernetes dashboard for managing containerized applications with real-time monitoring and deployment capabilities.',
-        repoUrl: 'https://github.com/nathanroos/k8s-dashboard',
-        liveUrl: null,
-        tags: ['React', 'Node.js', 'Kubernetes', 'Docker', 'TypeScript'],
-        createdAt: new Date('2023-11-20'),
-        updatedAt: new Date('2023-11-20')
-      },
-      {
-        id: '3',
-        title: 'Cloud Infrastructure Automation',
-        description: 'Terraform modules and automation scripts for deploying scalable cloud infrastructure on AWS and Azure.',
-        repoUrl: 'https://github.com/nathanroos/cloud-automation',
-        liveUrl: null,
-        tags: ['Terraform', 'AWS', 'Azure', 'CI/CD', 'Infrastructure as Code'],
-        createdAt: new Date('2023-09-10'),
-        updatedAt: new Date('2023-09-10')
-      }
-    ];
-    
-    return NextResponse.json(fallbackProjects);
+    return NextResponse.json([], { status: 200 });
   }
 }
 

@@ -29,11 +29,21 @@ enum Role {
 
 model Project {
   id          String   @id @default(cuid())
+  tags        String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  translations ProjectTranslation[]
+}
+
+model ProjectTranslation {
+  id          String   @id @default(cuid())
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id])
+  language    String   // 'en' or 'fr'
   title       String
   description String
   repoUrl     String?
   liveUrl     String?
-  tags        String[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
