@@ -1,11 +1,39 @@
 "use client";
 
-const handleTagsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  setFormData(prev => ({
-    ...prev,
-    tags: e.target.value
-  }));
-};
+// ...existing code...
+
+export default function AdminProjects() {
+
+  const { t } = useLanguage();
+
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({
+    tags: '', // Will be converted to array
+    en: {
+      title: '',
+      description: '',
+      repoUrl: '',
+      liveUrl: '',
+    },
+    fr: {
+      title: '',
+      description: '',
+      repoUrl: '',
+      liveUrl: '',
+    }
+  });
+  const [submitting, setSubmitting] = useState(false);
+  const [editState, setEditState] = useState<EditState | null>(null);
+  const [editSubmitting, setEditSubmitting] = useState(false);
+
+  const handleTagsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      tags: e.target.value
+    }));
+  };
 
 import { useState, useEffect } from 'react';
 import { useLanguage } from '../../../context/LanguageContext';
