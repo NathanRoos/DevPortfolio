@@ -90,14 +90,7 @@ const translations = {
         // Admin Testimonials keys (see below for French)
 
         // Admin Skills keys
-        "admin.skills.title": "Manage Skills",
-        "admin.skills.subtitle": "Add, edit, and organize your technical skills",
-        "admin.skills.addButton": "Add Skill",
-        "admin.skills.deleteButton": "Delete",
-        "admin.skills.form.name": "Skill Name",
-        "admin.skills.form.category": "Category",
-        "admin.skills.form.proficiency": "Proficiency",
-        "admin.skills.empty": "No skills found.",
+        // Admin Skills keys (see below for French)
 
         // Admin Messages keys
         "admin.messages.title": "Contact Messages",
@@ -122,14 +115,7 @@ const translations = {
         // Admin Testimonials keys (see above for English)
 
         // Admin Skills keys
-        "admin.skills.title": "Gérer les compétences",
-        "admin.skills.subtitle": "Ajoutez, modifiez et organisez vos compétences techniques",
-        "admin.skills.addButton": "Ajouter une compétence",
-        "admin.skills.deleteButton": "Supprimer",
-        "admin.skills.form.name": "Nom de la compétence",
-        "admin.skills.form.category": "Catégorie",
-        "admin.skills.form.proficiency": "Maîtrise",
-        "admin.skills.empty": "Aucune compétence trouvée.",
+        // Admin Skills keys (see above for English)
 
         // Admin Messages keys
         "admin.messages.title": "Messages de contact",
