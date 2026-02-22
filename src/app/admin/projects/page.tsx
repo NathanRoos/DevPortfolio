@@ -110,7 +110,11 @@ export default function AdminProjects() {
       if (!response.ok) throw new Error('Failed to create project');
       
       // Reset form and refresh projects
-      setFormData({ title: '', description: '', repoUrl: '', liveUrl: '', tags: '' });
+      setFormData({
+        tags: '',
+        en: { title: '', description: '', repoUrl: '', liveUrl: '' },
+        fr: { title: '', description: '', repoUrl: '', liveUrl: '' }
+      });
       setShowForm(false);
       await fetchProjects();
     } catch (error) {
