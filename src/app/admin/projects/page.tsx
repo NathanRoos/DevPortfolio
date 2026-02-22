@@ -1,3 +1,9 @@
+  const handleTagsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      tags: e.target.value
+    }));
+  };
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -310,7 +316,7 @@ export default function AdminProjects() {
                       id="tags"
                       name="tags"
                       value={formData.tags}
-                      onChange={handleInputChange}
+                      onChange={handleTagsChange}
                       className="w-full px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 transition-all duration-300"
                       placeholder={t('admin.projects.form.tagsPlaceholder')}
                       required
