@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import ProjectCard from '../../components/ProjectCard';
+import { useLanguage } from '../../context/LanguageContext';
 
 interface Project {
   id: string;
@@ -14,7 +15,7 @@ interface Project {
   updatedAt: Date;
 }
 
-export default function Projects() {
+  const { t } = useLanguage();
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -56,13 +57,13 @@ export default function Projects() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-8">
         <div className="text-center mb-12 animate-fade-in">
           <div className="mb-8 animate-slide-up">
-            <h1 className="text-6xl md:text-7xl font-black gradient-text mb-6">Projects</h1>
+            <h1 className="text-6xl md:text-7xl font-black gradient-text mb-6">{t('projects.title')}</h1>
             <div className="h-1 w-24 bg-gradient-to-r from-primary-500 to-neon-orange mx-auto mb-6 animate-bar-reveal"></div>
           </div>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Explore my portfolio of innovative applications and infrastructure solutions.
-            <span className="text-white font-semibold"> Modern Tech • Scalable Architecture • Production Ready</span>
-          </p>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              {t('projects.intro')}
+              <span className="text-white font-semibold"> {t('projects.tagline')}</span>
+            </p>
         </div>
 
         {projects.length === 0 ? (
@@ -70,9 +71,9 @@ export default function Projects() {
             <svg className="w-16 h-16 text-primary-400 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
-            <h3 className="text-2xl font-bold text-white mb-4">Coming Soon</h3>
+            <h3 className="text-2xl font-bold text-white mb-4">{t('projects.comingSoon')}</h3>
             <p className="text-gray-300">
-              Exciting projects are in development. Check back soon to see my latest work!
+              {t('projects.empty')}
             </p>
           </div>
         ) : (

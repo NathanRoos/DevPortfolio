@@ -8,6 +8,12 @@ export type Language = "en" | "fr";
 const translations = {
         // ...existing code...
     en: {
+        // Public Projects page keys
+        "projects.title": "Projects",
+        "projects.intro": "Explore my portfolio of innovative applications and infrastructure solutions.",
+        "projects.tagline": "Modern Tech • Scalable Architecture • Production Ready",
+        "projects.comingSoon": "Coming Soon",
+        "projects.empty": "Exciting projects are in development. Check back soon to see my latest work!",
         // Public Skills page keys
         "skills.title": "Skills & Expertise",
         "skills.intro": "A comprehensive overview of my technical abilities and professional toolset.",
@@ -215,6 +221,12 @@ const translations = {
         "home.techArsenal": "Technology Arsenal",
     },
     fr: {
+        // Public Projects page keys
+        "projects.title": "Projets",
+        "projects.intro": "Découvrez mon portfolio d'applications innovantes et de solutions d'infrastructure.",
+        "projects.tagline": "Technologies modernes • Architecture évolutive • Prêt pour la production",
+        "projects.comingSoon": "Bientôt disponible",
+        "projects.empty": "Des projets passionnants sont en cours de développement. Revenez bientôt pour découvrir mes dernières réalisations !",
         // Public Skills page keys
         "skills.title": "Compétences & Expertise",
         "skills.intro": "Un aperçu complet de mes compétences techniques et de mon arsenal professionnel.",
