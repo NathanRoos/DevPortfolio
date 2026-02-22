@@ -41,8 +41,11 @@ export default function ContactForm() {
           setSubmitting(false);
           return;
         }
-        // If validation failed on server, show all issues
-        if (errorData.issues && Array.isArray(errorData.issues)) {
+        // If backend returns a raw array of errors (not wrapped in an object)
+        if (Array.isArray(errorData)) {
+          setError('Please fix the following:');
+          setErrorList(errorData.map((i: any) => typeof i.message === 'string' ? i.message : 'Invalid input.'));
+        } else if (errorData.issues && Array.isArray(errorData.issues)) {
           setError('Please fix the following:');
           setErrorList(errorData.issues.map((i: any) => typeof i.message === 'string' ? i.message : 'Invalid input.'));
         } else if (typeof errorData.error === 'string') {
