@@ -87,19 +87,7 @@ const translations = {
         // Admin Projects keys (see below for French)
 
         // Admin Testimonials keys
-        "admin.testimonials.title": "Manage Testimonials",
-        "admin.testimonials.subtitle": "Approve, reject, or delete testimonials",
-        "admin.testimonials.cta": "Real-time Updates • Easy Management",
-        "admin.testimonials.pending": "Pending Review",
-        "admin.testimonials.approved": "Approved",
-        "admin.testimonials.rejected": "Rejected",
-        "admin.testimonials.approve": "Approve",
-        "admin.testimonials.reject": "Reject",
-        "admin.testimonials.delete": "Delete",
-        "admin.testimonials.empty": "No testimonials pending review.",
-        "admin.testimonials.allCaughtUp": "All Caught Up!",
-        "admin.testimonials.errorTitle": "Error Loading Testimonials",
-        "admin.testimonials.error": "An error occurred while loading testimonials.",
+        // Admin Testimonials keys (see below for French)
 
         // Admin Skills keys
         "admin.skills.title": "Manage Skills",
@@ -131,19 +119,7 @@ const translations = {
         // Admin Projects keys (see above for English)
 
         // Admin Testimonials keys
-        "admin.testimonials.title": "Gérer les témoignages",
-        "admin.testimonials.subtitle": "Approuvez, rejetez ou supprimez les témoignages",
-        "admin.testimonials.cta": "Mises à jour en temps réel • Gestion facile",
-        "admin.testimonials.pending": "En attente de révision",
-        "admin.testimonials.approved": "Approuvé",
-        "admin.testimonials.rejected": "Rejeté",
-        "admin.testimonials.approve": "Approuver",
-        "admin.testimonials.reject": "Rejeter",
-        "admin.testimonials.delete": "Supprimer",
-        "admin.testimonials.empty": "Aucun témoignage en attente de révision.",
-        "admin.testimonials.allCaughtUp": "Tout est à jour !",
-        "admin.testimonials.errorTitle": "Erreur lors du chargement des témoignages",
-        "admin.testimonials.error": "Une erreur s'est produite lors du chargement des témoignages.",
+        // Admin Testimonials keys (see above for English)
 
         // Admin Skills keys
         "admin.skills.title": "Gérer les compétences",
