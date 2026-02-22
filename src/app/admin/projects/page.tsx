@@ -136,7 +136,6 @@ export default function AdminProjects() {
   useEffect(() => {
     fetchProjects();
   }, []);
-
   return (
     <AdminGuard>
       <div>
