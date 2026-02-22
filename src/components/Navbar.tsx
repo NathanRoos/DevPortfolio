@@ -59,17 +59,16 @@ export default function Navbar() {
       }}
     >
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex justify-between items-center h-20">
-          <div className="flex items-center space-x-8">
-            <div className="flex items-center">
-              <Link href="/" className="flex items-center group">
-                <div className="ml-4 flex flex-row items-center space-x-4">
-                  <span className="text-white font-bold text-2xl drop-shadow-lg leading-tight">Nathan Roos</span>
-                  <span className="text-xs text-neon-orange font-mono font-semibold drop-shadow-md">&lt;DevOps Developer/&gt;</span>
-                </div>
-              </Link>
-            </div>
-            {/* Navigation menu */}
+        <div className="flex items-center h-20">
+          {/* Left: Branding */}
+          <div className="flex items-center mr-8">
+            <Link href="/" className="flex items-center group">
+              <span className="text-white font-bold text-2xl drop-shadow-lg leading-tight">Nathan Roos</span>
+              <span className="ml-3 text-xs text-neon-orange font-mono font-semibold drop-shadow-md">&lt;DevOps Developer/&gt;</span>
+            </Link>
+          </div>
+          {/* Center: Navigation */}
+          <div className="flex-1 flex justify-center">
             <div className="hidden lg:flex items-center space-x-1">
               {navMenu.map((item) => (
                 <Link 
@@ -83,10 +82,11 @@ export default function Navbar() {
                 </Link>
               ))}
             </div>
-            {/* LanguageSwitcher on the right */}
-            <div className="ml-auto flex items-center">
-              <LanguageSwitcher />
-            </div>
+          </div>
+          {/* Right: Controls */}
+          <div className="flex items-center ml-8">
+            <LanguageSwitcher />
+            {/* ...existing user/auth controls... */}
           </div>
           
           <div className="hidden lg:flex items-center space-x-4">
