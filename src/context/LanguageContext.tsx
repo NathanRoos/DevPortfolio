@@ -8,6 +8,11 @@ export type Language = "en" | "fr";
 const translations = {
         // ...existing code...
     en: {
+        // Public Skills page keys
+        "skills.title": "Skills & Expertise",
+        "skills.intro": "A comprehensive overview of my technical abilities and professional toolset.",
+        "skills.empty": "No skills added yet. Check back soon!",
+        "skills.proficiencyLabel": "Proficiency",
         // Public Experience page keys
         "experience.title": "Work Experience",
         "experience.intro": "My professional journey and career milestones.",
@@ -210,6 +215,11 @@ const translations = {
         "home.techArsenal": "Technology Arsenal",
     },
     fr: {
+        // Public Skills page keys
+        "skills.title": "Compétences & Expertise",
+        "skills.intro": "Un aperçu complet de mes compétences techniques et de mon arsenal professionnel.",
+        "skills.empty": "Aucune compétence ajoutée pour le moment.",
+        "skills.proficiencyLabel": "Niveau de maîtrise",
         // Public Experience page keys
         "experience.title": "Expérience professionnelle",
         "experience.intro": "Mon parcours professionnel et mes étapes de carrière.",

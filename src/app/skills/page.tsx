@@ -1,22 +1,29 @@
-import { prisma } from '../../lib/prisma';
+"use client";
+import { useEffect, useState } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 
-export const dynamic = 'force-dynamic';
+export default function SkillsPage() {
+  const { t } = useLanguage();
+  const [skills, setSkills] = useState<any[]>([]);
+  const [skillsByCategory, setSkillsByCategory] = useState<Record<string, any[]>>({});
 
-export default async function SkillsPage() {
-  const skills = await prisma.skill.findMany({
-    orderBy: {
-      category: 'asc',
-    },
-  });
-
-  // Group skills by category
-  const skillsByCategory: Record<string, typeof skills> = {};
-  skills.forEach(skill => {
-    if (!skillsByCategory[skill.category]) {
-      skillsByCategory[skill.category] = [];
+  useEffect(() => {
+    async function fetchSkills() {
+      const res = await fetch('/api/skills');
+      if (res.ok) {
+        const fetchedSkills = await res.json();
+        setSkills(fetchedSkills);
+        // Group skills by category
+        const grouped: Record<string, any[]> = {};
+        fetchedSkills.forEach((skill: any) => {
+          if (!grouped[skill.category]) grouped[skill.category] = [];
+          grouped[skill.category].push(skill);
+        });
+        setSkillsByCategory(grouped);
+      }
     }
-    skillsByCategory[skill.category].push(skill);
-  });
+    fetchSkills();
+  }, []);
 
   return (
     <div className="min-h-screen bg-mesh-gradient relative overflow-hidden">
@@ -25,18 +32,18 @@ export default async function SkillsPage() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-8">
         <div className="text-center mb-16 animate-fade-in">
           <div className="mb-8 animate-slide-up">
-            <h1 className="text-6xl md:text-7xl font-black gradient-text mb-6">Skills & Expertise</h1>
+            <h1 className="text-6xl md:text-7xl font-black gradient-text mb-6">{t('skills.title')}</h1>
             <div className="h-1 w-32 bg-gradient-to-r from-primary-500 to-neon-orange mx-auto mb-6 animate-bar-reveal"></div>
           </div>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            A comprehensive overview of my technical abilities and professional toolset.
+            {t('skills.intro')}
           </p>
         </div>
 
         <div className="space-y-12 mb-20">
           {Object.keys(skillsByCategory).length === 0 ? (
             <div className="text-center text-gray-400 py-12 glass-card rounded-2xl">
-              No skills added yet. Check back soon!
+              {t('skills.empty')}
             </div>
           ) : (
             Object.entries(skillsByCategory).map(([category, categorySkills]) => (
@@ -58,7 +65,7 @@ export default async function SkillsPage() {
                         <div className="flex mb-2 items-center justify-between">
                           <div>
                             <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-primary-300 bg-primary-500/10">
-                              Proficiency
+                              {t('skills.proficiencyLabel')}
                             </span>
                           </div>
                           <div className="text-right">
