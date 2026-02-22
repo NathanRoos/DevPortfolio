@@ -43,18 +43,20 @@ export default function ContactForm() {
         }
         // If backend returns a raw array of errors (not wrapped in an object)
         if (Array.isArray(errorData)) {
-          setError('Please fix the following:');
-          setErrorList(errorData.map((i: any) => typeof i.message === 'string' ? i.message : 'Invalid input.'));
+          const messages = errorData.map((i: any) => typeof i.message === 'string' ? i.message : 'Invalid input.');
+          window.alert(messages[0] || 'Invalid input.');
         } else if (errorData.issues && Array.isArray(errorData.issues)) {
-          setError('Please fix the following:');
-          setErrorList(errorData.issues.map((i: any) => typeof i.message === 'string' ? i.message : 'Invalid input.'));
+          const messages = errorData.issues.map((i: any) => typeof i.message === 'string' ? i.message : 'Invalid input.');
+          window.alert(messages[0] || 'Invalid input.');
         } else if (typeof errorData.error === 'string') {
-          setError(errorData.error);
+          window.alert(errorData.error);
         } else if (typeof errorData.message === 'string') {
-          setError(errorData.message);
+          window.alert(errorData.message);
         } else {
-          setError('Failed to send message');
+          window.alert('Failed to send message');
         }
+        setSubmitting(false);
+        return;
         setSubmitting(false);
         return;
       }
@@ -64,13 +66,15 @@ export default function ContactForm() {
     } catch (error: any) {
       // Zod validation error on client
       if (error && error.errors && Array.isArray(error.errors)) {
-        setError('Please fix the following:');
-        setErrorList(error.errors.map((i: any) => typeof i.message === 'string' ? i.message : 'Invalid input.'));
+        const messages = error.errors.map((i: any) => typeof i.message === 'string' ? i.message : 'Invalid input.');
+        window.alert(messages[0] || 'Invalid input.');
       } else if (error instanceof Error && typeof error.message === 'string') {
-        setError(error.message);
+        window.alert(error.message);
       } else {
-        setError('An error occurred');
+        window.alert('An error occurred');
       }
+      setSubmitting(false);
+      return;
     } finally {
       setSubmitting(false);
     }
@@ -104,18 +108,7 @@ export default function ContactForm() {
       </div>
       
       <form onSubmit={handleSubmit} className="space-y-6">
-        {(error || errorList.length > 0) && (
-          <div className="bg-red-500/20 border border-red-500/50 text-red-300 px-4 py-3 rounded-xl animate-fade-in">
-            {error && <div>{error}</div>}
-            {errorList.length > 0 && (
-              <ul className="list-disc list-inside mt-1">
-                {errorList.map((msg, idx) => (
-                  <li key={idx}>{msg}</li>
-                ))}
-              </ul>
-            )}
-          </div>
-        )}
+        {/* Error messages are now shown as popups only */}
       
         
         <div className="grid md:grid-cols-2 gap-6">
