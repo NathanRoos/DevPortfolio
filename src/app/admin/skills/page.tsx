@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useLanguage } from '../../../context/LanguageContext';
 import AdminGuard from '../../../components/AdminGuard';
 
 interface Skill {
@@ -11,6 +12,7 @@ interface Skill {
 }
 
 export default function AdminSkills() {
+    const { t } = useLanguage();
   const [skills, setSkills] = useState<Skill[]>([]);
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
@@ -19,7 +21,13 @@ export default function AdminSkills() {
     proficiency: 50
   });
 
-  const categories = ['Frontend', 'Backend', 'DevOps', 'Mobile', 'Other'];
+  const categories = [
+    t('admin.skills.category.frontend'),
+    t('admin.skills.category.backend'),
+    t('admin.skills.category.devops'),
+    t('admin.skills.category.mobile'),
+    t('admin.skills.category.other')
+  ];
 
   useEffect(() => {
     fetchSkills();
@@ -58,7 +66,7 @@ export default function AdminSkills() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this skill?')) return;
+    if (!confirm(t('admin.skills.confirmDelete'))) return;
     
     try {
       const response = await fetch(`/api/skills/${id}`, {
@@ -77,17 +85,17 @@ export default function AdminSkills() {
     <AdminGuard>
       <div>
         <div className="mb-12 text-center animate-fade-in">
-          <h2 className="text-5xl font-black gradient-text mb-4">🎨 Manage Skills</h2>
-          <p className="text-xl text-gray-300">Add, edit, and organize your technical skills</p>
+          <h2 className="text-5xl font-black gradient-text mb-4">🎨 {t('admin.skills.title')}</h2>
+          <p className="text-xl text-gray-300">{t('admin.skills.subtitle')}</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Add Skill Form */}
           <div className="glass-card p-6 rounded-2xl h-fit">
-            <h3 className="text-2xl font-bold text-white mb-6">Add New Skill</h3>
+            <h3 className="text-2xl font-bold text-white mb-6">{t('admin.skills.addTitle')}</h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-semibold text-gray-400 mb-2">Skill Name</label>
+                <label className="block text-sm font-semibold text-gray-400 mb-2">{t('admin.skills.nameLabel')}</label>
                 <input
                   type="text"
                   value={formData.name}
@@ -98,7 +106,7 @@ export default function AdminSkills() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-400 mb-2">Category</label>
+                <label className="block text-sm font-semibold text-gray-400 mb-2">{t('admin.skills.categoryLabel')}</label>
                 <select
                   value={formData.category}
                   onChange={(e) => setFormData({ ...formData, category: e.target.value })}
@@ -112,7 +120,7 @@ export default function AdminSkills() {
 
               <div>
                 <label className="block text-sm font-semibold text-gray-400 mb-2">
-                  Proficiency ({formData.proficiency}%)
+                  {t('admin.skills.proficiencyLabel')} ({formData.proficiency}%)
                 </label>
                 <input
                   type="range"
@@ -128,7 +136,7 @@ export default function AdminSkills() {
                 type="submit"
                 className="w-full py-3 bg-primary-600 hover:bg-primary-500 text-white font-bold rounded-lg transition-colors"
               >
-                Add Skill
+                {t('admin.skills.addButton')}
               </button>
             </form>
           </div>
@@ -173,7 +181,7 @@ export default function AdminSkills() {
             
             {skills.length === 0 && !loading && (
               <div className="text-center text-gray-500 py-12">
-                No skills added yet. Start adding your expertise!
+                {t('admin.skills.empty')}
               </div>
             )}
           </div>
