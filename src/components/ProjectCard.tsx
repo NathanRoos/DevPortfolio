@@ -1,8 +1,16 @@
 import Link from 'next/link';
-import { Project } from '@prisma/client';
-
 interface ProjectCardProps {
-  project: Project;
+  project: {
+    id: string;
+    createdAt: Date | string;
+    updatedAt: Date | string;
+    tags: string[];
+    title: string;
+    description: string;
+    repoUrl: string;
+    liveUrl: string;
+    language: string;
+  };
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
