@@ -1,10 +1,11 @@
-  const handleTagsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      tags: e.target.value
-    }));
-  };
 "use client";
+
+const handleTagsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  setFormData(prev => ({
+    ...prev,
+    tags: e.target.value
+  }));
+};
 
 import { useState, useEffect } from 'react';
 import { useLanguage } from '../../../context/LanguageContext';
