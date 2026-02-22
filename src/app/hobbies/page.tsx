@@ -1,13 +1,20 @@
-import { prisma } from '../../lib/prisma';
+"use client";
+import { useEffect, useState } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 
-export const dynamic = 'force-dynamic';
+export default function HobbiesPage() {
+  const { t } = useLanguage();
+  const [hobbies, setHobbies] = useState<any[]>([]);
 
-export default async function HobbiesPage() {
-  const hobbies = await prisma.hobby.findMany({
-    orderBy: {
-      name: 'asc',
-    },
-  });
+  useEffect(() => {
+    async function fetchHobbies() {
+      const res = await fetch('/api/hobbies');
+      if (res.ok) {
+        setHobbies(await res.json());
+      }
+    }
+    fetchHobbies();
+  }, []);
 
   return (
     <div className="min-h-screen bg-mesh-gradient relative overflow-hidden">
@@ -16,18 +23,18 @@ export default async function HobbiesPage() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-8">
         <div className="text-center mb-16 animate-fade-in">
           <div className="mb-8 animate-slide-up">
-            <h1 className="text-6xl md:text-7xl font-black gradient-text mb-6">Hobbies & Interests</h1>
+            <h1 className="text-6xl md:text-7xl font-black gradient-text mb-6">{t('hobbies.title')}</h1>
             <div className="h-1 w-32 bg-gradient-to-r from-primary-500 to-neon-orange mx-auto mb-6 animate-bar-reveal"></div>
           </div>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            What I enjoy doing when I'm not coding.
+            {t('hobbies.intro')}
           </p>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
           {hobbies.length === 0 ? (
             <div className="col-span-full text-center text-gray-400 py-12 glass-card rounded-2xl">
-              No hobbies added yet.
+              {t('hobbies.empty')}
             </div>
           ) : (
             hobbies.map((hobby, index) => (

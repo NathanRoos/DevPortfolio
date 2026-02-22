@@ -9,6 +9,11 @@ const translations = {
     en: {
         // CV page keys
         // Public Testimonials page keys
+        // Public Hobbies page keys
+        "hobbies.title": "Hobbies & Interests",
+        "hobbies.intro": "What I enjoy doing when I'm not coding.",
+        "hobbies.empty": "No hobbies added yet.",
+        "hobbies.sectionTitle": "Hobbies",
         "testimonials.title": "Testimonials",
         "testimonials.intro": "Read authentic feedback from clients and collaborators.",
         "testimonials.empty": "No testimonials yet.",
@@ -198,6 +203,11 @@ const translations = {
     fr: {
         // CV page keys
         // Public Testimonials page keys
+        // Public Hobbies page keys
+        "hobbies.title": "Loisirs & Centres d'intérêt",
+        "hobbies.intro": "Ce que j'aime faire en dehors du code.",
+        "hobbies.empty": "Aucun loisir ajouté pour le moment.",
+        "hobbies.sectionTitle": "Loisirs",
         "testimonials.title": "Témoignages",
         "testimonials.intro": "Lisez les retours authentiques de clients et collaborateurs.",
         "testimonials.empty": "Aucun témoignage pour le moment.",
