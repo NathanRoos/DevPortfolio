@@ -41,29 +41,18 @@ export default function ContactForm() {
           setSubmitting(false);
           return;
         }
-        // If backend returns a raw array of errors (not wrapped in an object)
-        if (Array.isArray(errorData)) {
-          // If the backend returns a raw array, try to extract the first message
-          const first = errorData[0];
-          if (first && typeof first === 'object' && typeof first.message === 'string') {
-            window.alert(first.message);
-          } else {
-            window.alert('Invalid input.');
+          // Robustly extract a user-friendly error message
+          let errorMessage = 'An error occurred.';
+          if (errorData && Array.isArray(errorData.issues) && errorData.issues.length > 0 && typeof errorData.issues[0].message === 'string') {
+            errorMessage = errorData.issues[0].message;
+          } else if (typeof errorData.error === 'string') {
+            errorMessage = errorData.error;
+          } else if (Array.isArray(errorData) && errorData.length > 0 && typeof errorData[0].message === 'string') {
+            errorMessage = errorData[0].message;
+          } else if (typeof errorData === 'string') {
+            errorMessage = errorData;
           }
-        } else if (errorData.issues && Array.isArray(errorData.issues)) {
-          const first = errorData.issues[0];
-          if (first && typeof first === 'object' && typeof first.message === 'string') {
-            window.alert(first.message);
-          } else {
-            window.alert('Invalid input.');
-          }
-        } else if (typeof errorData.error === 'string') {
-          window.alert(errorData.error);
-        } else if (typeof errorData.message === 'string') {
-          window.alert(errorData.message);
-        } else {
-          window.alert('Failed to send message');
-        }
+          window.alert(errorMessage);
         setSubmitting(false);
         return;
         setSubmitting(false);
