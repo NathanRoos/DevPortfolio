@@ -7,6 +7,11 @@ export type Language = "en" | "fr";
 // 2. Define the dictionary of words
 const translations = {
     en: {
+        // CV page keys
+        "cv.title": "Curriculum Vitae",
+        "cv.intro": "Download or view my latest CV below.",
+        "cv.button": "View / Download CV",
+        "cv.preview": "CV Preview",
         // Contact page keys
         "contact.title": "Contact",
         "contact.intro": "Have a project in mind? Let's discuss how we can work together to bring your ideas to life.",
@@ -181,6 +186,11 @@ const translations = {
         "home.techArsenal": "Technology Arsenal",
     },
     fr: {
+        // CV page keys
+        "cv.title": "Curriculum Vitae",
+        "cv.intro": "Téléchargez ou consultez mon dernier CV ci-dessous.",
+        "cv.button": "Voir / Télécharger le CV",
+        "cv.preview": "Aperçu du CV",
         // Contact page keys
         "contact.title": "Contact",
         "contact.intro": "Vous avez un projet en tête ? Discutons de la façon dont nous pouvons travailler ensemble pour concrétiser vos idées.",

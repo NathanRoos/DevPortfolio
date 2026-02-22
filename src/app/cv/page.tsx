@@ -48,12 +48,12 @@ export default function CVPage() {
                 rel="noopener noreferrer"
                 className="inline-block px-6 py-3 mb-4 bg-primary-600 text-white font-semibold rounded-lg shadow hover:bg-primary-500 transition text-lg"
               >
-                View / Download CV
+                  {t('cv.button')}
               </a>
               {previewUrl && (
                 <img
                   src={previewUrl}
-                  alt="CV Preview"
+                    alt={t('cv.preview')}
                   className="rounded-xl shadow-lg border border-primary-700 bg-white max-w-full"
                   style={{ maxHeight: '900px', width: 'auto' }}
                 />
