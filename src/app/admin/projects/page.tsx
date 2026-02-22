@@ -25,9 +25,7 @@ interface Project {
 }
 
 export default function AdminProjects() {
-
   const { t } = useLanguage();
-
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -56,28 +54,6 @@ export default function AdminProjects() {
       tags: e.target.value
     }));
   };
-
-export default function AdminProjects() {
-
-  const { t } = useLanguage();
-
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [showForm, setShowForm] = useState(false);
-  const [formData, setFormData] = useState({
-    tags: '', // Will be converted to array
-    en: {
-      title: '',
-      description: '',
-      repoUrl: '',
-      liveUrl: '',
-    },
-    fr: {
-      title: '',
-      description: '',
-      repoUrl: '',
-      liveUrl: '',
-    }
   });
   const [submitting, setSubmitting] = useState(false);
   const [editState, setEditState] = useState<EditState | null>(null);
