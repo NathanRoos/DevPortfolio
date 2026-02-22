@@ -93,18 +93,7 @@ const translations = {
         // Admin Skills keys (see below for French)
 
         // Admin Messages keys
-        "admin.messages.title": "Contact Messages",
-        "admin.messages.subtitle": "View and manage contact form submissions",
-        "admin.messages.cta": "Real-time Updates • Customer Communications",
-        "admin.messages.sectionTitle": "Messages",
-        "admin.messages.deleteButton": "Delete",
-        "admin.messages.empty": "No Messages Yet",
-        "admin.messages.emptyDesc": "Contact messages will appear here once submitted.",
-        "admin.messages.registeredUser": "Registered User",
-        "admin.messages.email": "Email",
-        "admin.messages.date": "Date",
-        "admin.messages.time": "Time",
-        "admin.messages.confirmDelete": "Are you sure you want to delete this message?",
+        // Admin Messages keys (see below for French)
         "admin.hobbies.title": "Loisirs & Centres d'intérêt",
         "admin.hobbies.subtitle": "Partagez votre personnalité en dehors du travail",
         "admin.hobbies.addTitle": "Ajouter un loisir",
@@ -118,18 +107,7 @@ const translations = {
         // Admin Skills keys (see above for English)
 
         // Admin Messages keys
-        "admin.messages.title": "Messages de contact",
-        "admin.messages.subtitle": "Consultez et gérez les soumissions du formulaire de contact",
-        "admin.messages.cta": "Mises à jour en temps réel • Communications clients",
-        "admin.messages.sectionTitle": "Messages",
-        "admin.messages.deleteButton": "Supprimer",
-        "admin.messages.empty": "Aucun message pour le moment",
-        "admin.messages.emptyDesc": "Les messages de contact apparaîtront ici une fois soumis.",
-        "admin.messages.registeredUser": "Utilisateur enregistré",
-        "admin.messages.email": "E-mail",
-        "admin.messages.date": "Date",
-        "admin.messages.time": "Heure",
-        "admin.messages.confirmDelete": "Êtes-vous sûr de vouloir supprimer ce message ?",
+        // Admin Messages keys (see above for English)
         // Admin Dashboard Quick Actions
         "admin.dashboard.quickActions": "Actions rapides",
         "admin.dashboard.viewProjects": "Voir les projets",
