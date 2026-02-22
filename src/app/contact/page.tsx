@@ -1,4 +1,5 @@
 
+"use client";
 import ContactForm from '../../components/ContactForm';
 import { useLanguage } from '../../context/LanguageContext';
 

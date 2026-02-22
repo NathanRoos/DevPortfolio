@@ -1,6 +1,9 @@
+"use client";
 import ArchitectureDiagram from '../../components/ArchitectureDiagram';
+import { useLanguage } from '../../context/LanguageContext';
 
 export default function Architecture() {
+  const { t } = useLanguage();
   return (
     <div className="min-h-screen bg-mesh-gradient relative overflow-hidden">
       {/* Animated Background Elements */}
@@ -9,12 +12,12 @@ export default function Architecture() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-8">
         <div className="text-center mb-12 animate-fade-in">
           <div className="mb-8 animate-slide-up">
-            <h1 className="text-6xl md:text-7xl font-black gradient-text mb-6">Infrastructure Architecture</h1>
+            <h1 className="text-6xl md:text-7xl font-black gradient-text mb-6">{t('architecture.title')}</h1>
             <div className="h-1 w-40 bg-gradient-to-r from-primary-500 to-neon-orange mx-auto mb-6 animate-bar-reveal"></div>
           </div>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Live visualization of the k3s cluster topology hosting this application.
-            <span className="text-white font-semibold"> Production Ready • Scalable • Modern Stack</span>
+            {t('architecture.intro')}
+            <span className="text-white font-semibold"> {t('architecture.tagline')}</span>
           </p>
         </div>
 
@@ -24,18 +27,18 @@ export default function Architecture() {
 
         <div className="grid md:grid-cols-2 gap-8">
           <div className="glass-card rounded-2xl p-8">
-            <h2 className="text-3xl font-bold text-white mb-6 gradient-text">Cluster Overview</h2>
+            <h2 className="text-3xl font-bold text-white mb-6 gradient-text">{t('architecture.clusterOverview')}</h2>
             <div className="space-y-4">
               <div className="flex justify-between items-center p-3 rounded-lg bg-dark-800/30 border border-primary-500/20">
-                <span className="font-semibold text-primary-400">Orchestrator:</span>
+                <span className="font-semibold text-primary-400">{t('architecture.orchestrator')}</span>
                 <span className="text-white">k3s (Lightweight Kubernetes)</span>
               </div>
               <div className="flex justify-between items-center p-3 rounded-lg bg-dark-800/30 border border-primary-500/20">
-                <span className="font-semibold text-primary-400">Total Nodes:</span>
+                <span className="font-semibold text-primary-400">{t('architecture.totalNodes')}</span>
                 <span className="text-white">3 (1 Control Plane + 2 Workers)</span>
               </div>
               <div className="flex justify-between items-center p-3 rounded-lg bg-dark-800/30 border border-primary-500/20">
-                <span className="font-semibold text-primary-400">Container Runtime:</span>
+                <span className="font-semibold text-primary-400">{t('architecture.containerRuntime')}</span>
                 <span className="text-white">Docker</span>
               </div>
               <div className="flex justify-between items-center p-3 rounded-lg bg-dark-800/30 border border-primary-500/20">
