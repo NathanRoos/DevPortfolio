@@ -102,14 +102,29 @@ export default function AdminProjects() {
 
     try {
       const tagsArray = formData.tags.split(',').map(tag => tag.trim()).filter(tag => tag);
-      
+      const payload = {
+        tags: tagsArray,
+        translations: [
+          {
+            title: formData.en.title,
+            description: formData.en.description,
+            repoUrl: formData.en.repoUrl,
+            liveUrl: formData.en.liveUrl,
+            language: 'en'
+          },
+          {
+            title: formData.fr.title,
+            description: formData.fr.description,
+            repoUrl: formData.fr.repoUrl,
+            liveUrl: formData.fr.liveUrl,
+            language: 'fr'
+          }
+        ]
+      };
       const response = await fetch('/api/projects', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...formData,
-          tags: tagsArray
-        }),
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) throw new Error('Failed to create project');
