@@ -11,8 +11,9 @@ interface Project {
   repoUrl: string;
   liveUrl: string;
   tags: string[];
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: Date | string;
+  updatedAt: Date | string;
+  language: string;
 }
 
 export default function Projects() {
@@ -25,6 +26,7 @@ export default function Projects() {
       const response = await fetch(`/api/projects?lang=${lang}`);
       if (!response.ok) throw new Error('Failed to fetch projects');
       const data = await response.json();
+      // Ensure each project has translation fields
       setProjects(data);
     } catch (error) {
       console.error('Error fetching projects:', error);
