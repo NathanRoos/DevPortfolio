@@ -24,7 +24,18 @@ export default function ContactForm() {
 
     try {
       // Validate form data on client for fast feedback
-      contactMessageSchema.parse(formData);
+      try {
+        contactMessageSchema.parse(formData);
+      } catch (zodError: any) {
+        // If it's a ZodError, show only the first message
+        if (zodError && Array.isArray(zodError.issues) && zodError.issues.length > 0 && typeof zodError.issues[0].message === 'string') {
+          window.alert(zodError.issues[0].message);
+        } else {
+          window.alert('Invalid input.');
+        }
+        setSubmitting(false);
+        return;
+      }
 
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -41,20 +52,18 @@ export default function ContactForm() {
           setSubmitting(false);
           return;
         }
-          // Robustly extract a user-friendly error message
-          let errorMessage = 'An error occurred.';
-          if (errorData && Array.isArray(errorData.issues) && errorData.issues.length > 0 && typeof errorData.issues[0].message === 'string') {
-            errorMessage = errorData.issues[0].message;
-          } else if (typeof errorData.error === 'string') {
-            errorMessage = errorData.error;
-          } else if (Array.isArray(errorData) && errorData.length > 0 && typeof errorData[0].message === 'string') {
-            errorMessage = errorData[0].message;
-          } else if (typeof errorData === 'string') {
-            errorMessage = errorData;
-          }
-          window.alert(errorMessage);
-        setSubmitting(false);
-        return;
+        // Robustly extract a user-friendly error message
+        let errorMessage = 'An error occurred.';
+        if (errorData && Array.isArray(errorData.issues) && errorData.issues.length > 0 && typeof errorData.issues[0].message === 'string') {
+          errorMessage = errorData.issues[0].message;
+        } else if (typeof errorData.error === 'string') {
+          errorMessage = errorData.error;
+        } else if (Array.isArray(errorData) && errorData.length > 0 && typeof errorData[0].message === 'string') {
+          errorMessage = errorData[0].message;
+        } else if (typeof errorData === 'string') {
+          errorMessage = errorData;
+        }
+        window.alert(errorMessage);
         setSubmitting(false);
         return;
       }
