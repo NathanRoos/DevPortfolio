@@ -8,7 +8,7 @@ export type Language = "en" | "fr";
 const translations = {
     en: {
         // CV page keys
-        "cv.title": "Curriculum Vitae",
+        "cv.title": "Resume",
         "cv.intro": "Download or view my latest CV below.",
         "cv.button": "View / Download CV",
         "cv.preview": "CV Preview",
@@ -187,7 +187,7 @@ const translations = {
     },
     fr: {
         // CV page keys
-        "cv.title": "Curriculum Vitae",
+        "cv.title": "CV",
         "cv.intro": "Téléchargez ou consultez mon dernier CV ci-dessous.",
         "cv.button": "Voir / Télécharger le CV",
         "cv.preview": "Aperçu du CV",
