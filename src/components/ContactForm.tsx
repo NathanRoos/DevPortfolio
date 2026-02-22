@@ -33,13 +33,22 @@ export default function ContactForm() {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
+        let errorData;
+        try {
+          errorData = await response.json();
+        } catch {
+          setError('Failed to send message');
+          setSubmitting(false);
+          return;
+        }
         // If validation failed on server, show all issues
         if (errorData.issues && Array.isArray(errorData.issues)) {
           setError('Please fix the following:');
-          setErrorList(errorData.issues.map((i: any) => i.message));
-        } else if (errorData.error) {
+          setErrorList(errorData.issues.map((i: any) => typeof i.message === 'string' ? i.message : 'Invalid input.'));
+        } else if (typeof errorData.error === 'string') {
           setError(errorData.error);
+        } else if (typeof errorData.message === 'string') {
+          setError(errorData.message);
         } else {
           setError('Failed to send message');
         }
@@ -51,10 +60,10 @@ export default function ContactForm() {
       setFormData({ name: '', email: '', message: '' });
     } catch (error: any) {
       // Zod validation error on client
-      if (error.errors && Array.isArray(error.errors)) {
+      if (error && error.errors && Array.isArray(error.errors)) {
         setError('Please fix the following:');
-        setErrorList(error.errors.map((i: any) => i.message));
-      } else if (error instanceof Error) {
+        setErrorList(error.errors.map((i: any) => typeof i.message === 'string' ? i.message : 'Invalid input.'));
+      } else if (error instanceof Error && typeof error.message === 'string') {
         setError(error.message);
       } else {
         setError('An error occurred');
