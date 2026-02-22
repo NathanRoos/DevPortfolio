@@ -73,8 +73,11 @@ Sent from your portfolio contact form
     }
     
   } catch (error) {
-    if (error instanceof Error && 'issues' in error) {
-      return NextResponse.json({ error: 'Validation failed', issues: error.issues }, { status: 400 });
+    // Zod validation error
+    if (error && typeof error === 'object' && 'issues' in error && Array.isArray((error as any).issues)) {
+      // Map Zod issues to a clean array of messages
+      const issues = (error as any).issues.map((i: any) => ({ message: i.message }));
+      return NextResponse.json({ error: 'Validation failed', issues }, { status: 400 });
     }
     console.error('Error creating contact message:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
