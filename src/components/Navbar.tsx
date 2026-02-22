@@ -68,9 +68,25 @@ export default function Navbar() {
                   <span className="text-xs text-neon-orange font-mono font-semibold drop-shadow-md">&lt;DevOps Developer/&gt;</span>
                 </div>
               </Link>
-              <div className="ml-6">
-                <LanguageSwitcher />
-              </div>
+            </div>
+            {/* Navigation menu */}
+            <div className="hidden lg:flex items-center space-x-1">
+              {navMenu.map((item) => (
+                <Link 
+                  key={item.href}
+                  href={item.href} 
+                  className="group px-4 py-2 text-gray-300 hover:text-white transition-all duration-300 relative overflow-hidden rounded-lg"
+                >
+                  <span className="relative z-10 font-medium">{item.label}</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary-500/20 to-neon-orange/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></div>
+                  <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-neon-orange group-hover:w-full transition-all duration-300"></div>
+                </Link>
+              ))}
+            </div>
+            {/* LanguageSwitcher on the right */}
+            <div className="ml-auto flex items-center">
+              <LanguageSwitcher />
+            </div>
             </div>
             <div className="hidden lg:flex items-center space-x-1">
               {navMenu.map((item) => (
