@@ -17,6 +17,7 @@ interface Testimonial {
 }
 
 export default function AdminTestimonials() {
+    const { t } = require('../../../context/LanguageContext');
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -99,10 +100,10 @@ export default function AdminTestimonials() {
             <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
             </svg>
-            Manage Testimonials
+            {t('admin.testimonials.title')}
           </h2>
-          <p className="text-xl text-gray-300">Approve, reject, or delete testimonials
-            <span className="gradient-text-alt font-semibold"> • Real-time Updates • Easy Management</span>
+          <p className="text-xl text-gray-300">{t('admin.testimonials.subtitle')}
+            <span className="gradient-text-alt font-semibold"> • {t('admin.testimonials.cta') || 'Real-time Updates • Easy Management'}</span>
           </p>
         </div>
 
@@ -112,7 +113,7 @@ export default function AdminTestimonials() {
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          Pending Review 
+          {t('admin.testimonials.status.pending')}
           <span className="ml-3 px-3 py-1 bg-primary-500/20 text-primary-300 rounded-full text-sm font-medium border border-primary-500/30">
             {pendingTestimonials.length}
           </span>
@@ -122,8 +123,8 @@ export default function AdminTestimonials() {
             <svg className="w-16 h-16 text-primary-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
             </svg>
-            <h4 className="text-xl font-bold text-white mb-2">All Caught Up!</h4>
-            <p className="text-gray-300">No testimonials pending review.</p>
+            <h4 className="text-xl font-bold text-white mb-2">{t('admin.testimonials.empty')}</h4>
+            <p className="text-gray-300">{t('admin.testimonials.emptyDesc')}</p>
           </div>
         ) : (
           <div className="space-y-6">
@@ -155,7 +156,7 @@ export default function AdminTestimonials() {
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
-                      Approve
+                      {t('admin.testimonials.status.approved')}
                     </button>
                     <button
                       onClick={() => updateTestimonialStatus(testimonial.id, 'REJECTED')}
@@ -164,7 +165,7 @@ export default function AdminTestimonials() {
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                       </svg>
-                      Reject
+                      {t('admin.testimonials.status.rejected')}
                     </button>
                     <button
                       onClick={() => deleteTestimonial(testimonial.id)}
@@ -173,7 +174,7 @@ export default function AdminTestimonials() {
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                       </svg>
-                      Delete
+                      {t('admin.testimonials.deleteButton')}
                     </button>
                   </div>
                 </div>
@@ -192,7 +193,7 @@ export default function AdminTestimonials() {
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
-          Approved 
+          {t('admin.testimonials.status.approved')}
           <span className="ml-3 px-3 py-1 bg-primary-500/20 text-primary-300 rounded-full text-sm font-medium border border-primary-500/30">
             {approvedTestimonials.length}
           </span>
@@ -249,7 +250,7 @@ export default function AdminTestimonials() {
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            Rejected 
+            {t('admin.testimonials.status.rejected')}
             <span className="ml-3 px-3 py-1 bg-red-500/20 text-red-300 rounded-full text-sm font-medium border border-red-500/30">
               {rejectedTestimonials.length}
             </span>
