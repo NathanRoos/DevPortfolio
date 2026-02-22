@@ -8,6 +8,10 @@ export type Language = "en" | "fr";
 const translations = {
         // ...existing code...
     en: {
+        // Public Education page keys
+        "education.title": "Education",
+        "education.intro": "Academic qualifications and certifications.",
+        "education.empty": "No education listed yet. Check back soon!",
         // CV page keys
         // Public Testimonials page keys
         // Public Hobbies page keys
@@ -202,6 +206,10 @@ const translations = {
         "home.techArsenal": "Technology Arsenal",
     },
     fr: {
+        // Public Education page keys
+        "education.title": "Éducation",
+        "education.intro": "Parcours académique et certifications.",
+        "education.empty": "Aucune formation ajoutée pour le moment.",
         // CV page keys
         // Public Testimonials page keys
         // Public Hobbies page keys
