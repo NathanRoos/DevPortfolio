@@ -102,6 +102,8 @@ a {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+  line-height: 1.2;
+  vertical-align: middle;
 }
 
 .gradient-text-alt {
@@ -110,6 +112,8 @@ a {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  line-height: 1.2;
+  vertical-align: middle;
 }
 
 /* Modern Glass Morphism */
@@ -128,6 +132,8 @@ a {
   transition: all 0.2s ease; /* Faster */
   position: relative;
   overflow: hidden;
+  line-height: 1.2;
+  vertical-align: middle;
 }
 
 /* Removed glass-card::before shimmer */
