@@ -63,18 +63,21 @@ export default function Navbar() {
           <div className="flex items-center space-x-8">
             <div className="flex items-center">
               <Link href="/" className="flex items-center group">
-                <div className="relative">
-                  <span className="font-black text-3xl gradient-text hover:scale-105 transition-transform duration-300 pulse-glow">
+                <div className="relative flex flex-col items-center justify-center">
+                  <span className="font-black text-3xl gradient-text hover:scale-105 transition-transform duration-300 pulse-glow leading-none">
                     NR
                   </span>
                   <div className="absolute -inset-2 bg-gradient-to-r from-primary-500 to-neon-orange rounded-lg opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur"></div>
                 </div>
-                <div className="ml-3 hidden sm:block">
-                  <span className="text-white font-bold text-lg drop-shadow-lg">Nathan Roos</span>
-                  <div className="text-xs text-neon-orange font-mono font-semibold drop-shadow-md">&lt;DevOps Developer/&gt;</div>
+                <div className="ml-4 hidden sm:flex flex-col justify-center">
+                  <span className="text-white font-bold text-xl drop-shadow-lg leading-tight">Nathan</span>
+                  <span className="text-white font-bold text-xl drop-shadow-lg leading-tight">Roos</span>
+                  <div className="mt-1 text-xs text-neon-orange font-mono font-semibold drop-shadow-md">&lt;DevOps Developer/&gt;</div>
                 </div>
               </Link>
-              <LanguageSwitcher />
+              <div className="ml-6">
+                <LanguageSwitcher />
+              </div>
             </div>
             <div className="hidden lg:flex items-center space-x-1">
               {navMenu.map((item) => (
