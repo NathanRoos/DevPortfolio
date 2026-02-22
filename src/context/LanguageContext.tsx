@@ -84,21 +84,7 @@ const translations = {
     fr: {
         // Admin Hobbies keys
         // Admin Projects keys
-        "admin.projects.title": "Manage Projects",
-        "admin.projects.subtitle": "Add, edit, and organize your portfolio projects",
-        "admin.projects.cta": "Showcase Your Work • Professional Portfolio",
-        "admin.projects.sectionTitle": "Projects",
-        "admin.projects.addButton": "Add Project",
-        "admin.projects.editButton": "Edit",
-        "admin.projects.deleteButton": "Delete",
-        "admin.projects.form.title": "Title",
-        "admin.projects.form.description": "Description",
-        "admin.projects.form.repoUrl": "Repository URL",
-        "admin.projects.form.liveUrl": "Live URL",
-        "admin.projects.form.tags": "Tags (comma separated)",
-        "admin.projects.form.save": "Save",
-        "admin.projects.form.cancel": "Cancel",
-        "admin.projects.empty": "No projects found.",
+        // Admin Projects keys (see below for French)
 
         // Admin Testimonials keys
         "admin.testimonials.title": "Manage Testimonials",
@@ -142,21 +128,7 @@ const translations = {
         "admin.hobbies.subtitle": "Partagez votre personnalité en dehors du travail",
         "admin.hobbies.addTitle": "Ajouter un loisir",
         // Admin Projects keys
-        "admin.projects.title": "Gérer les projets",
-        "admin.projects.subtitle": "Ajoutez, modifiez et organisez vos projets de portfolio",
-        "admin.projects.cta": "Mettez en valeur votre travail • Portfolio professionnel",
-        "admin.projects.sectionTitle": "Projets",
-        "admin.projects.addButton": "Ajouter un projet",
-        "admin.projects.editButton": "Modifier",
-        "admin.projects.deleteButton": "Supprimer",
-        "admin.projects.form.title": "Titre",
-        "admin.projects.form.description": "Description",
-        "admin.projects.form.repoUrl": "URL du dépôt",
-        "admin.projects.form.liveUrl": "URL en ligne",
-        "admin.projects.form.tags": "Tags (séparés par des virgules)",
-        "admin.projects.form.save": "Enregistrer",
-        "admin.projects.form.cancel": "Annuler",
-        "admin.projects.empty": "Aucun projet trouvé.",
+        // Admin Projects keys (see above for English)
 
         // Admin Testimonials keys
         "admin.testimonials.title": "Gérer les témoignages",
