@@ -1,6 +1,9 @@
+
 import ContactForm from '../../components/ContactForm';
+import { useLanguage } from '../../context/LanguageContext';
 
 export default function Contact() {
+  const { t } = useLanguage();
   return (
     <div className="min-h-screen bg-mesh-gradient relative overflow-hidden">
       {/* Animated Background Elements */}
@@ -11,18 +14,18 @@ export default function Contact() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-8">
         <div className="text-center mb-12 animate-fade-in">
           <div className="mb-8 animate-slide-up">
-            <h1 className="text-6xl md:text-7xl font-black gradient-text mb-6">Get In Touch</h1>
+            <h1 className="text-6xl md:text-7xl font-black gradient-text mb-6">{t('contact.title')}</h1>
             <div className="h-1 w-32 bg-gradient-to-r from-primary-500 to-neon-orange mx-auto mb-6 animate-bar-reveal"></div>
           </div>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Have a project in mind? Let's discuss how we can work together to bring your ideas to life.
-            <span className="text-white font-semibold"> Collaboration • Innovation • Results</span>
+            {t('contact.intro')}
+            <span className="text-white font-semibold"> {t('contact.collabTagline')}</span>
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
           <div className="glass-card p-8 rounded-2xl">
-            <h2 className="text-3xl font-bold text-white mb-8 gradient-text">Let's Connect</h2>
+            <h2 className="text-3xl font-bold text-white mb-8 gradient-text">{t('contact.connectTitle')}</h2>
             <div className="space-y-8">
               <div className="flex items-start group">
                 <div className="flex-shrink-0">
@@ -33,7 +36,7 @@ export default function Contact() {
                   </div>
                 </div>
                 <div className="ml-6">
-                  <h3 className="text-xl font-bold text-white mb-2">Email</h3>
+                  <h3 className="text-xl font-bold text-white mb-2">{t('contact.emailTitle')}</h3>
                   <p className="text-primary-400 hover:text-primary-300 transition-colors cursor-pointer">nathan.roos@example.com</p>
                 </div>
               </div>
@@ -48,8 +51,8 @@ export default function Contact() {
                   </div>
                 </div>
                 <div className="ml-6">
-                  <h3 className="text-xl font-bold text-white mb-2">Location</h3>
-                  <p className="text-gray-300">Available for remote work worldwide</p>
+                  <h3 className="text-xl font-bold text-white mb-2">{t('contact.locationTitle')}</h3>
+                  <p className="text-gray-300">{t('contact.locationDesc')}</p>
                 </div>
               </div>
 
@@ -62,14 +65,14 @@ export default function Contact() {
                   </div>
                 </div>
                 <div className="ml-6">
-                  <h3 className="text-xl font-bold text-white mb-2">Response Time</h3>
-                  <p className="text-gray-300">Usually within 24 hours</p>
+                  <h3 className="text-xl font-bold text-white mb-2">{t('contact.responseTitle')}</h3>
+                  <p className="text-gray-300">{t('contact.responseDesc')}</p>
                 </div>
               </div>
             </div>
 
             <div className="mt-10 pt-8 border-t border-primary-500/20">
-              <h3 className="text-xl font-bold text-white mb-6 gradient-text">What I Can Help With</h3>
+              <h3 className="text-xl font-bold text-white mb-6 gradient-text">{t('contact.helpTitle')}</h3>
               <ul className="space-y-4 text-gray-300">
                 <li className="flex items-center group">
                   <div className="w-6 h-6 bg-primary-500 rounded-full flex items-center justify-center mr-4 group-hover:scale-105 transition-transform duration-300">
@@ -77,7 +80,7 @@ export default function Contact() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <span>Full-stack web application development</span>
+                  <span>{t('contact.helpWeb')}</span>
                 </li>
                 <li className="flex items-center group">
                   <div className="w-6 h-6 bg-primary-500 rounded-full flex items-center justify-center mr-4 group-hover:scale-105 transition-transform duration-300">
@@ -85,7 +88,7 @@ export default function Contact() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <span>Cloud infrastructure setup and optimization</span>
+                  <span>{t('contact.helpCloud')}</span>
                 </li>
                 <li className="flex items-center group">
                   <div className="w-6 h-6 bg-primary-500 rounded-full flex items-center justify-center mr-4 group-hover:scale-105 transition-transform duration-300">
@@ -93,7 +96,7 @@ export default function Contact() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <span>Kubernetes deployment and DevOps consulting</span>
+                  <span>{t('contact.helpK8s')}</span>
                 </li>
                 <li className="flex items-center group">
                   <div className="w-6 h-6 bg-primary-500 rounded-full flex items-center justify-center mr-4 group-hover:scale-105 transition-transform duration-300">
@@ -101,7 +104,7 @@ export default function Contact() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <span>Technical architecture and system design</span>
+                  <span>{t('contact.helpArch')}</span>
                 </li>
               </ul>
             </div>
