@@ -7,6 +7,21 @@ export type Language = "en" | "fr";
 // 2. Define the dictionary of words
 const translations = {
     en: {
+        // Contact page keys
+        "contact.title": "Contact",
+        "contact.intro": "Have a project in mind? Let's discuss how we can work together to bring your ideas to life.",
+        "contact.collabTagline": "Collaboration • Innovation • Results",
+        "contact.connectTitle": "Let's Connect",
+        "contact.emailTitle": "Email",
+        "contact.locationTitle": "Location",
+        "contact.locationDesc": "Available for remote work worldwide",
+        "contact.responseTitle": "Response Time",
+        "contact.responseDesc": "Usually within 24 hours",
+        "contact.helpTitle": "What I Can Help With",
+        "contact.helpWeb": "Full-stack web application development",
+        "contact.helpCloud": "Cloud infrastructure setup and optimization",
+        "contact.helpK8s": "Kubernetes deployment and DevOps consulting",
+        "contact.helpArch": "Technical architecture and system design",
         // Admin Messages keys
         "admin.messages.title": "Messages",
         "admin.messages.subtitle": "View and manage contact form messages",
@@ -166,6 +181,21 @@ const translations = {
         "home.techArsenal": "Technology Arsenal",
     },
     fr: {
+        // Contact page keys
+        "contact.title": "Contact",
+        "contact.intro": "Vous avez un projet en tête ? Discutons de la façon dont nous pouvons travailler ensemble pour concrétiser vos idées.",
+        "contact.collabTagline": "Collaboration • Innovation • Résultats",
+        "contact.connectTitle": "Entrons en contact",
+        "contact.emailTitle": "Email",
+        "contact.locationTitle": "Localisation",
+        "contact.locationDesc": "Disponible pour le travail à distance dans le monde entier",
+        "contact.responseTitle": "Délai de réponse",
+        "contact.responseDesc": "Généralement sous 24 heures",
+        "contact.helpTitle": "Ce que je peux apporter",
+        "contact.helpWeb": "Développement d'applications web full-stack",
+        "contact.helpCloud": "Mise en place et optimisation d'infrastructures cloud",
+        "contact.helpK8s": "Déploiement Kubernetes et conseil DevOps",
+        "contact.helpArch": "Architecture technique et conception de systèmes",
         // Admin Messages keys
         "admin.messages.title": "Messages",
         "admin.messages.subtitle": "Consultez et gérez les messages du formulaire de contact",
