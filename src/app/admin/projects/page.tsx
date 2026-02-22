@@ -54,7 +54,6 @@ export default function AdminProjects() {
       tags: e.target.value
     }));
   };
-  });
   const [submitting, setSubmitting] = useState(false);
   const [editState, setEditState] = useState<EditState | null>(null);
   const [editSubmitting, setEditSubmitting] = useState(false);
