@@ -15,6 +15,7 @@ interface Project {
   updatedAt: Date;
 }
 
+export default function Projects() {
   const { t } = useLanguage();
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
