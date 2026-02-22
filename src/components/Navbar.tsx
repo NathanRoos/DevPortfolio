@@ -84,8 +84,10 @@ export default function Navbar() {
             </div>
           </div>
           {/* Right: Controls */}
-          <div className="flex items-center ml-8 space-x-6">
-            <LanguageSwitcher />
+          <div className="flex items-center ml-8">
+            <div className="mr-8">
+              <LanguageSwitcher />
+            </div>
             {/* ...existing user/auth controls... */}
           </div>
           
