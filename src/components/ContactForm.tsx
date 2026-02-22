@@ -43,11 +43,20 @@ export default function ContactForm() {
         }
         // If backend returns a raw array of errors (not wrapped in an object)
         if (Array.isArray(errorData)) {
-          const messages = errorData.map((i: any) => typeof i.message === 'string' ? i.message : 'Invalid input.');
-          window.alert(messages[0] || 'Invalid input.');
+          // If the backend returns a raw array, try to extract the first message
+          const first = errorData[0];
+          if (first && typeof first === 'object' && typeof first.message === 'string') {
+            window.alert(first.message);
+          } else {
+            window.alert('Invalid input.');
+          }
         } else if (errorData.issues && Array.isArray(errorData.issues)) {
-          const messages = errorData.issues.map((i: any) => typeof i.message === 'string' ? i.message : 'Invalid input.');
-          window.alert(messages[0] || 'Invalid input.');
+          const first = errorData.issues[0];
+          if (first && typeof first === 'object' && typeof first.message === 'string') {
+            window.alert(first.message);
+          } else {
+            window.alert('Invalid input.');
+          }
         } else if (typeof errorData.error === 'string') {
           window.alert(errorData.error);
         } else if (typeof errorData.message === 'string') {
