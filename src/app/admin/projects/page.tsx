@@ -1,6 +1,28 @@
 "use client";
 
-// ...existing code...
+import { useState, useEffect } from 'react';
+import { useLanguage } from '../../../context/LanguageContext';
+import AdminGuard from '../../../components/AdminGuard';
+
+interface EditState {
+  id: string;
+  title: string;
+  description: string;
+  repoUrl: string;
+  liveUrl: string;
+  tags: string;
+}
+
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  repoUrl: string;
+  liveUrl: string;
+  tags: string[];
+  createdAt: string;
+  updatedAt: string;
+}
 
 export default function AdminProjects() {
 
@@ -34,30 +56,6 @@ export default function AdminProjects() {
       tags: e.target.value
     }));
   };
-
-import { useState, useEffect } from 'react';
-import { useLanguage } from '../../../context/LanguageContext';
-import AdminGuard from '../../../components/AdminGuard';
-
-interface EditState {
-  id: string;
-  title: string;
-  description: string;
-  repoUrl: string;
-  liveUrl: string;
-  tags: string;
-}
-
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  repoUrl: string;
-  liveUrl: string;
-  tags: string[];
-  createdAt: string;
-  updatedAt: string;
-}
 
 export default function AdminProjects() {
 
