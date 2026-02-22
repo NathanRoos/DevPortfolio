@@ -22,7 +22,7 @@ export default function Testimonials() {
   const [formData, setFormData] = useState({ author: '', text: '', rating: 5 });
   const [submitting, setSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
-  const { user } = useUser();
+  // No user context needed for public testimonials
   const { t } = useLanguage();
 
   const fetchTestimonials = async () => {
