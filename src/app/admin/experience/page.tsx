@@ -56,12 +56,11 @@ export default function AdminExperience() {
 
       if (response.ok) {
         setFormData({
-            position: '',
-            company: '',
-            startDate: '',
-            endDate: '',
-            description: '',
-            location: ''
+          en: { position: '', company: '', description: '' },
+          fr: { position: '', company: '', description: '' },
+          startDate: '',
+          endDate: '',
+          location: ''
         });
         fetchExperiences();
       }
