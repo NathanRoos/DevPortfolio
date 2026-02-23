@@ -492,17 +492,10 @@ export default function AdminProjects() {
                       {/* Edit Project Modal */}
                       {editState && editState.id === project.id && (
                         <div className="fixed inset-0 z-50 bg-black bg-opacity-70 flex items-center justify-center">
-                          <div 
+                          <div
                             className="glass-card p-6 sm:p-8 rounded-2xl w-full max-w-lg relative animate-fade-in shadow-2xl border border-primary-500/40 overflow-y-auto"
                             style={{
-                              minWidth: '320px',
                               maxHeight: '90vh',
-                              margin: 'auto',
-                              left: 0,
-                              right: 0,
-                              top: 0,
-                              bottom: 0,
-                              position: 'fixed',
                             }}
                           >
                             <button className="absolute top-4 right-4 text-gray-400 hover:text-red-400" onClick={() => setEditState(null)}>
