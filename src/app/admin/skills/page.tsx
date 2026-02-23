@@ -4,11 +4,18 @@ import { useState, useEffect } from 'react';
 import { useLanguage } from '../../../context/LanguageContext';
 import AdminGuard from '../../../components/AdminGuard';
 
+interface SkillTranslation {
+  id: string;
+  skillId: string;
+  language: string;
+  name: string;
+}
+
 interface Skill {
   id: string;
-  name: string;
   category: string;
   proficiency: number;
+  translations: SkillTranslation[];
 }
 
 export default function AdminSkills() {
@@ -16,7 +23,8 @@ export default function AdminSkills() {
   const [skills, setSkills] = useState<Skill[]>([]);
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
-    name: '',
+    en: { name: '' },
+    fr: { name: '' },
     category: 'Frontend',
     proficiency: 50
   });
@@ -48,16 +56,24 @@ export default function AdminSkills() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      const payload = {
+        category: formData.category,
+        proficiency: formData.proficiency,
+        translations: [
+          { name: formData.en.name, language: 'en' },
+          { name: formData.fr.name, language: 'fr' }
+        ]
+      };
       const response = await fetch('/api/skills', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
       if (response.ok) {
-        setFormData({ name: '', category: 'Frontend', proficiency: 50 });
+        setFormData({ en: { name: '' }, fr: { name: '' }, category: 'Frontend', proficiency: 50 });
         fetchSkills();
       }
     } catch (error) {
@@ -94,15 +110,27 @@ export default function AdminSkills() {
           <div className="glass-card p-6 rounded-2xl h-fit">
             <h3 className="text-2xl font-bold text-white mb-6">{t('admin.skills.addTitle')}</h3>
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label className="block text-sm font-semibold text-gray-400 mb-2">{t('admin.skills.nameLabel')}</label>
-                <input
-                  type="text"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-primary-500"
-                  required
-                />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-400 mb-2">English Name</label>
+                  <input
+                    type="text"
+                    value={formData.en.name}
+                    onChange={(e) => setFormData({ ...formData, en: { name: e.target.value } })}
+                    className="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-primary-500"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-400 mb-2">French Name</label>
+                  <input
+                    type="text"
+                    value={formData.fr.name}
+                    onChange={(e) => setFormData({ ...formData, fr: { name: e.target.value } })}
+                    className="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-primary-500"
+                    required
+                  />
+                </div>
               </div>
 
               <div>

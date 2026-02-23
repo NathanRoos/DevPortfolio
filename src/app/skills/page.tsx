@@ -52,16 +52,18 @@ export default function SkillsPage() {
                   {category}
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {categorySkills.map((skill) => (
-                    <div key={skill.id} className="bg-dark-800/50 p-6 rounded-xl hover:bg-dark-700/50 transition-colors border border-primary-500/10 hover:border-primary-500/30 group">
-                      <div className="flex justify-between items-center mb-4">
-                        <h3 className="text-xl font-semibold text-white group-hover:text-primary-400 transition-colors">
-                          {skill.name}
-                        </h3>
-                        {skill.icon && <span className="text-2xl">{skill.icon}</span>}
-                      </div>
-                      
-                      <div className="relative pt-1">
+                  {categorySkills.map((skill) => {
+                    const { language } = useLanguage();
+                    const translation = skill.translations?.find((t: any) => t.language === language);
+                    return (
+                      <div key={skill.id} className="bg-dark-800/50 p-6 rounded-xl hover:bg-dark-700/50 transition-colors border border-primary-500/10 hover:border-primary-500/30 group">
+                        <div className="flex justify-between items-center mb-4">
+                          <h3 className="text-xl font-semibold text-white group-hover:text-primary-400 transition-colors">
+                            {translation?.name || <span className="italic text-gray-400">No translation</span>}
+                          </h3>
+                          {skill.icon && <span className="text-2xl">{skill.icon}</span>}
+                        </div>
+                        <div className="relative pt-1">
                         <div className="flex mb-2 items-center justify-between">
                           <div>
                             <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-primary-300 bg-primary-500/10">
