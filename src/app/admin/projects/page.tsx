@@ -442,94 +442,122 @@ export default function AdminProjects() {
                         )}
                         {/* Optionally, show repoUrl/liveUrl for each language if needed */}
                       </div>
-                      <div className="flex flex-col space-y-2 ml-6">
-                        <button className="px-4 py-2 bg-primary-500/20 text-primary-300 rounded-xl hover:bg-primary-500/30 transition-all duration-300 font-semibold hover:scale-105 border border-primary-500/30 text-sm flex items-center gap-2" onClick={() => {
-                          const en = project.translations.find(t => t.language === 'en');
-                          const fr = project.translations.find(t => t.language === 'fr');
-                          setEditState({
-                            id: project.id,
-                            // For editing, you may want to expand this to support both languages
-                            title: en?.title || '',
-                            description: en?.description || '',
-                            repoUrl: en?.repoUrl || '',
-                            liveUrl: en?.liveUrl || '',
-                            tags: project.tags.join(', ')
-                          });
-                        }}>
-                                          {/* Edit Project Modal */}
-                                          {editState && (
-                                            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
-                                              <div className="glass-card p-8 rounded-2xl w-full max-w-2xl relative animate-fade-in">
-                                                <button className="absolute top-4 right-4 text-gray-400 hover:text-red-400" onClick={() => setEditState(null)}>
-                                                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                                  </svg>
-                                                </button>
-                                                <h3 className="text-2xl font-bold gradient-text mb-6">Edit Project</h3>
-                                                <form onSubmit={handleEditSubmit} className="space-y-6">
-                                                  <input
-                                                    type="text"
-                                                    placeholder="Project Title"
-                                                    value={editState.title}
-                                                    onChange={e => setEditState({ ...editState, title: e.target.value })}
-                                                    className="w-full px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
-                                                    required
-                                                  />
-                                                  <textarea
-                                                    placeholder="Description"
-                                                    value={editState.description}
-                                                    onChange={e => setEditState({ ...editState, description: e.target.value })}
-                                                    rows={4}
-                                                    className="w-full px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
-                                                    required
-                                                  />
-                                                  <input
-                                                    type="url"
-                                                    placeholder="Repository URL"
-                                                    value={editState.repoUrl}
-                                                    onChange={e => setEditState({ ...editState, repoUrl: e.target.value })}
-                                                    className="w-full px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
-                                                  />
-                                                  <input
-                                                    type="url"
-                                                    placeholder="Live Demo URL"
-                                                    value={editState.liveUrl}
-                                                    onChange={e => setEditState({ ...editState, liveUrl: e.target.value })}
-                                                    className="w-full px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
-                                                  />
-                                                  <input
-                                                    type="text"
-                                                    placeholder="Tags (comma-separated)"
-                                                    value={editState.tags}
-                                                    onChange={e => setEditState({ ...editState, tags: e.target.value })}
-                                                    className="w-full px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
-                                                    required
-                                                  />
-                                                  <div className="flex space-x-4 pt-4">
-                                                    <button
-                                                      type="submit"
-                                                      disabled={editSubmitting}
-                                                      className="px-8 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl font-semibold hover:scale-105 transition-all duration-300 disabled:opacity-50"
-                                                    >
-                                                      {editSubmitting ? 'Saving...' : 'Save Changes'}
-                                                    </button>
-                                                    <button
-                                                      type="button"
-                                                      onClick={() => setEditState(null)}
-                                                      className="px-8 py-3 bg-gray-700 text-white rounded-xl font-semibold hover:scale-105 transition-all duration-300"
-                                                    >
-                                                      Cancel
-                                                    </button>
-                                                  </div>
-                                                </form>
-                                              </div>
-                                            </div>
-                                          )}
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <div className="absolute top-4 right-4 flex gap-2 z-10">
+                        <button
+                          onClick={() => {
+                            const en = project.translations.find(t => t.language === 'en');
+                            const fr = project.translations.find(t => t.language === 'fr');
+                            setEditState({
+                              id: project.id,
+                              title: en?.title || '',
+                              description: en?.description || '',
+                              repoUrl: en?.repoUrl || '',
+                              liveUrl: en?.liveUrl || '',
+                              tags: project.tags.join(', ')
+                            });
+                          }}
+                          className="text-gray-500 hover:text-primary-400 bg-dark-700 rounded-full p-2 shadow-md"
+                          title={t('admin.projects.editButton')}
+                        >
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                           </svg>
-                          {t('admin.projects.editButton')}
                         </button>
+                        <button
+                          className="text-gray-500 hover:text-red-500 bg-dark-700 rounded-full p-2 shadow-md"
+                          title={t('admin.projects.deleteButton')}
+                          onClick={async () => {
+                            if (!confirm(t('admin.projects.confirmDelete'))) return;
+                            try {
+                              const response = await fetch('/api/projects', {
+                                method: 'DELETE',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ id: project.id }),
+                              });
+                              if (response.ok) {
+                                await fetchProjects();
+                              } else {
+                                alert('Failed to delete project');
+                              }
+                            } catch (err) {
+                              alert('Failed to delete project');
+                            }
+                          }}
+                        >
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                          </svg>
+                        </button>
+                      </div>
+                      {/* Edit Project Modal */}
+                      {editState && editState.id === project.id && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+                          <div className="glass-card p-8 rounded-2xl w-full max-w-2xl relative animate-fade-in">
+                            <button className="absolute top-4 right-4 text-gray-400 hover:text-red-400" onClick={() => setEditState(null)}>
+                              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                              </svg>
+                            </button>
+                            <h3 className="text-2xl font-bold gradient-text mb-6">Edit Project</h3>
+                            <form onSubmit={handleEditSubmit} className="space-y-6">
+                              <input
+                                type="text"
+                                placeholder="Project Title"
+                                value={editState.title}
+                                onChange={e => setEditState({ ...editState, title: e.target.value })}
+                                className="w-full px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
+                                required
+                              />
+                              <textarea
+                                placeholder="Description"
+                                value={editState.description}
+                                onChange={e => setEditState({ ...editState, description: e.target.value })}
+                                rows={4}
+                                className="w-full px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
+                                required
+                              />
+                              <input
+                                type="url"
+                                placeholder="Repository URL"
+                                value={editState.repoUrl}
+                                onChange={e => setEditState({ ...editState, repoUrl: e.target.value })}
+                                className="w-full px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
+                              />
+                              <input
+                                type="url"
+                                placeholder="Live Demo URL"
+                                value={editState.liveUrl}
+                                onChange={e => setEditState({ ...editState, liveUrl: e.target.value })}
+                                className="w-full px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
+                              />
+                              <input
+                                type="text"
+                                placeholder="Tags (comma-separated)"
+                                value={editState.tags}
+                                onChange={e => setEditState({ ...editState, tags: e.target.value })}
+                                className="w-full px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
+                                required
+                              />
+                              <div className="flex space-x-4 pt-4">
+                                <button
+                                  type="submit"
+                                  disabled={editSubmitting}
+                                  className="px-8 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl font-semibold hover:scale-105 transition-all duration-300 disabled:opacity-50"
+                                >
+                                  {editSubmitting ? 'Saving...' : 'Save Changes'}
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => setEditState(null)}
+                                  className="px-8 py-3 bg-gray-700 text-white rounded-xl font-semibold hover:scale-105 transition-all duration-300"
+                                >
+                                  Cancel
+                                </button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      )}
                         <button className="px-4 py-2 bg-dark-800/50 text-gray-400 rounded-xl hover:bg-dark-700/50 transition-all duration-300 font-semibold hover:scale-105 border border-gray-600/30 text-sm flex items-center gap-2" onClick={async () => {
                           if (!confirm(t('admin.projects.confirmDelete'))) return;
                           try {
