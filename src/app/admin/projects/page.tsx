@@ -13,15 +13,22 @@ interface EditState {
   tags: string;
 }
 
-interface Project {
+interface ProjectTranslation {
   id: string;
+  projectId: string;
   title: string;
   description: string;
   repoUrl: string;
   liveUrl: string;
+  language: string;
+}
+
+interface Project {
+  id: string;
   tags: string[];
   createdAt: string;
   updatedAt: string;
+  translations: ProjectTranslation[];
 }
 
 export default function AdminProjects() {
