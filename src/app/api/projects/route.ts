@@ -49,25 +49,30 @@ import { prisma } from '../../../lib/prisma';
 export async function GET(request: Request) {
   try {
     const url = new URL(request.url);
-    const lang = url.searchParams.get('lang') || 'en';
+    const lang = url.searchParams.get('lang');
     const projects = await prisma.project.findMany({
       orderBy: { createdAt: 'desc' },
       include: {
         translations: true
       }
     });
-    // Filter to only the translation matching the language
-    const projectsWithTranslation = projects.map(project => {
-      const translation = project.translations.find(t => t.language === lang);
-      return translation ? {
-        id: project.id,
-        tags: project.tags,
-        createdAt: project.createdAt,
-        updatedAt: project.updatedAt,
-        ...translation
-      } : null;
-    }).filter(Boolean);
-    return NextResponse.json(projectsWithTranslation);
+    if (lang) {
+      // Public page: filter to only the translation matching the language
+      const projectsWithTranslation = projects.map(project => {
+        const translation = project.translations.find(t => t.language === lang);
+        return translation ? {
+          id: project.id,
+          tags: project.tags,
+          createdAt: project.createdAt,
+          updatedAt: project.updatedAt,
+          ...translation
+        } : null;
+      }).filter(Boolean);
+      return NextResponse.json(projectsWithTranslation);
+    } else {
+      // Admin dashboard: return all translations for each project
+      return NextResponse.json(projects);
+    }
   } catch (error) {
     console.error('Database error:', error);
     return NextResponse.json([], { status: 200 });
