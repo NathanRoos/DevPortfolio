@@ -8,6 +8,10 @@ export type Language = "en" | "fr";
 const translations = {
         // ...existing code...
     en: {
+            // Admin Dashboard Quick Actions
+            "admin.dashboard.quickActions": "Quick Actions",
+            "admin.dashboard.viewProjects": "View Projects",
+            "admin.dashboard.manageProjects": "Manage your portfolio projects",
         // Public Projects page keys
         "projects.title": "Projects",
         "projects.intro": "Explore my portfolio of innovative applications and infrastructure solutions.",
