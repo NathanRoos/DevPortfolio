@@ -184,7 +184,15 @@ export default function AdminSkills() {
                     {categorySkills.map(skill => (
                       <div key={skill.id} className="bg-dark-800/50 p-4 rounded-xl flex justify-between items-center group">
                         <div>
-                          <p className="font-semibold text-white">{skill.name}</p>
+                          {(() => {
+                            const { language } = useLanguage();
+                            const translation = skill.translations?.find((t: any) => t.language === language);
+                            return (
+                              <p className="font-semibold text-white">
+                                {translation?.name || <span className="italic text-gray-400">No translation</span>}
+                              </p>
+                            );
+                          })()}
                           <div className="w-24 h-1.5 bg-gray-700 rounded-full mt-2 overflow-hidden">
                             <div 
                               className="h-full bg-primary-500 rounded-full"
