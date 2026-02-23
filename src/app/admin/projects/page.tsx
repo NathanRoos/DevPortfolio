@@ -38,7 +38,7 @@ export default function AdminProjects() {
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
-    tags: '', // Will be converted to array
+    tags: '',
     en: {
       title: '',
       description: '',
@@ -63,33 +63,7 @@ export default function AdminProjects() {
     }));
   };
 
-  const handleEditSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!editState) return;
-    setEditSubmitting(true);
-    try {
-      const tagsArray = editState.tags.split(',').map(tag => tag.trim()).filter(tag => tag);
-      const response = await fetch('/api/projects', {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          id: editState.id,
-          title: editState.title,
-          description: editState.description,
-          repoUrl: editState.repoUrl,
-          liveUrl: editState.liveUrl,
-          tags: tagsArray
-        }),
-      });
-      if (!response.ok) throw new Error('Failed to update project');
-      setEditState(null);
-      await fetchProjects();
-    } catch (error) {
-      alert('Failed to update project');
-    } finally {
-      setEditSubmitting(false);
-    }
-  };
+  // Remove handleEditSubmit, merge logic into handleSubmit
 
   const fetchProjects = async () => {
     try {
@@ -107,36 +81,64 @@ export default function AdminProjects() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-
     try {
       const tagsArray = formData.tags.split(',').map(tag => tag.trim()).filter(tag => tag);
-      const payload = {
-        tags: tagsArray,
-        translations: [
-          {
-            title: formData.en.title,
-            description: formData.en.description,
-            repoUrl: formData.en.repoUrl,
-            liveUrl: formData.en.liveUrl,
-            language: 'en'
-          },
-          {
-            title: formData.fr.title,
-            description: formData.fr.description,
-            repoUrl: formData.fr.repoUrl,
-            liveUrl: formData.fr.liveUrl,
-            language: 'fr'
-          }
-        ]
-      };
-      const response = await fetch('/api/projects', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) throw new Error('Failed to create project');
-      
+      if (editState) {
+        // Edit mode
+        const payload = {
+          id: editState.id,
+          tags: tagsArray,
+          translations: [
+            {
+              title: formData.en.title,
+              description: formData.en.description,
+              repoUrl: formData.en.repoUrl,
+              liveUrl: formData.en.liveUrl,
+              language: 'en'
+            },
+            {
+              title: formData.fr.title,
+              description: formData.fr.description,
+              repoUrl: formData.fr.repoUrl,
+              liveUrl: formData.fr.liveUrl,
+              language: 'fr'
+            }
+          ]
+        };
+        const response = await fetch('/api/projects', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (!response.ok) throw new Error('Failed to update project');
+      } else {
+        // Create mode
+        const payload = {
+          tags: tagsArray,
+          translations: [
+            {
+              title: formData.en.title,
+              description: formData.en.description,
+              repoUrl: formData.en.repoUrl,
+              liveUrl: formData.en.liveUrl,
+              language: 'en'
+            },
+            {
+              title: formData.fr.title,
+              description: formData.fr.description,
+              repoUrl: formData.fr.repoUrl,
+              liveUrl: formData.fr.liveUrl,
+              language: 'fr'
+            }
+          ]
+        };
+        const response = await fetch('/api/projects', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (!response.ok) throw new Error('Failed to create project');
+      }
       // Reset form and refresh projects
       setFormData({
         tags: '',
@@ -144,10 +146,10 @@ export default function AdminProjects() {
         fr: { title: '', description: '', repoUrl: '', liveUrl: '' }
       });
       setShowForm(false);
+      setEditState(null);
       await fetchProjects();
     } catch (error) {
-      console.error('Error creating project:', error);
-      alert('Failed to create project');
+      alert('Failed to save project');
     } finally {
       setSubmitting(false);
     }
@@ -220,14 +222,14 @@ export default function AdminProjects() {
               </button>
             </div>
 
-            {/* Add Project Form */}
+            {/* Add/Edit Project Form (shared) */}
             {showForm && (
               <div className="glass-card rounded-2xl p-8 border border-primary-500/30 animate-fade-in">
                 <h4 className="text-2xl font-bold gradient-text mb-6 flex items-center">
                   <svg className="w-5 h-5 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                   </svg>
-                  {t('admin.projects.addTitle')}
+                  {editState ? t('admin.projects.editTitle') : t('admin.projects.addTitle')}
                 </h4>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -362,20 +364,20 @@ export default function AdminProjects() {
                           <svg className="w-5 h-5 animate-spin mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                           </svg>
-                          {t('admin.projects.form.creating')}
+                          {editState ? t('admin.projects.form.saving') : t('admin.projects.form.creating')}
                         </>
                       ) : (
                         <>
                           <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                           </svg>
-                          {t('admin.projects.form.createButton')}
+                          {editState ? t('admin.projects.form.saveChanges') : t('admin.projects.form.createButton')}
                         </>
                       )}
                     </button>
                     <button
                       type="button"
-                      onClick={() => setShowForm(false)}
+                      onClick={() => { setShowForm(false); setEditState(null); setFormData({ tags: '', en: { title: '', description: '', repoUrl: '', liveUrl: '' }, fr: { title: '', description: '', repoUrl: '', liveUrl: '' } }); }}
                       className="px-8 py-3 bg-gradient-to-r from-gray-600 to-gray-700 text-white rounded-xl hover:from-gray-500 hover:to-gray-600 transition-all duration-300 font-semibold hover:scale-105 shadow-lg flex items-center gap-2"
                     >
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -456,6 +458,22 @@ export default function AdminProjects() {
                               liveUrl: en?.liveUrl || '',
                               tags: project.tags.join(', ')
                             });
+                            setFormData({
+                              tags: project.tags.join(', '),
+                              en: {
+                                title: en?.title || '',
+                                description: en?.description || '',
+                                repoUrl: en?.repoUrl || '',
+                                liveUrl: en?.liveUrl || '',
+                              },
+                              fr: {
+                                title: fr?.title || '',
+                                description: fr?.description || '',
+                                repoUrl: fr?.repoUrl || '',
+                                liveUrl: fr?.liveUrl || '',
+                              }
+                            });
+                            setShowForm(true);
                           }}
                           className="text-gray-500 hover:text-primary-400 bg-dark-700 rounded-full p-2 shadow-md"
                           title={t('admin.projects.editButton')}
@@ -490,80 +508,7 @@ export default function AdminProjects() {
                           </svg>
                         </button>
                       </div>
-                      {/* Edit Project Modal */}
-                      {editState && editState.id === project.id && (
-                        <div className="fixed inset-0 z-50 bg-black bg-opacity-70 flex items-center justify-center">
-                          <div
-                            className="glass-card p-6 sm:p-8 rounded-2xl w-full max-w-lg relative animate-fade-in shadow-2xl border border-primary-500/40 overflow-y-auto"
-                            style={{
-                              maxHeight: '90vh',
-                            }}
-                          >
-                            <button className="absolute top-4 right-4 text-gray-400 hover:text-red-400" onClick={() => setEditState(null)}>
-                              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                              </svg>
-                            </button>
-                            <h3 className="text-2xl font-bold gradient-text mb-6">Edit Project</h3>
-                            <form onSubmit={handleEditSubmit} className="space-y-6">
-                              <input
-                                type="text"
-                                placeholder="Project Title"
-                                value={editState.title}
-                                onChange={e => setEditState({ ...editState, title: e.target.value })}
-                                className="w-full px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
-                                required
-                              />
-                              <textarea
-                                placeholder="Description"
-                                value={editState.description}
-                                onChange={e => setEditState({ ...editState, description: e.target.value })}
-                                rows={4}
-                                className="w-full px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
-                                required
-                              />
-                              <input
-                                type="url"
-                                placeholder="Repository URL"
-                                value={editState.repoUrl}
-                                onChange={e => setEditState({ ...editState, repoUrl: e.target.value })}
-                                className="w-full px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
-                              />
-                              <input
-                                type="url"
-                                placeholder="Live Demo URL"
-                                value={editState.liveUrl}
-                                onChange={e => setEditState({ ...editState, liveUrl: e.target.value })}
-                                className="w-full px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
-                              />
-                              <input
-                                type="text"
-                                placeholder="Tags (comma-separated)"
-                                value={editState.tags}
-                                onChange={e => setEditState({ ...editState, tags: e.target.value })}
-                                className="w-full px-4 py-3 bg-dark-800/30 border border-primary-500/30 rounded-xl text-white placeholder-gray-400"
-                                required
-                              />
-                              <div className="flex space-x-4 pt-4">
-                                <button
-                                  type="submit"
-                                  disabled={editSubmitting}
-                                  className="px-8 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl font-semibold hover:scale-105 transition-all duration-300 disabled:opacity-50"
-                                >
-                                  {editSubmitting ? 'Saving...' : 'Save Changes'}
-                                </button>
-                                <button
-                                  type="button"
-                                  onClick={() => setEditState(null)}
-                                  className="px-8 py-3 bg-gray-700 text-white rounded-xl font-semibold hover:scale-105 transition-all duration-300"
-                                >
-                                  Cancel
-                                </button>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                      )}
+                      {/* Edit Project Modal removed; now handled by main form */}
                     </div>
                   </div>
                 ))}
