@@ -56,11 +56,18 @@ export const experienceSchema = z.object({
 });
 
 export const educationSchema = z.object({
-  degree: z.string().min(1, 'Degree is required'),
-  institution: z.string().min(1, 'Institution is required'),
+  en: z.object({
+    degree: z.string().min(1, 'Degree (EN) is required'),
+    institution: z.string().min(1, 'Institution (EN) is required'),
+    description: z.string().optional(),
+  }),
+  fr: z.object({
+    degree: z.string().min(1, 'Degree (FR) is required'),
+    institution: z.string().min(1, 'Institution (FR) is required'),
+    description: z.string().optional(),
+  }),
   startDate: z.string().or(z.date()),
   endDate: z.string().or(z.date()).nullable().optional(),
-  description: z.string().optional(),
 });
 
 export const hobbySchema = z.object({

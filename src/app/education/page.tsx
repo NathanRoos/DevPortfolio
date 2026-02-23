@@ -37,31 +37,33 @@ export default function EducationPage() {
               {t('education.empty')}
             </div>
           ) : (
-            education.map((edu, index) => (
-              <div key={edu.id} className="glass-card p-8 rounded-2xl animate-slide-up group hover:-translate-y-2 transition-all duration-300" style={{ animationDelay: `${index * 0.1}s` }}>
-                <div className="flex items-start justify-between mb-6">
-                  <div className="bg-primary-500/10 p-4 rounded-xl group-hover:bg-primary-500/20 transition-colors">
-                    <svg className="w-8 h-8 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 14l9-5-9-5-9 5 9 5z" />
-                      <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
-                    </svg>
+            education.map((edu, index) => {
+              const { language } = useLanguage();
+              const translation = edu.translations?.find((t: any) => t.language === language);
+              return (
+                <div key={edu.id} className="glass-card p-8 rounded-2xl animate-slide-up group hover:-translate-y-2 transition-all duration-300" style={{ animationDelay: `${index * 0.1}s` }}>
+                  <div className="flex items-start justify-between mb-6">
+                    <div className="bg-primary-500/10 p-4 rounded-xl group-hover:bg-primary-500/20 transition-colors">
+                      <svg className="w-8 h-8 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                        <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                      </svg>
+                    </div>
+                    <span className="text-sm font-mono text-neon-orange bg-neon-orange/10 px-3 py-1 rounded-full border border-neon-orange/20">
+                      {new Date(edu.startDate).getFullYear()} - {edu.endDate ? new Date(edu.endDate).getFullYear() : 'Present'}
+                    </span>
                   </div>
-                  <span className="text-sm font-mono text-neon-orange bg-neon-orange/10 px-3 py-1 rounded-full border border-neon-orange/20">
-                    {new Date(edu.startDate).getFullYear()} - {edu.endDate ? new Date(edu.endDate).getFullYear() : 'Present'}
-                  </span>
+                  <h3 className="text-2xl font-bold text-white mb-2">{translation?.degree || <span className="italic text-gray-400">No translation</span>}</h3>
+                  <h4 className="text-xl text-primary-300 mb-4">{translation?.institution || <span className="italic text-gray-400">No translation</span>}</h4>
+                  {translation?.description && (
+                    <p className="text-gray-400 leading-relaxed border-t border-gray-700/50 pt-4 mt-4">
+                      {translation.description}
+                    </p>
+                  )}
                 </div>
-                
-                <h3 className="text-2xl font-bold text-white mb-2">{edu.degree}</h3>
-                <h4 className="text-xl text-primary-300 mb-4">{edu.institution}</h4>
-                
-                {edu.description && (
-                  <p className="text-gray-400 leading-relaxed border-t border-gray-700/50 pt-4 mt-4">
-                    {edu.description}
-                  </p>
-                )}
-              </div>
-            ))
+              );
+            })
           )}
         </div>
       </div>

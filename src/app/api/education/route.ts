@@ -2,14 +2,17 @@ import { NextResponse } from 'next/server';
 import { prisma } from '../../../lib/prisma';
 import { educationSchema } from '../../../lib/validators';
 
+
 export async function GET() {
   try {
     const education = await prisma.education.findMany({
       orderBy: {
         startDate: 'desc',
+      },
+      include: {
+        translations: true
       }
     });
-    
     return NextResponse.json(education);
   } catch (error) {
     console.error('Database error:', error);
@@ -24,10 +27,26 @@ export async function POST(request: Request) {
 
     const education = await prisma.education.create({
       data: {
-        ...validatedData,
         startDate: new Date(validatedData.startDate),
         endDate: validatedData.endDate ? new Date(validatedData.endDate) : null,
-      }
+        translations: {
+          create: [
+            {
+              language: 'en',
+              degree: validatedData.en.degree,
+              institution: validatedData.en.institution,
+              description: validatedData.en.description,
+            },
+            {
+              language: 'fr',
+              degree: validatedData.fr.degree,
+              institution: validatedData.fr.institution,
+              description: validatedData.fr.description,
+            }
+          ]
+        }
+      },
+      include: { translations: true }
     });
 
     return NextResponse.json(education, { status: 201 });

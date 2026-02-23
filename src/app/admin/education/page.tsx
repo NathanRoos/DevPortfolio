@@ -18,11 +18,10 @@ interface Education {
 export default function AdminEducation() {
   const [educationList, setEducationList] = useState<Education[]>([]);
   const [formData, setFormData] = useState({
-    degree: '',
-    institution: '',
+    en: { degree: '', institution: '', description: '' },
+    fr: { degree: '', institution: '', description: '' },
     startDate: '',
     endDate: '',
-    description: ''
   });
 
   useEffect(() => {
