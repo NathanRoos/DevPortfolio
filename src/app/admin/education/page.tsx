@@ -54,11 +54,10 @@ export default function AdminEducation() {
 
       if (response.ok) {
         setFormData({
-            degree: '',
-            institution: '',
-            startDate: '',
-            endDate: '',
-            description: ''
+          en: { degree: '', institution: '', description: '' },
+          fr: { degree: '', institution: '', description: '' },
+          startDate: '',
+          endDate: ''
         });
         fetchEducation();
       }
