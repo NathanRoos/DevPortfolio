@@ -77,13 +77,31 @@ export default function AdminEducation() {
     }
   };
 
+  const handleEdit = (edu: any) => {
+    setFormData({
+      en: {
+        degree: edu.translations?.find((t: any) => t.language === 'en')?.degree || '',
+        institution: edu.translations?.find((t: any) => t.language === 'en')?.institution || '',
+        description: edu.translations?.find((t: any) => t.language === 'en')?.description || '',
+      },
+      fr: {
+        degree: edu.translations?.find((t: any) => t.language === 'fr')?.degree || '',
+        institution: edu.translations?.find((t: any) => t.language === 'fr')?.institution || '',
+        description: edu.translations?.find((t: any) => t.language === 'fr')?.description || '',
+      },
+      startDate: edu.startDate ? edu.startDate.split('T')[0] : '',
+      endDate: edu.endDate ? edu.endDate.split('T')[0] : '',
+    });
+    setEditId(edu.id);
+  };
+
   return (
     <AdminGuard>
       <div>
         <AdminEducationHeader />
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <AdminEducationForm formData={formData} setFormData={setFormData} handleSubmit={handleSubmit} />
-          <AdminEducationList educationList={educationList} handleDelete={handleDelete} />
+          <AdminEducationForm formData={formData} setFormData={setFormData} handleSubmit={handleSubmit} editId={editId} />
+          <AdminEducationList educationList={educationList} handleDelete={handleDelete} handleEdit={handleEdit} />
         </div>
       </div>
     </AdminGuard>

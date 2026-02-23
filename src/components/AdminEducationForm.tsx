@@ -3,10 +3,46 @@ import { useLanguage } from '../context/LanguageContext';
 
 export default function AdminEducationForm({formData, setFormData, handleSubmit}) {
   const { t } = useLanguage();
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const dataToSend = {
+        ...formData,
+        endDate: formData.endDate || null
+      };
+      let response;
+      if (editId) {
+        response = await fetch(`/api/education/${editId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(dataToSend),
+        });
+      } else {
+        response = await fetch('/api/education', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(dataToSend),
+        });
+      }
+      if (response.ok) {
+        setFormData({
+          en: { degree: '', institution: '', description: '' },
+          fr: { degree: '', institution: '', description: '' },
+          startDate: '',
+          endDate: ''
+        });
+        // Optionally reset editId in parent
+      }
+    } catch (error) {
+      console.error('Error submitting education:', error);
+    }
+  };
+
   return (
     <div className="glass-card p-6 rounded-2xl h-fit">
-      <h3 className="text-2xl font-bold text-white mb-6">{t('admin.education.addTitle')}</h3>
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <h3 className="text-2xl font-bold text-white mb-6">{editId ? 'Edit Education' : t('admin.education.addTitle')}</h3>
+      <form onSubmit={handleFormSubmit} className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <input
             type="text"
@@ -82,7 +118,7 @@ export default function AdminEducationForm({formData, setFormData, handleSubmit}
           type="submit"
           className="w-full py-3 bg-primary-600 hover:bg-primary-500 text-white font-bold rounded-lg transition-colors"
         >
-          {t('admin.education.addButton')}
+          {editId ? 'Save Changes' : t('admin.education.addButton')}
         </button>
       </form>
     </div>
