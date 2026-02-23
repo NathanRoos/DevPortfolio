@@ -1,7 +1,7 @@
 "use client";
 import { useLanguage } from '../context/LanguageContext';
 
-export default function AdminEducationList({educationList, handleDelete}) {
+export default function AdminEducationList({educationList, handleDelete, handleEdit}) {
   const { t } = useLanguage();
   return (
     <div className="lg:col-span-2 space-y-4">
