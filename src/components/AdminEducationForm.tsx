@@ -1,7 +1,7 @@
 "use client";
 import { useLanguage } from '../context/LanguageContext';
 
-export default function AdminEducationForm({formData, setFormData, handleSubmit}) {
+export default function AdminEducationForm({formData, setFormData, handleSubmit, editId}) {
   const { t } = useLanguage();
 
   const handleFormSubmit = async (e: React.FormEvent) => {
