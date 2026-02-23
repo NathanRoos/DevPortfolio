@@ -1,3 +1,7 @@
+import { NextResponse } from 'next/server';
+import { prisma } from '../../../lib/prisma';
+import { experienceSchema } from '../../../lib/validators';
+
 export async function GET() {
   try {
     const experience = await prisma.experience.findMany({
