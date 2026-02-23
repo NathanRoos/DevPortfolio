@@ -15,6 +15,7 @@ interface Education {
   description: string | null;
 }
 
+export default function AdminEducation() {
   const [educationList, setEducationList] = useState<Education[]>([]);
   const [formData, setFormData] = useState({
     en: { degree: '', institution: '', description: '' },
