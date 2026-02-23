@@ -6,25 +6,69 @@ export default function AdminExperienceForm({ formData, setFormData, handleSubmi
   return (
     <form onSubmit={handleSubmit} className="glass-card p-6 rounded-2xl h-fit">
       <h3 className="text-2xl font-bold text-white mb-6">{t('admin.experience.addTitle')}</h3>
-      <div className="mb-4">
-        <input
-          type="text"
-          className="input"
-          placeholder={t('admin.experience.positionPlaceholder')}
-          value={formData.position}
-          onChange={e => setFormData({ ...formData, position: e.target.value })}
-          required
-        />
+      <div className="mb-4 grid grid-cols-2 gap-4">
+        <div>
+          <input
+            type="text"
+            className="input"
+            placeholder={t('admin.experience.positionPlaceholder') + ' (EN)'}
+            value={formData.en.position}
+            onChange={e => setFormData({ ...formData, en: { ...formData.en, position: e.target.value } })}
+            required
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            className="input"
+            placeholder={t('admin.experience.positionPlaceholder') + ' (FR)'}
+            value={formData.fr.position}
+            onChange={e => setFormData({ ...formData, fr: { ...formData.fr, position: e.target.value } })}
+            required
+          />
+        </div>
       </div>
-      <div className="mb-4">
-        <input
-          type="text"
-          className="input"
-          placeholder={t('admin.experience.companyPlaceholder')}
-          value={formData.company}
-          onChange={e => setFormData({ ...formData, company: e.target.value })}
-          required
-        />
+      <div className="mb-4 grid grid-cols-2 gap-4">
+        <div>
+          <input
+            type="text"
+            className="input"
+            placeholder={t('admin.experience.companyPlaceholder') + ' (EN)'}
+            value={formData.en.company}
+            onChange={e => setFormData({ ...formData, en: { ...formData.en, company: e.target.value } })}
+            required
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            className="input"
+            placeholder={t('admin.experience.companyPlaceholder') + ' (FR)'}
+            value={formData.fr.company}
+            onChange={e => setFormData({ ...formData, fr: { ...formData.fr, company: e.target.value } })}
+            required
+          />
+        </div>
+      </div>
+      <div className="mb-4 grid grid-cols-2 gap-4">
+        <div>
+          <textarea
+            className="input"
+            placeholder={t('admin.experience.descriptionPlaceholder') + ' (EN)'}
+            value={formData.en.description}
+            onChange={e => setFormData({ ...formData, en: { ...formData.en, description: e.target.value } })}
+            required
+          />
+        </div>
+        <div>
+          <textarea
+            className="input"
+            placeholder={t('admin.experience.descriptionPlaceholder') + ' (FR)'}
+            value={formData.fr.description}
+            onChange={e => setFormData({ ...formData, fr: { ...formData.fr, description: e.target.value } })}
+            required
+          />
+        </div>
       </div>
       <div className="mb-4">
         <input
@@ -51,14 +95,6 @@ export default function AdminExperienceForm({ formData, setFormData, handleSubmi
           placeholder={t('admin.experience.endDate')}
           value={formData.endDate}
           onChange={e => setFormData({ ...formData, endDate: e.target.value })}
-        />
-      </div>
-      <div className="mb-4">
-        <textarea
-          className="input"
-          placeholder={t('admin.experience.descriptionPlaceholder')}
-          value={formData.description}
-          onChange={e => setFormData({ ...formData, description: e.target.value })}
         />
       </div>
       <button type="submit" className="btn btn-primary w-full">{t('admin.experience.addButton')}</button>

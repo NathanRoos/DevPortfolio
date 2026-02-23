@@ -17,11 +17,10 @@ import AdminExperienceList from '../../../components/AdminExperienceList';
 export default function AdminExperience() {
   const [experiences, setExperiences] = useState<Experience[]>([]);
   const [formData, setFormData] = useState({
-    position: '',
-    company: '',
+    en: { position: '', company: '', description: '' },
+    fr: { position: '', company: '', description: '' },
     startDate: '',
     endDate: '',
-    description: '',
     location: ''
   });
 

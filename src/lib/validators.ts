@@ -40,11 +40,18 @@ export const skillSchema = z.object({
 });
 
 export const experienceSchema = z.object({
-  position: z.string().min(1, 'Position is required'),
-  company: z.string().min(1, 'Company is required'),
-  startDate: z.string().or(z.date()), // Accept string from JSON, convert later if needed
+  en: z.object({
+    position: z.string().min(1, 'Position (EN) is required'),
+    company: z.string().min(1, 'Company (EN) is required'),
+    description: z.string().min(1, 'Description (EN) is required'),
+  }),
+  fr: z.object({
+    position: z.string().min(1, 'Position (FR) is required'),
+    company: z.string().min(1, 'Company (FR) is required'),
+    description: z.string().min(1, 'Description (FR) is required'),
+  }),
+  startDate: z.string().or(z.date()),
   endDate: z.string().or(z.date()).nullable().optional(),
-  description: z.string().min(1, 'Description is required'),
   location: z.string().optional(),
 });
 

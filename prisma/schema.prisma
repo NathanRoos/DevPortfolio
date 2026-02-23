@@ -95,14 +95,22 @@ model SkillTranslation {
 
 model Experience {
   id          String   @id @default(cuid())
-  position    String
-  company     String
   startDate   DateTime
   endDate     DateTime? // Null means "Present"
-  description String
   location    String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  translations ExperienceTranslation[]
+}
+
+model ExperienceTranslation {
+  id            String   @id @default(cuid())
+  experienceId  String
+  experience    Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
+  language      String   // 'en' or 'fr'
+  position      String
+  company       String
+  description   String
 }
 
 model Education {
