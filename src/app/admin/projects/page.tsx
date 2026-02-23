@@ -7,6 +7,8 @@ import AdminGuard from '../../../components/AdminGuard';
 
 interface EditState {
   id: string;
+  enId: string;
+  frId: string;
   title: string;
   description: string;
   repoUrl: string;
@@ -90,6 +92,7 @@ export default function AdminProjects() {
           tags: tagsArray,
           translations: [
             {
+              id: editState.enId,
               title: formData.en.title,
               description: formData.en.description,
               repoUrl: formData.en.repoUrl,
@@ -97,6 +100,7 @@ export default function AdminProjects() {
               language: 'en'
             },
             {
+              id: editState.frId,
               title: formData.fr.title,
               description: formData.fr.description,
               repoUrl: formData.fr.repoUrl,
@@ -452,6 +456,8 @@ export default function AdminProjects() {
                             const fr = project.translations.find(t => t.language === 'fr');
                             setEditState({
                               id: project.id,
+                              enId: en?.id || '',
+                              frId: fr?.id || '',
                               title: en?.title || '',
                               description: en?.description || '',
                               repoUrl: en?.repoUrl || '',
