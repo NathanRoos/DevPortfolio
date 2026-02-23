@@ -443,14 +443,19 @@ export default function AdminProjects() {
                         {/* Optionally, show repoUrl/liveUrl for each language if needed */}
                       </div>
                       <div className="flex flex-col space-y-2 ml-6">
-                        <button className="px-4 py-2 bg-primary-500/20 text-primary-300 rounded-xl hover:bg-primary-500/30 transition-all duration-300 font-semibold hover:scale-105 border border-primary-500/30 text-sm flex items-center gap-2" onClick={() => setEditState({
-                          id: project.id,
-                          title: project.title,
-                          description: project.description,
-                          repoUrl: project.repoUrl,
-                          liveUrl: project.liveUrl,
-                          tags: project.tags.join(', ')
-                        })}>
+                        <button className="px-4 py-2 bg-primary-500/20 text-primary-300 rounded-xl hover:bg-primary-500/30 transition-all duration-300 font-semibold hover:scale-105 border border-primary-500/30 text-sm flex items-center gap-2" onClick={() => {
+                          const en = project.translations.find(t => t.language === 'en');
+                          const fr = project.translations.find(t => t.language === 'fr');
+                          setEditState({
+                            id: project.id,
+                            // For editing, you may want to expand this to support both languages
+                            title: en?.title || '',
+                            description: en?.description || '',
+                            repoUrl: en?.repoUrl || '',
+                            liveUrl: en?.liveUrl || '',
+                            tags: project.tags.join(', ')
+                          });
+                        }}>
                                           {/* Edit Project Modal */}
                                           {editState && (
                                             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
