@@ -11,8 +11,11 @@ export default function ManageInfoPage() {
     helpInfo: "",
     directEmail: "",
     homeTitle: "",
+    homeTitleFr: "",
     homeDescription: "",
-    homeStack: ""
+    homeDescriptionFr: "",
+    homeStack: "",
+    homeStackFr: ""
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState({
@@ -41,8 +44,11 @@ export default function ManageInfoPage() {
           helpInfo: data.helpInfo || "",
           directEmail: data.directEmail || "",
           homeTitle: data.homeTitle || "Full Stack Developer & DevOps Developer",
+          homeTitleFr: data.homeTitleFr || "Développeur Full Stack & DevOps",
           homeDescription: data.homeDescription || "Crafting scalable applications with cutting-edge technologies.",
-          homeStack: data.homeStack || "Next.js • Kubernetes • Modern Cloud Infrastructure"
+          homeDescriptionFr: data.homeDescriptionFr || "Création d'applications évolutives avec des technologies de pointe.",
+          homeStack: data.homeStack || "Next.js • Kubernetes • Modern Cloud Infrastructure",
+          homeStackFr: data.homeStackFr || "Next.js • Kubernetes • Infrastructure Cloud Moderne"
         });
         setLoading(false);
       });
@@ -97,6 +103,28 @@ export default function ManageInfoPage() {
               <span className="text-green-500 ml-2">{message.homeTitle}</span>
             </div>
             <p className="text-xs text-gray-400 mt-1">{t('dashboard.siteinfo.homeTitleHelp')}</p>
+            <div className="mt-4">
+              <label className="block font-semibold text-primary-400 mb-2">{t('dashboard.siteinfo.homeTitle')} (FR)</label>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  name="homeTitleFr"
+                  value={form.homeTitleFr}
+                  onChange={handleChange}
+                  className="input w-full font-bold"
+                  required
+                />
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  disabled={saving.homeTitleFr}
+                  onClick={() => handleSave("homeTitleFr")}
+                >
+                  {saving.homeTitleFr ? "Saving..." : "Save"}
+                </button>
+                <span className="text-green-500 ml-2">{message.homeTitleFr}</span>
+              </div>
+            </div>
           </div>
           <div>
             <label className="block font-semibold text-primary-400 mb-2">{t('dashboard.siteinfo.homeStack')}</label>
@@ -120,6 +148,28 @@ export default function ManageInfoPage() {
               <span className="text-green-500 ml-2">{message.homeStack}</span>
             </div>
             <p className="text-xs text-gray-400 mt-1">{t('dashboard.siteinfo.homeStackHelp')}</p>
+            <div className="mt-4">
+              <label className="block font-semibold text-primary-400 mb-2">{t('dashboard.siteinfo.homeStack')} (FR)</label>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  name="homeStackFr"
+                  value={form.homeStackFr}
+                  onChange={handleChange}
+                  className="input w-full font-mono"
+                  required
+                />
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  disabled={saving.homeStackFr}
+                  onClick={() => handleSave("homeStackFr")}
+                >
+                  {saving.homeStackFr ? "Saving..." : "Save"}
+                </button>
+                <span className="text-green-500 ml-2">{message.homeStackFr}</span>
+              </div>
+            </div>
           </div>
           <div>
             <label className="block font-semibold text-primary-400 mb-2">{t('dashboard.siteinfo.homeDescription')}</label>
@@ -143,6 +193,28 @@ export default function ManageInfoPage() {
               <span className="text-green-500 ml-2">{message.homeDescription}</span>
             </div>
             <p className="text-xs text-gray-400 mt-1">{t('dashboard.siteinfo.homeDescriptionHelp')}</p>
+            <div className="mt-4">
+              <label className="block font-semibold text-primary-400 mb-2">{t('dashboard.siteinfo.homeDescription')} (FR)</label>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  name="homeDescriptionFr"
+                  value={form.homeDescriptionFr}
+                  onChange={handleChange}
+                  className="input w-full"
+                  required
+                />
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  disabled={saving.homeDescriptionFr}
+                  onClick={() => handleSave("homeDescriptionFr")}
+                >
+                  {saving.homeDescriptionFr ? "Saving..." : "Save"}
+                </button>
+                <span className="text-green-500 ml-2">{message.homeDescriptionFr}</span>
+              </div>
+            </div>
           </div>
           <div>
             <label className="block font-semibold text-primary-400 mb-2">{t('dashboard.siteinfo.contactEmail')}</label>
