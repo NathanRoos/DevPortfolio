@@ -7,6 +7,15 @@ export default function AdminSidebar() {
   const pathname = usePathname();
 
   const menuItems = [
+        {
+          href: '/manage/info',
+          label: 'Site Info',
+          icon: (
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M12 20a8 8 0 100-16 8 8 0 000 16z" />
+            </svg>
+          )
+        },
     {
       href: '/manage/cv',
       label: 'CV',

@@ -51,11 +51,11 @@ export default function ManageInfoPage() {
 
   return (
     <ManageGuard>
-      <div className="max-w-xl mx-auto p-8">
-        <h1 className="text-3xl font-bold mb-6">Edit Site Info</h1>
-        <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="glass-card p-8 rounded-2xl max-w-2xl mx-auto">
+        <h1 className="text-4xl font-bold gradient-text mb-8">Edit Site Info</h1>
+        <form onSubmit={handleSubmit} className="space-y-8">
           <div>
-            <label className="block font-semibold mb-1">Contact Email</label>
+            <label className="block font-semibold text-primary-400 mb-2">Contact Email</label>
             <input
               type="email"
               name="contactEmail"
@@ -66,7 +66,7 @@ export default function ManageInfoPage() {
             />
           </div>
           <div>
-            <label className="block font-semibold mb-1">What I Can Help With</label>
+            <label className="block font-semibold text-primary-400 mb-2">What I Can Help With</label>
             <textarea
               name="helpInfo"
               value={form.helpInfo}
@@ -77,7 +77,7 @@ export default function ManageInfoPage() {
             />
           </div>
           <div>
-            <label className="block font-semibold mb-1">Direct Email (for Send Message section)</label>
+            <label className="block font-semibold text-primary-400 mb-2">Direct Email (for Send Message section)</label>
             <input
               type="email"
               name="directEmail"
