@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import AdminGuard from '../../../components/AdminGuard';
+import ManageGuard from '../../../components/AdminGuard';
 import AdminEducationHeader from '../../../components/AdminEducationHeader';
 import AdminEducationForm from '../../../components/AdminEducationForm';
 import AdminEducationList from '../../../components/AdminEducationList';
@@ -96,7 +96,7 @@ export default function AdminEducation() {
   };
 
   return (
-    <AdminGuard>
+    <ManageGuard>
       <div>
         <AdminEducationHeader />
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

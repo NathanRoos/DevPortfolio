@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useLanguage } from '../../../context/LanguageContext';
-import AdminGuard from '../../../components/AdminGuard';
+import ManageGuard from '../../../components/AdminGuard';
 
 interface Testimonial {
   id: string;
@@ -94,7 +94,7 @@ export default function AdminTestimonials() {
   const rejectedTestimonials = testimonials.filter(t => t.status === 'REJECTED');
 
   return (
-    <AdminGuard>
+    <ManageGuard>
       <div>
         <div className="mb-12 text-center animate-fade-in">
           <h2 className="text-5xl font-black gradient-text mb-4 flex items-center gap-4">
@@ -302,6 +302,6 @@ export default function AdminTestimonials() {
         </div>
       )}
     </div>
-    </AdminGuard>
+    </ManageGuard>
   );
 }

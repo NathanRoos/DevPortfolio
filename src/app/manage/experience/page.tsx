@@ -10,7 +10,7 @@ interface Experience {
 'use client';
 
 import { useState, useEffect } from 'react';
-import AdminGuard from '../../../components/AdminGuard';
+import ManageGuard from '../../../components/AdminGuard';
 import AdminExperienceHeader from '../../../components/AdminExperienceHeader';
 import AdminExperienceForm from '../../../components/AdminExperienceForm';
 import AdminExperienceList from '../../../components/AdminExperienceList';
@@ -112,7 +112,7 @@ export default function AdminExperience() {
   };
 
   return (
-    <AdminGuard>
+    <ManageGuard>
       <div>
         <AdminExperienceHeader />
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

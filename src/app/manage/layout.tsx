@@ -1,6 +1,6 @@
 'use client';
 
-import AdminGuard from '../../components/AdminGuard';
+import ManageGuard from '../../components/AdminGuard';
 import AdminSidebar from '../../components/AdminSidebar';
 
 export default function AdminLayout({
@@ -9,7 +9,7 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <AdminGuard>
+    <ManageGuard>
       <div className="h-[calc(100vh-5rem)] bg-mesh-gradient relative overflow-hidden flex">
         {/* Animated Background Elements */}
         <div className="fixed inset-0 cyber-grid opacity-30 pointer-events-none"></div>
@@ -24,6 +24,6 @@ export default function AdminLayout({
             </div>
         </div>
       </div>
-    </AdminGuard>
+    </ManageGuard>
   );
 }

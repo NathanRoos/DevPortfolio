@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useLanguage } from '../../../context/LanguageContext';
-import AdminGuard from '../../../components/AdminGuard';
+import ManageGuard from '../../../components/AdminGuard';
 
 interface SkillTranslation {
   id: string;
@@ -98,7 +98,7 @@ export default function AdminSkills() {
   };
 
   return (
-    <AdminGuard>
+    <ManageGuard>
       <div>
         <div className="mb-12 text-center animate-fade-in">
           <h2 className="text-5xl font-black gradient-text mb-4">🎨 {t('admin.skills.title')}</h2>
@@ -223,6 +223,6 @@ export default function AdminSkills() {
           </div>
         </div>
       </div>
-    </AdminGuard>
+    </ManageGuard>
   );
 }

@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 
 //Fix
-export default function AdminCVPage() {
+export default function ManageCVPage() {
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
   const [message, setMessage] = useState('');

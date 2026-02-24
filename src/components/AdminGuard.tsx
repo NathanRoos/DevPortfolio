@@ -4,11 +4,11 @@ import { useUser } from '../context/AuthContext';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-interface AdminGuardProps {
+interface ManageGuardProps {
   children: React.ReactNode;
 }
 
-export default function AdminGuard({ children }: AdminGuardProps) {
+export default function ManageGuard({ children }: ManageGuardProps) {
   const { user, error, isLoading } = useUser();
   const router = useRouter();
   const [isAdmin, setIsAdmin] = useState(false);

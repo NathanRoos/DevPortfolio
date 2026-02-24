@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import AdminGuard from '../../../components/AdminGuard';
+import ManageGuard from '../../../components/AdminGuard';
 import AdminHobbiesHeader from '../../../components/AdminHobbiesHeader';
 import AdminHobbiesForm from '../../../components/AdminHobbiesForm';
 import AdminHobbiesList from '../../../components/AdminHobbiesList';
@@ -71,7 +71,7 @@ export default function AdminHobbies() {
   };
 
   return (
-    <AdminGuard>
+    <ManageGuard>
       <div>
         <AdminHobbiesHeader />
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

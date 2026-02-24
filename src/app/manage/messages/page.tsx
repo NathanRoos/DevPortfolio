@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import AdminGuard from '../../../components/AdminGuard';
+import ManageGuard from '../../../components/AdminGuard';
 import { useLanguage } from '../../../context/LanguageContext';
 
 interface ContactMessage {
@@ -63,7 +63,7 @@ export default function AdminMessages() {
 
 
   return (
-    <AdminGuard>
+    <ManageGuard>
       <div>
         <div className="mb-12 text-center animate-fade-in">
           <h2 className="text-5xl font-black gradient-text mb-4">📬 {t('admin.messages.title')}</h2>
@@ -170,6 +170,6 @@ export default function AdminMessages() {
           </div>
         )}
       </div>
-    </AdminGuard>
+    </ManageGuard>
   );
 }
