@@ -69,12 +69,12 @@ export default function Navbar() {
           </div>
           {/* Center: Navigation */}
           <div className="flex-1 flex justify-center min-w-0">
-            <div className="hidden lg:flex items-center space-x-4 min-w-0 max-w-full overflow-x-auto scrollbar-thin scrollbar-thumb-primary-500/40 scrollbar-track-transparent">
+            <div className="hidden lg:flex items-center space-x-4 min-w-0 max-w-full overflow-x-auto scrollbar-thin scrollbar-thumb-primary-500/40 scrollbar-track-transparent flex-shrink-0 whitespace-nowrap">
               {navMenu.map((item) => (
                 <Link 
                   key={item.href}
                   href={item.href} 
-                  className="group px-4 py-2 text-gray-300 hover:text-white transition-all duration-300 relative overflow-hidden rounded-lg"
+                  className="group px-4 py-2 text-gray-300 hover:text-white transition-all duration-300 relative overflow-hidden rounded-lg flex-shrink-0 whitespace-nowrap"
                 >
                   <span className="relative z-10 font-medium">{item.label}</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-primary-500/20 to-neon-orange/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></div>
