@@ -10,6 +10,7 @@ interface ProjectCardProps {
     repoUrl: string;
     liveUrl: string;
     language: string;
+    image?: string | null;
   };
 }
 
@@ -23,6 +24,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       <div className="absolute inset-0 bg-gradient-to-r from-primary-500 via-neon-orange to-primary-500 rounded-2xl opacity-0 group-hover:opacity-20 blur-sm transition-all duration-500"></div>
       
       <div className="relative z-10 flex flex-col h-full">
+        {project.image && (
+          <img src={project.image} alt="Project" className="w-full h-48 object-cover rounded-xl mb-6 border border-primary-500/30" />
+        )}
         <div className="flex items-start justify-between mb-6">
           <div className="flex-1">
             <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-primary-300 transition-colors duration-300">
@@ -30,7 +34,6 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             </h3>
             <div className="w-12 h-1 bg-gradient-to-r from-primary-500 to-neon-orange rounded-full mb-4 group-hover:w-20 transition-all duration-300"></div>
           </div>
-          
           {/* Project icon */}
           <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-neon-orange rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
             <svg className="w-6 h-6 text-dark-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
