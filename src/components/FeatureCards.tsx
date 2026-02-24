@@ -13,7 +13,7 @@ export default function FeatureCards() {
       delay: "0s"
     },
     {
-      title: t('home.skills') || 'Skills',
+      title: t('skills.title') || 'Skills',
       description: t('skills.intro') || 'A comprehensive overview of my technical abilities and professional toolset.',
       icon: "M16 7a4 4 0 01-8 0M12 3v4m0 0a4 4 0 01-4 4H7a4 4 0 01-4-4V7a4 4 0 014-4h1a4 4 0 014 4zM12 21v-4m0 0a4 4 0 014-4h1a4 4 0 014 4v1a4 4 0 01-4 4h-1a4 4 0 01-4-4z",
       href: "/skills",
