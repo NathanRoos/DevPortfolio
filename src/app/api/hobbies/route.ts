@@ -37,23 +37,20 @@ export async function POST(request: Request) {
 
     let iconUrl: string | undefined = undefined;
     if (iconFile && typeof iconFile === 'object' && 'arrayBuffer' in iconFile) {
-      // Only accept PNG
-      if (iconFile.type !== 'image/png') {
-        return NextResponse.json({ error: 'Only PNG files are allowed.' }, { status: 400 });
+      // Accept PNG, JPG, JPEG
+      const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+      if (!allowedTypes.includes(iconFile.type)) {
+        return NextResponse.json({ error: 'Only PNG, JPG, or JPEG files are allowed.' }, { status: 400 });
+      }
+      // Determine file extension for Cloudinary format
+      let format = 'png';
+      if (iconFile.type === 'image/jpeg' || iconFile.type === 'image/jpg') {
+        format = 'jpg';
       }
       const buffer = Buffer.from(await iconFile.arrayBuffer());
-      const uploadRes = await cloudinary.uploader.upload_stream({
-        folder: 'portfolio-hobbies',
-        resource_type: 'image',
-        format: 'png',
-      }, (error, result) => {
-        if (error || !result) throw new Error('Cloudinary upload failed');
-        iconUrl = result.secure_url;
-      });
-      // Use a promise to wait for upload_stream
       await new Promise((resolve, reject) => {
         const stream = cloudinary.uploader.upload_stream(
-          { folder: 'portfolio-hobbies', resource_type: 'image', format: 'png' },
+          { folder: 'portfolio-hobbies', resource_type: 'image', format },
           (error, result) => {
             if (error || !result) reject(error || new Error('Cloudinary upload failed'));
             iconUrl = result.secure_url;
