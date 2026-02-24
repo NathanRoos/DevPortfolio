@@ -51,6 +51,7 @@ export default function ManageInfoPage() {
         setForm({
           contactEmail: data.contactEmail || "",
           helpInfo: data.helpInfo || "",
+          helpInfoFr: data.helpInfoFr || "",
           directEmail: data.directEmail || "",
           homeTitle: data.homeTitle || "Full Stack Developer & DevOps Developer",
           homeTitleFr: data.homeTitleFr || "Développeur Full Stack & DevOps",
