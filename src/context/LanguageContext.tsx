@@ -8,6 +8,8 @@ export type Language = "en" | "fr";
 const translations = {
         // ...existing code...
     en: {
+                "admin.sidebar.dashboard": "Dashboard",
+                "admin.sidebar.dashboardPanel": "Dashboard Panel",
             "contact.formIntro": "Ready to bring your ideas to life? Let's discuss your next project.",
             "contact.formNameLabel": "Name *",
             "contact.formNamePlaceholder": "Your name",
@@ -257,6 +259,8 @@ const translations = {
         "home.techArsenal": "Technology Arsenal",
     },
     fr: {
+                "admin.sidebar.dashboard": "Tableau de bord",
+                "admin.sidebar.dashboardPanel": "Panneau de contrôle",
             "contact.formIntro": "Prêt à donner vie à vos idées ? Discutons de votre prochain projet.",
             "contact.formNameLabel": "Nom *",
             "contact.formNamePlaceholder": "Votre nom",

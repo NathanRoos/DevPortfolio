@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 export default function AdminSidebar() {
+    // Import language context
+    const { t, language } = require('../context/LanguageContext').useLanguage ? require('../context/LanguageContext').useLanguage() : { t: (key) => key, language: 'en' };
   const pathname = usePathname();
 
   const menuItems = [
@@ -27,7 +29,7 @@ export default function AdminSidebar() {
     },
     {
       href: '/manage/dashboard',
-      label: 'Dashboard',
+      label: t('admin.sidebar.dashboard'),
       icon: (
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
           <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
@@ -105,7 +107,7 @@ export default function AdminSidebar() {
     <aside className="fixed left-0 top-[3.5rem] h-[calc(100vh-3.5rem)] w-64 glass-card border-r border-primary-500/20 backdrop-blur-xl z-20 flex flex-col">
       <div className="p-6 overflow-y-auto h-full flex-1 custom-scrollbar">
             <div className="mb-8">
-              <h1 className="text-2xl font-black gradient-text">Dashboard Panel</h1>
+              <h1 className="text-2xl font-black gradient-text">{t('admin.sidebar.dashboardPanel')}</h1>
               <p className="text-primary-400 font-mono text-xs">&lt;control-center/&gt;</p>
             </div>
             
