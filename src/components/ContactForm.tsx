@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import { contactMessageSchema } from '../lib/validators';
 
 export default function ContactForm() {
+    const { t } = useLanguage();
   // Placeholder - will implement proper auth after Auth0 setup
   const user = null;
   const [formData, setFormData] = useState({
