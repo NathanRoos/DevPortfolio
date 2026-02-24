@@ -1,3 +1,8 @@
+"use client";
+
+import { useState, useEffect } from 'react';
+import { contactMessageSchema } from '../lib/validators';
+
 export default function ContactForm() {
   // Placeholder - will implement proper auth after Auth0 setup
   const user = null;
