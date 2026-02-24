@@ -1,8 +1,4 @@
-'use client';
-
-import { useState, useEffect } from 'react';
-import { contactMessageSchema } from '../lib/validators';
-
+export default function ContactForm() {
   // Placeholder - will implement proper auth after Auth0 setup
   const user = null;
   const [formData, setFormData] = useState({
@@ -133,7 +129,7 @@ import { contactMessageSchema } from '../lib/validators';
               type="text"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full px-4 py-3 bg-dark-800/50 border border-gray-600 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-primary-500 focus:bg-dark-800/80 transition-all duration-300"
+              className="w-full px-4 py-3 bg-dark-800/50 border border-gray-600 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-primary-500 focus:bg-dark-800/80 transition-all duration-300"
               placeholder="Your name"
               required
             />
@@ -147,7 +143,7 @@ import { contactMessageSchema } from '../lib/validators';
               type="email"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            className="w-full px-4 py-3 bg-dark-800/50 border border-gray-600 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-primary-500 focus:bg-dark-800/80 transition-all duration-300"
+              className="w-full px-4 py-3 bg-dark-800/50 border border-gray-600 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-primary-500 focus:bg-dark-800/80 transition-all duration-300"
               placeholder="your@email.com"
               required
             />
@@ -194,4 +190,5 @@ import { contactMessageSchema } from '../lib/validators';
       </form>
     </div>
   );
+}
 }
