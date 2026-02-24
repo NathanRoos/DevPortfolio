@@ -14,19 +14,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className="fixed inset-0 cyber-grid opacity-30 pointer-events-none"></div>
 
         {/* Sidebar: hidden on small screens, overlay on mobile */}
-        <div>
-          <div className="hidden lg:block">
-            <AdminSidebar />
-          </div>
-          {/* Overlay sidebar for mobile/tablet */}
-          {sidebarOpen && (
-            <div className="fixed inset-0 z-[1100] bg-black/40 lg:hidden" onClick={() => setSidebarOpen(false)}>
-              <div className="absolute left-0 top-0 h-full w-64 bg-dark-900 shadow-xl animate-slide-in z-[1200]" onClick={e => e.stopPropagation()}>
-                <AdminSidebar />
-              </div>
-            </div>
-          )}
+        {/* Sidebar for desktop */}
+        <div className="hidden lg:block">
+          <AdminSidebar />
         </div>
+        {/* Overlay sidebar for mobile/tablet - no parent div, highest z-index */}
+        {sidebarOpen && (
+          <div className="fixed inset-0 z-[9999] bg-black/60 lg:hidden flex" onClick={() => setSidebarOpen(false)}>
+            <div className="h-full w-64 bg-dark-900 shadow-xl animate-slide-in z-[10000]" onClick={e => e.stopPropagation()}>
+              <AdminSidebar />
+            </div>
+          </div>
+        )}
 
         {/* Main Content */}
         <div className="flex-1 relative z-10 p-4 sm:p-6 md:p-8 h-full overflow-y-auto custom-scrollbar lg:ml-64">
