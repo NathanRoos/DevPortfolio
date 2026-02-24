@@ -5,7 +5,7 @@ import ManageGuard from "../../../components/AdminGuard";
 import { useLanguage } from '../../../context/LanguageContext';
 
 export default function ManageInfoPage() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [form, setForm] = useState({
     contactEmail: "",
     helpInfo: "",
@@ -114,7 +114,7 @@ export default function ManageInfoPage() {
             </div>
             <p className="text-xs text-gray-400 mt-1">{t('dashboard.siteinfo.homeTitleHelp')}</p>
             <div className="mt-4">
-              <label className="block font-semibold text-primary-400 mb-2">{t('dashboard.siteinfo.homeTitle')} (FR)</label>
+              <label className="block font-semibold text-primary-400 mb-2">{language === 'fr' ? t('dashboard.siteinfo.homeTitle') : t('dashboard.siteinfo.homeTitle') + ' (FR)'}</label>
               <div className="flex gap-2">
                 <input
                   type="text"
@@ -159,7 +159,7 @@ export default function ManageInfoPage() {
             </div>
             <p className="text-xs text-gray-400 mt-1">{t('dashboard.siteinfo.homeStackHelp')}</p>
             <div className="mt-4">
-              <label className="block font-semibold text-primary-400 mb-2">{t('dashboard.siteinfo.homeStack')} (FR)</label>
+              <label className="block font-semibold text-primary-400 mb-2">{language === 'fr' ? t('dashboard.siteinfo.homeStack') : t('dashboard.siteinfo.homeStack') + ' (FR)'}</label>
               <div className="flex gap-2">
                 <input
                   type="text"
@@ -204,7 +204,7 @@ export default function ManageInfoPage() {
             </div>
             <p className="text-xs text-gray-400 mt-1">{t('dashboard.siteinfo.homeDescriptionHelp')}</p>
             <div className="mt-4">
-              <label className="block font-semibold text-primary-400 mb-2">{t('dashboard.siteinfo.homeDescription')} (FR)</label>
+              <label className="block font-semibold text-primary-400 mb-2">{language === 'fr' ? t('dashboard.siteinfo.homeDescription') : t('dashboard.siteinfo.homeDescription') + ' (FR)'}</label>
               <div className="flex gap-2">
                 <input
                   type="text"
@@ -270,7 +270,7 @@ export default function ManageInfoPage() {
             </div>
             {message.helpInfo && <div className="mt-1 text-green-400 text-sm">{message.helpInfo}</div>}
             <div className="mt-4">
-              <label className="block font-semibold text-primary-400 mb-2">{t('dashboard.siteinfo.helpInfo')} (FR)</label>
+              <label className="block font-semibold text-primary-400 mb-2">{language === 'fr' ? t('dashboard.siteinfo.helpInfo') : t('dashboard.siteinfo.helpInfo') + ' (FR)'}</label>
               <div className="flex gap-2">
                 <textarea
                   name="helpInfoFr"
