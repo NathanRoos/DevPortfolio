@@ -61,7 +61,7 @@ export default function Testimonials() {
         throw new Error(data.error || 'Failed to submit testimonial');
       }
       
-      setFormData({ author: '', text: '', rating: 5 });
+      setFormData({ author: '', text: '', rating: 5, website: '' });
       setSubmitSuccess(true);
       setShowForm(false);
       setTimeout(() => setSubmitSuccess(false), 5000);
