@@ -83,71 +83,69 @@ export default function Navbar() {
               ))}
             </div>
           </div>
-          {/* Right: Controls */}
+          {/* Right: Controls and Mobile Menu Button */}
           <div className="flex items-center ml-8">
             <div className="mr-8">
               <LanguageSwitcher />
             </div>
             {/* ...existing user/auth controls... */}
-          </div>
-          
-          <div className="hidden lg:flex items-center space-x-4">
-            {isLoading && (
-              <div className="flex items-center space-x-2 text-primary-300">
-                <div className="w-2 h-2 bg-primary-400 rounded-full animate-pulse"></div>
-                <span className="text-sm font-mono">Loading...</span>
-              </div>
-            )}
-            {error && (
-              <span className="text-red-400 text-sm font-mono bg-red-500/10 px-3 py-1 rounded-lg border border-red-500/20">
-                Error loading user
-              </span>
-            )}
-            {user ? (
-              <div className="flex items-center space-x-3">
-                <div className="text-right hidden md:block">
-                  <div className="text-sm font-medium text-white">{user.name || 'Admin'}</div>
-                  <div className="text-xs text-primary-400 font-mono">authenticated</div>
+            <div className="hidden lg:flex items-center space-x-4">
+              {isLoading && (
+                <div className="flex items-center space-x-2 text-primary-300">
+                  <div className="w-2 h-2 bg-primary-400 rounded-full animate-pulse"></div>
+                  <span className="text-sm font-mono">Loading...</span>
                 </div>
+              )}
+              {error && (
+                <span className="text-red-400 text-sm font-mono bg-red-500/10 px-3 py-1 rounded-lg border border-red-500/20">
+                  Error loading user
+                </span>
+              )}
+              {user ? (
+                <div className="flex items-center space-x-3">
+                  <div className="text-right hidden md:block">
+                    <div className="text-sm font-medium text-white">{user.name || 'Admin'}</div>
+                    <div className="text-xs text-primary-400 font-mono">authenticated</div>
+                  </div>
+                  <Link 
+                    href="/manage/dashboard" 
+                    className="px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-500 transition-all duration-300 shadow-md hover:shadow-lg"
+                  >
+                    Dashboard
+                  </Link>
+                  <button 
+                    onClick={logout}
+                    className="px-4 py-2 text-sm font-medium text-primary-400 hover:text-white border border-primary-500/30 hover:border-primary-400 rounded-lg transition-all duration-300 hover:bg-primary-500/10 backdrop-blur-sm"
+                  >
+                    Logout
+                  </button>
+                </div>
+              ) : (
                 <Link 
-                  href="/manage/dashboard" 
-                  className="px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-500 transition-all duration-300 shadow-md hover:shadow-lg"
+                  href="/api/auth/login" 
+                  prefetch={false}
+                  className="group px-6 py-2 text-sm font-medium text-primary-400 hover:text-white border border-primary-500/30 hover:border-primary-400 rounded-lg transition-all duration-300 hover:bg-primary-500/10 backdrop-blur-sm relative overflow-hidden"
                 >
-                  Dashboard
+                  <span className="relative z-10">Login</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary-500/10 to-neon-orange/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                 </Link>
-                <button 
-                  onClick={logout}
-                  className="px-4 py-2 text-sm font-medium text-primary-400 hover:text-white border border-primary-500/30 hover:border-primary-400 rounded-lg transition-all duration-300 hover:bg-primary-500/10 backdrop-blur-sm"
-                >
-                  Logout
-                </button>
-              </div>
-            ) : (
-              <Link 
-                href="/api/auth/login" 
-                prefetch={false}
-                className="group px-6 py-2 text-sm font-medium text-primary-400 hover:text-white border border-primary-500/30 hover:border-primary-400 rounded-lg transition-all duration-300 hover:bg-primary-500/10 backdrop-blur-sm relative overflow-hidden"
+              )}
+            </div>
+            {/* Mobile menu button always at end */}
+            <div className="lg:hidden ml-2">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="text-gray-300 hover:text-white p-2 rounded-lg hover:bg-primary-500/10 transition-all duration-300"
               >
-                <span className="relative z-10">Login</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-primary-500/10 to-neon-orange/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-              </Link>
-            )}
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="lg:hidden">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-300 hover:text-white p-2 rounded-lg hover:bg-primary-500/10 transition-all duration-300"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                {isMenuOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                )}
-              </svg>
-            </button>
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  {isMenuOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
 
