@@ -79,7 +79,7 @@ export default function AdminHobbies() {
           <AdminHobbiesList hobbies={hobbies} handleDelete={handleDelete} />
         </div>
       </div>
-    </AdminGuard>
+    </ManageGuard>
   );
 }
 

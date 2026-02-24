@@ -120,7 +120,7 @@ export default function AdminExperience() {
           <AdminExperienceList experiences={experiences} handleDelete={handleDelete} handleEdit={handleEdit} />
         </div>
       </div>
-    </AdminGuard>
+    </ManageGuard>
   );
 }
 

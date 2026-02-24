@@ -104,6 +104,6 @@ export default function AdminEducation() {
           <AdminEducationList educationList={educationList} handleDelete={handleDelete} handleEdit={handleEdit} />
         </div>
       </div>
-    </AdminGuard>
+    </ManageGuard>
   );
 }
