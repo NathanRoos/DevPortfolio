@@ -5,8 +5,15 @@ import { useLanguage } from '../context/LanguageContext';
 import { useEffect, useState } from 'react';
 
 export default function HeroSection() {
-  const { t } = useLanguage();
-  const [siteInfo, setSiteInfo] = useState({ homeTitle: '', homeDescription: '', homeStack: '' });
+  const { t, language } = useLanguage();
+  const [siteInfo, setSiteInfo] = useState({
+    homeTitle: '',
+    homeTitleFr: '',
+    homeDescription: '',
+    homeDescriptionFr: '',
+    homeStack: '',
+    homeStackFr: ''
+  });
 
   useEffect(() => {
     fetch('/api/info')
@@ -14,8 +21,11 @@ export default function HeroSection() {
       .then(data => {
         setSiteInfo({
           homeTitle: data.homeTitle || '',
+          homeTitleFr: data.homeTitleFr || '',
           homeDescription: data.homeDescription || '',
-          homeStack: data.homeStack || ''
+          homeDescriptionFr: data.homeDescriptionFr || '',
+          homeStack: data.homeStack || '',
+          homeStackFr: data.homeStackFr || ''
         });
       });
   }, []);
@@ -40,13 +50,19 @@ export default function HeroSection() {
       }}>
         <span className="font-mono text-neon-orange font-bold drop-shadow-lg">&lt;</span>
         <span className="text-white font-bold">
-          {siteInfo.homeTitle || t('home.title')}
+          {language === 'fr'
+            ? siteInfo.homeTitleFr || t('home.title')
+            : siteInfo.homeTitle || t('home.title')}
         </span>
         <span className="font-mono text-neon-orange font-bold drop-shadow-lg">/&gt;</span>
       </h2>
       <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed animate-slide-up" style={{ animationDelay: '0.6s' }}>
-        {siteInfo.homeDescription || t('home.subtitle')}
-        <span className="text-white font-semibold"> {siteInfo.homeStack || t('home.stack')}</span>
+        {language === 'fr'
+          ? siteInfo.homeDescriptionFr || t('home.subtitle')
+          : siteInfo.homeDescription || t('home.subtitle')}
+        <span className="text-white font-semibold"> {language === 'fr'
+          ? siteInfo.homeStackFr || t('home.stack')
+          : siteInfo.homeStack || t('home.stack')}</span>
       </p>
       <div className="flex flex-col sm:flex-row justify-center gap-4 animate-slide-up" style={{ animationDelay: '0.9s' }}>
         <Link 
