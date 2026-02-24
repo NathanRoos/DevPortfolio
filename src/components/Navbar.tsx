@@ -110,7 +110,7 @@ export default function Navbar() {
                   <div className="text-xs text-primary-400 font-mono">authenticated</div>
                 </div>
                 <Link 
-                  href="/admin/dashboard" 
+                  href="/manage/dashboard" 
                   className="px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-500 transition-all duration-300 shadow-md hover:shadow-lg"
                 >
                   Dashboard
@@ -175,7 +175,7 @@ export default function Navbar() {
             {user ? (
               <div className="pt-4 border-t border-primary-500/20 space-y-3">
                 <Link 
-                  href="/admin/dashboard"
+                  href="/manage/dashboard"
                   className="block px-4 py-3 text-center bg-gradient-to-r from-primary-500 to-neon-orange text-dark-900 font-semibold rounded-lg"
                   onClick={() => setIsMenuOpen(false)}
                 >
