@@ -63,7 +63,7 @@ export default function Navbar() {
           {/* Left: Branding */}
           <div className="flex items-center mr-8">
             <Link href="/" className="flex items-center group">
-              <span className="text-white font-bold text-2xl drop-shadow-lg leading-tight">Nathan Roos 🚀</span>
+              <span className="text-white font-bold text-2xl drop-shadow-lg leading-tight">Nathan Roos</span>
               <span className="ml-3 text-xs text-neon-orange font-mono font-semibold drop-shadow-md">&lt;DevOps Developer/&gt;</span>
             </Link>
           </div>
