@@ -12,8 +12,16 @@ export default function AdminHobbiesList({ hobbies, handleDelete }) {
         <ul className="divide-y divide-dark-700">
           {hobbies.map(hobby => (
             <li key={hobby.id} className="py-4 flex flex-col md:flex-row md:items-center md:justify-between">
-              <div>
-                <div className="font-bold text-lg text-primary-400">{hobby.icon ? <span>{hobby.icon} </span> : null}{hobby.name}</div>
+              <div className="flex items-center gap-3">
+                {hobby.icon && (
+                  <img
+                    src={hobby.icon}
+                    alt={hobby.name}
+                    className="w-10 h-10 object-contain rounded"
+                    style={{ background: '#222' }}
+                  />
+                )}
+                <span className="font-bold text-lg text-primary-400">{hobby.name}</span>
               </div>
               <button
                 className="btn btn-danger mt-2 md:mt-0"
