@@ -1,3 +1,11 @@
+    "admin.experience.editTitle": "Edit Experience",
+    "admin.experience.editSaveButton": "Save Changes",
+    "admin.experience.editCancelButton": "Cancel",
+    "admin.experience.editButton": "Edit",
+    "admin.experience.editTitle": "Modifier l'expérience",
+    "admin.experience.editSaveButton": "Enregistrer les modifications",
+    "admin.experience.editCancelButton": "Annuler",
+    "admin.experience.editButton": "Modifier",
 "use client";
 import { createContext, useContext, useState, ReactNode } from "react";
 

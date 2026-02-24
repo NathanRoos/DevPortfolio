@@ -1,11 +1,11 @@
 "use client";
 import { useLanguage } from '../context/LanguageContext';
 
-export default function AdminExperienceForm({ formData, setFormData, handleSubmit }) {
+export default function AdminExperienceForm({ formData, setFormData, handleSubmit, editId, setEditId }) {
   const { t } = useLanguage();
   return (
     <form onSubmit={handleSubmit} className="glass-card p-6 rounded-2xl h-fit">
-      <h3 className="text-2xl font-bold text-white mb-6">{t('admin.experience.addTitle')}</h3>
+      <h3 className="text-2xl font-bold text-white mb-6">{editId ? t('admin.experience.editTitle') : t('admin.experience.addTitle')}</h3>
       <div className="mb-4 grid grid-cols-2 gap-4">
         <div>
           <input
@@ -97,7 +97,14 @@ export default function AdminExperienceForm({ formData, setFormData, handleSubmi
           onChange={e => setFormData({ ...formData, endDate: e.target.value })}
         />
       </div>
-      <button type="submit" className="btn btn-primary w-full">{t('admin.experience.addButton')}</button>
+      <div className="flex gap-2">
+        <button type="submit" className="btn btn-primary w-full">{editId ? t('admin.experience.editSaveButton') : t('admin.experience.addButton')}</button>
+        {editId && (
+          <button type="button" className="btn btn-secondary w-full" onClick={() => { setEditId(null); setFormData({ en: { position: '', company: '', description: '' }, fr: { position: '', company: '', description: '' }, startDate: '', endDate: '', location: '' }); }}>
+            {t('admin.experience.editCancelButton')}
+          </button>
+        )}
+      </div>
     </form>
   );
 }

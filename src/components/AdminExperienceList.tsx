@@ -1,7 +1,7 @@
 "use client";
 import { useLanguage } from '../context/LanguageContext';
 
-export default function AdminExperienceList({ experiences, handleDelete }) {
+export default function AdminExperienceList({ experiences, handleDelete, handleEdit }) {
   const { t } = useLanguage();
   return (
     <div className="glass-card p-6 rounded-2xl col-span-2">
@@ -22,12 +22,20 @@ export default function AdminExperienceList({ experiences, handleDelete }) {
                   <div className="text-gray-300 text-sm mb-1">{exp.location} | {exp.startDate} - {exp.endDate || t('admin.experience.present')}</div>
                   <div className="text-gray-400 text-sm">{translation?.description || <span className="italic text-gray-400">No translation</span>}</div>
                 </div>
-                <button
-                  className="btn btn-danger mt-2 md:mt-0"
-                  onClick={() => handleDelete(exp.id)}
-                >
-                  {t('admin.experience.deleteButton')}
-                </button>
+                <div className="flex gap-2 mt-2 md:mt-0">
+                  <button
+                    className="btn btn-secondary"
+                    onClick={() => handleEdit(exp)}
+                  >
+                    {t('admin.experience.editButton')}
+                  </button>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => handleDelete(exp.id)}
+                  >
+                    {t('admin.experience.deleteButton')}
+                  </button>
+                </div>
               </li>
             );
           })}

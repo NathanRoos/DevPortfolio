@@ -23,6 +23,7 @@ export default function AdminExperience() {
     endDate: '',
     location: ''
   });
+  const [editId, setEditId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchExperiences();
@@ -45,15 +46,20 @@ export default function AdminExperience() {
         ...formData,
         endDate: formData.endDate || null
       };
-
-      const response = await fetch('/api/experience', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dataToSend),
-      });
-
+      let response;
+      if (editId) {
+        response = await fetch(`/api/experience/${editId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(dataToSend),
+        });
+      } else {
+        response = await fetch('/api/experience', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(dataToSend),
+        });
+      }
       if (response.ok) {
         setFormData({
           en: { position: '', company: '', description: '' },
@@ -62,10 +68,11 @@ export default function AdminExperience() {
           endDate: '',
           location: ''
         });
+        setEditId(null);
         fetchExperiences();
       }
     } catch (error) {
-      console.error('Error creating experience:', error);
+      console.error('Error saving experience:', error);
     }
   };
 
@@ -83,13 +90,34 @@ export default function AdminExperience() {
     }
   };
 
+  const handleEdit = (exp: any) => {
+    setEditId(exp.id);
+    const en = exp.translations?.find((t: any) => t.language === 'en') || {};
+    const fr = exp.translations?.find((t: any) => t.language === 'fr') || {};
+    setFormData({
+      en: {
+        position: en.position || '',
+        company: en.company || '',
+        description: en.description || ''
+      },
+      fr: {
+        position: fr.position || '',
+        company: fr.company || '',
+        description: fr.description || ''
+      },
+      startDate: exp.startDate ? exp.startDate.slice(0, 10) : '',
+      endDate: exp.endDate ? exp.endDate.slice(0, 10) : '',
+      location: exp.location || ''
+    });
+  };
+
   return (
     <AdminGuard>
       <div>
         <AdminExperienceHeader />
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <AdminExperienceForm formData={formData} setFormData={setFormData} handleSubmit={handleSubmit} />
-          <AdminExperienceList experiences={experiences} handleDelete={handleDelete} />
+          <AdminExperienceForm formData={formData} setFormData={setFormData} handleSubmit={handleSubmit} editId={editId} setEditId={setEditId} />
+          <AdminExperienceList experiences={experiences} handleDelete={handleDelete} handleEdit={handleEdit} />
         </div>
       </div>
     </AdminGuard>
