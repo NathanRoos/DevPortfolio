@@ -83,6 +83,10 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
+    // Honeypot: if website field is filled, silently succeed
+    if (body.website) {
+      return NextResponse.json({ message: 'Testimonial submitted successfully and is pending approval' }, { status: 201 });
+    }
     const validatedData = testimonialSchema.parse(body);
 
     try {

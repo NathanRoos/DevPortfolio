@@ -19,7 +19,7 @@ export default function Testimonials() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
-  const [formData, setFormData] = useState({ author: '', text: '', rating: 5 });
+  const [formData, setFormData] = useState({ author: '', text: '', rating: 5, website: '' }); // website is honeypot
   const [submitting, setSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   // No user context needed for public testimonials
@@ -40,21 +40,22 @@ export default function Testimonials() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (formData.text.trim().length < 10) {
       alert('Please write at least 10 characters for your testimonial so we can hear your full story!');
       return;
     }
-
+    // Honeypot: if website field is filled, silently fail
+    if (formData.website) {
+      setSubmitSuccess(true); // Pretend success to bots
+      return;
+    }
     setSubmitting(true);
-
     try {
       const response = await fetch('/api/testimonials', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-
       if (!response.ok) {
         const data = await response.json();
         throw new Error(data.error || 'Failed to submit testimonial');
@@ -137,6 +138,19 @@ export default function Testimonials() {
         <div className="glass-card p-8 rounded-2xl border border-primary-500/20 mb-12 max-w-2xl mx-auto">
           <h3 className="text-2xl font-bold text-white mb-6 gradient-text">{t('testimonials.button')}</h3>
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Honeypot field (hidden from users) */}
+            <div style={{ display: 'none' }} aria-hidden="true">
+              <label htmlFor="website">Website</label>
+              <input
+                type="text"
+                id="website"
+                name="website"
+                autoComplete="off"
+                tabIndex={-1}
+                value={formData.website}
+                onChange={e => setFormData({ ...formData, website: e.target.value })}
+              />
+            </div>
             <div>
               <label htmlFor="author" className="block text-sm font-semibold text-primary-400 mb-2">
                 {t('testimonials.author')} *
