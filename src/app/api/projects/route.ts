@@ -1,13 +1,13 @@
 export async function PATCH(request: Request) {
   try {
-    const { id, translations, tags } = await request.json();
+    const { id, translations, tags, image } = await request.json();
     if (!id) {
       return NextResponse.json({ error: 'Project ID is required' }, { status: 400 });
     }
     // Update tags in Project
     const updatedProject = await prisma.project.update({
       where: { id },
-      data: { tags },
+      data: { tags, image },
     });
     // Update translations
     if (translations && Array.isArray(translations)) {
@@ -82,12 +82,13 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { tags, translations } = body;
+    const { tags, translations, image } = body;
 
     // Create the project
     const project = await prisma.project.create({
       data: {
-        tags
+        tags,
+        image
       }
     });
 

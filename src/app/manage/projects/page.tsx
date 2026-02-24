@@ -29,6 +29,7 @@ interface ProjectTranslation {
 interface Project {
   id: string;
   tags: string[];
+  image?: string | null;
   createdAt: string;
   updatedAt: string;
   translations: ProjectTranslation[];
@@ -468,6 +469,9 @@ export default function AdminProjects() {
                   <div key={project.id} className="glass-card rounded-2xl p-8 border border-primary-500/30 hover:border-primary-400/50 transition-all duration-300">
                     <div className="flex justify-between items-start mb-6">
                       <div className="flex-1">
+                        {project.image && (
+                          <img src={project.image} alt="Project" className="w-32 h-32 object-cover rounded mb-4 border border-primary-500/30" />
+                        )}
                         {/* English Translation */}
                         <h4 className="text-xl font-bold text-white mb-1 flex items-center gap-2">
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -39,6 +39,7 @@ enum Role {
 model Project {
   id          String   @id @default(cuid())
   tags        String[]
+  image       String?  // Cloudinary image URL
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   translations ProjectTranslation[]
