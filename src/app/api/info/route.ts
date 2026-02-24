@@ -14,7 +14,8 @@ export async function GET() {
         helpInfo: '',
         directEmail: '',
         homeTitle: 'Full Stack Developer & DevOps Developer',
-        homeDescription: 'Crafting scalable applications with cutting-edge technologies.'
+        homeDescription: 'Crafting scalable applications with cutting-edge technologies.',
+        homeStack: 'Next.js • Kubernetes • Modern Cloud Infrastructure'
       });
     }
     return NextResponse.json(info);
@@ -38,6 +39,7 @@ export async function POST(request: Request) {
       directEmail: body.directEmail,
       homeTitle: body.homeTitle,
       homeDescription: body.homeDescription,
+      homeStack: body.homeStack,
     },
     create: {
       id: INFO_ID,
@@ -46,6 +48,7 @@ export async function POST(request: Request) {
       directEmail: body.directEmail,
       homeTitle: body.homeTitle || 'Full Stack Developer & DevOps Developer',
       homeDescription: body.homeDescription || 'Crafting scalable applications with cutting-edge technologies.',
+      homeStack: body.homeStack || 'Next.js • Kubernetes • Modern Cloud Infrastructure',
     },
   });
   return NextResponse.json({ success: true });

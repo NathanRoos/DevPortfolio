@@ -9,7 +9,8 @@ export default function ManageInfoPage() {
     helpInfo: "",
     directEmail: "",
     homeTitle: "",
-    homeDescription: ""
+    homeDescription: "",
+    homeStack: ""
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState({
@@ -17,14 +18,16 @@ export default function ManageInfoPage() {
     helpInfo: false,
     directEmail: false,
     homeTitle: false,
-    homeDescription: false
+    homeDescription: false,
+    homeStack: false
   });
   const [message, setMessage] = useState({
     contactEmail: "",
     helpInfo: "",
     directEmail: "",
     homeTitle: "",
-    homeDescription: ""
+    homeDescription: "",
+    homeStack: ""
   });
 
   useEffect(() => {
@@ -36,8 +39,32 @@ export default function ManageInfoPage() {
           helpInfo: data.helpInfo || "",
           directEmail: data.directEmail || "",
           homeTitle: data.homeTitle || "Full Stack Developer & DevOps Developer",
-          homeDescription: data.homeDescription || "Crafting scalable applications with cutting-edge technologies."
+          homeDescription: data.homeDescription || "Crafting scalable applications with cutting-edge technologies.",
+          homeStack: data.homeStack || "Next.js • Kubernetes • Modern Cloud Infrastructure"
         });
+                  <div>
+                    <label className="block font-semibold text-primary-400 mb-2">Homepage Stack/Tech List</label>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        name="homeStack"
+                        value={form.homeStack}
+                        onChange={handleChange}
+                        className="input w-full font-mono"
+                        required
+                      />
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        disabled={saving.homeStack}
+                        onClick={() => handleSave("homeStack")}
+                      >
+                        {saving.homeStack ? "Saving..." : "Save"}
+                      </button>
+                      <span className="text-green-500 ml-2">{message.homeStack}</span>
+                    </div>
+                    <p className="text-xs text-gray-400 mt-1">This is the tech stack text (e.g. Next.js • Kubernetes • ...). Styling will remain unchanged.</p>
+                  </div>
         setLoading(false);
       });
   }, []);

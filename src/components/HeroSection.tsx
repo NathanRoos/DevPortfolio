@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 export default function HeroSection() {
   const { t } = useLanguage();
-  const [siteInfo, setSiteInfo] = useState({ homeTitle: '', homeDescription: '' });
+  const [siteInfo, setSiteInfo] = useState({ homeTitle: '', homeDescription: '', homeStack: '' });
 
   useEffect(() => {
     fetch('/api/info')
@@ -14,7 +14,8 @@ export default function HeroSection() {
       .then(data => {
         setSiteInfo({
           homeTitle: data.homeTitle || '',
-          homeDescription: data.homeDescription || ''
+          homeDescription: data.homeDescription || '',
+          homeStack: data.homeStack || ''
         });
       });
   }, []);
@@ -45,7 +46,7 @@ export default function HeroSection() {
       </h2>
       <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed animate-slide-up" style={{ animationDelay: '0.6s' }}>
         {siteInfo.homeDescription || t('home.subtitle')}
-        <span className="text-white font-semibold"> {t('home.stack')}</span>
+        <span className="text-white font-semibold"> {siteInfo.homeStack || t('home.stack')}</span>
       </p>
       <div className="flex flex-col sm:flex-row justify-center gap-4 animate-slide-up" style={{ animationDelay: '0.9s' }}>
         <Link 

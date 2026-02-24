@@ -5,6 +5,7 @@ model SiteInfo {
   directEmail  String
   homeTitle    String   @default("Full Stack Developer & DevOps Developer")
   homeDescription String @default("Crafting scalable applications with cutting-edge technologies.")
+  homeStack    String   @default("Next.js • Kubernetes • Modern Cloud Infrastructure")
 }
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
