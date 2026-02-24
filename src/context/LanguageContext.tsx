@@ -8,6 +8,16 @@ export type Language = "en" | "fr";
 const translations = {
         // ...existing code...
     en: {
+            "contact.formIntro": "Ready to bring your ideas to life? Let's discuss your next project.",
+            "contact.formNameLabel": "Name *",
+            "contact.formNamePlaceholder": "Your name",
+            "contact.formEmailLabel": "Email *",
+            "contact.formEmailPlaceholder": "your@email.com",
+            "contact.formMessageLabel": "Message *",
+            "contact.formMessagePlaceholder": "Tell me about your project, goals, timeline, and any specific requirements...",
+            "contact.formSendButton": "Send Message",
+            "contact.formSending": "Sending...",
+            "contact.formDirectLabel": "Or reach out directly:",
         // Dashboard Site Info keys
         "dashboard.siteinfo.title": "Edit Site Info",
         "dashboard.siteinfo.homeTitle": "Homepage Title",
@@ -247,6 +257,16 @@ const translations = {
         "home.techArsenal": "Technology Arsenal",
     },
     fr: {
+            "contact.formIntro": "Prêt à donner vie à vos idées ? Discutons de votre prochain projet.",
+            "contact.formNameLabel": "Nom *",
+            "contact.formNamePlaceholder": "Votre nom",
+            "contact.formEmailLabel": "Email *",
+            "contact.formEmailPlaceholder": "votre@email.com",
+            "contact.formMessageLabel": "Message *",
+            "contact.formMessagePlaceholder": "Parlez-moi de votre projet, de vos objectifs, de votre calendrier et de toute exigence spécifique...",
+            "contact.formSendButton": "Envoyer le message",
+            "contact.formSending": "Envoi...",
+            "contact.formDirectLabel": "Ou contactez-moi directement :",
         // Dashboard Site Info keys
         "dashboard.siteinfo.title": "Modifier les infos du site",
         "dashboard.siteinfo.homeTitle": "Titre de la page d'accueil",
