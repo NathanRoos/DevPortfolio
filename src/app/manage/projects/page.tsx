@@ -55,6 +55,20 @@ export default function AdminProjects() {
     }
   });
   const [submitting, setSubmitting] = useState(false);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+    // Handle image file selection and preview
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0] || null;
+      setImageFile(file);
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => setImagePreview(reader.result as string);
+        reader.readAsDataURL(file);
+      } else {
+        setImagePreview(null);
+      }
+    };
   const [editState, setEditState] = useState<EditState | null>(null);
   const [editSubmitting, setEditSubmitting] = useState(false);
 
@@ -85,11 +99,27 @@ export default function AdminProjects() {
     setSubmitting(true);
     try {
       const tagsArray = formData.tags.split(',').map(tag => tag.trim()).filter(tag => tag);
+      let imageUrl = null;
+      if (imageFile) {
+        // Upload image to /api/upload or similar endpoint (assumes same as hobbies)
+        const formDataImg = new FormData();
+        formDataImg.append('file', imageFile);
+        const uploadRes = await fetch('/api/upload', { method: 'POST', body: formDataImg });
+        if (uploadRes.ok) {
+          const { url } = await uploadRes.json();
+          imageUrl = url;
+        } else {
+          alert('Image upload failed');
+          setSubmitting(false);
+          return;
+        }
+      }
       if (editState) {
         // Edit mode
         const payload = {
           id: editState.id,
           tags: tagsArray,
+          image: imageUrl, // add image url
           translations: [
             {
               id: editState.enId,
@@ -119,6 +149,7 @@ export default function AdminProjects() {
         // Create mode
         const payload = {
           tags: tagsArray,
+          image: imageUrl, // add image url
           translations: [
             {
               title: formData.en.title,
@@ -149,6 +180,8 @@ export default function AdminProjects() {
         en: { title: '', description: '', repoUrl: '', liveUrl: '' },
         fr: { title: '', description: '', repoUrl: '', liveUrl: '' }
       });
+      setImageFile(null);
+      setImagePreview(null);
       setShowForm(false);
       setEditState(null);
       await fetchProjects();
@@ -333,6 +366,16 @@ export default function AdminProjects() {
                   </div>
 
                   <div>
+                    <label className="text-sm font-semibold text-primary-400 mb-2 block">Project Image</label>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      className="mb-2"
+                    />
+                    {imagePreview && (
+                      <img src={imagePreview} alt="Preview" className="w-32 h-32 object-cover rounded mb-2 border border-primary-500/30" />
+                    )}
                     <label htmlFor="tags" className="flex items-center gap-2 text-sm font-semibold text-primary-400 mb-3">
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
