@@ -14,7 +14,7 @@ export default function AdminExperienceList({ experiences, handleDelete, handleE
             const { language } = useLanguage();
             const translation = exp.translations?.find((t: any) => t.language === language);
             return (
-              <li key={exp.id} className="py-4 flex flex-col md:flex-row md:items-center md:justify-between">
+              <li key={exp.id} className="py-4 flex flex-col md:flex-row md:items-center md:justify-between relative group">
                 <div>
                   <div className="font-bold text-lg text-primary-400">
                     {translation?.position || <span className="italic text-gray-400">No translation</span>} @ {translation?.company || <span className="italic text-gray-400">No translation</span>}
