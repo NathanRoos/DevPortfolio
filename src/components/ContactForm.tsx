@@ -1,9 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { contactMessageSchema } from '../lib/validators';
 
-export default function ContactForm() {
   // Placeholder - will implement proper auth after Auth0 setup
   const user = null;
   const [formData, setFormData] = useState({
@@ -15,6 +14,13 @@ export default function ContactForm() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [errorList, setErrorList] = useState<string[]>([]);
+  const [directEmail, setDirectEmail] = useState('');
+
+  useEffect(() => {
+    fetch('/api/info')
+      .then(res => res.json())
+      .then(data => setDirectEmail(data.directEmail || 'nathan@example.com'));
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -183,7 +189,7 @@ export default function ContactForm() {
         </button>
         
         <div className="text-center text-sm text-gray-500">
-          <p>Or reach out directly: <a href="mailto:nathan@example.com" className="text-primary-400 hover:text-primary-300 font-mono transition-colors">nathan@example.com</a></p>
+          <p>Or reach out directly: <a href={`mailto:${directEmail}`} className="text-primary-400 hover:text-primary-300 font-mono transition-colors">{directEmail}</a></p>
         </div>
       </form>
     </div>
