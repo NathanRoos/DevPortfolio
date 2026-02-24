@@ -59,7 +59,7 @@ export default function Navbar() {
       }}
     >
       <div className="max-w-7xl mx-auto px-2 sm:px-4">
-        <div className="flex items-center h-20">
+        <div className="flex flex-wrap items-center h-20 gap-x-4 gap-y-2">
           {/* Left: Branding */}
           <div className="flex items-center mr-2 sm:mr-8">
             <Link href="/" className="flex items-center group">
@@ -69,7 +69,7 @@ export default function Navbar() {
           </div>
           {/* Center: Navigation */}
           <div className="flex-1 flex justify-center min-w-0">
-            <div className="hidden lg:flex items-center space-x-1 min-w-0">
+            <div className="hidden lg:flex flex-wrap items-center space-x-4 min-w-0">
               {navMenu.map((item) => (
                 <Link 
                   key={item.href}
@@ -84,12 +84,12 @@ export default function Navbar() {
             </div>
           </div>
           {/* Right: Controls and Mobile Menu Button */}
-          <div className="flex items-center ml-2 sm:ml-8">
-            <div className="mr-2 sm:mr-8">
+          <div className="flex items-center ml-4 sm:ml-12">
+            <div className="mr-4 sm:mr-8">
               <LanguageSwitcher />
             </div>
             {/* ...existing user/auth controls... */}
-            <div className="hidden lg:flex items-center space-x-4">
+            <div className="hidden lg:flex items-center space-x-6">
               {isLoading && (
                 <div className="flex items-center space-x-2 text-primary-300">
                   <div className="w-2 h-2 bg-primary-400 rounded-full animate-pulse"></div>
