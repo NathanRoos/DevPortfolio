@@ -46,7 +46,7 @@ export default function HobbiesPage() {
                       <img
                         src={hobby.icon}
                         alt={hobby.name}
-                        className="w-20 h-20 object-contain rounded"
+                        className="w-40 h-40 object-contain rounded"
                         style={{ background: '#222' }}
                       />
                     ) : (

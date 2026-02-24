@@ -17,7 +17,7 @@ export default function AdminHobbiesList({ hobbies, handleDelete }) {
                   <img
                     src={hobby.icon}
                     alt={hobby.name}
-                    className="w-16 h-16 object-contain rounded"
+                    className="w-32 h-32 object-contain rounded"
                     style={{ background: '#222' }}
                   />
                 )}
