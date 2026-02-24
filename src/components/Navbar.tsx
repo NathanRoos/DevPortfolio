@@ -69,7 +69,7 @@ export default function Navbar() {
           </div>
           {/* Center: Navigation */}
           <div className="flex-1 flex justify-center min-w-0">
-            <div className="hidden lg:flex flex-wrap items-center space-x-4 min-w-0">
+            <div className="hidden lg:flex flex-wrap items-center space-x-4 gap-y-2 min-w-0 whitespace-normal">
               {navMenu.map((item) => (
                 <Link 
                   key={item.href}
