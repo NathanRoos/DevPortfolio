@@ -2,10 +2,14 @@ model SiteInfo {
   id           Int      @id @default(1)
   contactEmail String
   helpInfo     String
+  helpInfoFr   String   @default("Je peux vous aider avec le développement full stack, DevOps, et l'infrastructure cloud moderne.")
   directEmail  String
   homeTitle    String   @default("Full Stack Developer & DevOps Developer")
+  homeTitleFr  String   @default("Développeur Full Stack & DevOps")
   homeDescription String @default("Crafting scalable applications with cutting-edge technologies.")
+  homeDescriptionFr String @default("Création d'applications évolutives avec des technologies de pointe.")
   homeStack    String   @default("Next.js • Kubernetes • Modern Cloud Infrastructure")
+  homeStackFr  String   @default("Next.js • Kubernetes • Infrastructure Cloud Moderne")
 }
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema

@@ -9,6 +9,7 @@ export default function ManageInfoPage() {
   const [form, setForm] = useState({
     contactEmail: "",
     helpInfo: "",
+    helpInfoFr: "",
     directEmail: "",
     homeTitle: "",
     homeTitleFr: "",
@@ -21,6 +22,7 @@ export default function ManageInfoPage() {
   const [saving, setSaving] = useState({
     contactEmail: false,
     helpInfo: false,
+    helpInfoFr: false,
     directEmail: false,
     homeTitle: false,
     homeTitleFr: false,
@@ -32,6 +34,7 @@ export default function ManageInfoPage() {
   const [message, setMessage] = useState({
     contactEmail: "",
     helpInfo: "",
+    helpInfoFr: "",
     directEmail: "",
     homeTitle: "",
     homeTitleFr: "",
@@ -265,6 +268,28 @@ export default function ManageInfoPage() {
               </button>
             </div>
             {message.helpInfo && <div className="mt-1 text-green-400 text-sm">{message.helpInfo}</div>}
+            <div className="mt-4">
+              <label className="block font-semibold text-primary-400 mb-2">{t('dashboard.siteinfo.helpInfo')} (FR)</label>
+              <div className="flex gap-2">
+                <textarea
+                  name="helpInfoFr"
+                  value={form.helpInfoFr}
+                  onChange={handleChange}
+                  className="input w-full"
+                  rows={3}
+                  required
+                />
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  disabled={saving.helpInfoFr}
+                  onClick={() => handleSave("helpInfoFr")}
+                >
+                  {saving.helpInfoFr ? "Saving..." : "Save"}
+                </button>
+                <span className="text-green-500 ml-2">{message.helpInfoFr}</span>
+              </div>
+            </div>
           </div>
           <div>
             <label className="block font-semibold text-primary-400 mb-2">{t('dashboard.siteinfo.directEmail')}</label>

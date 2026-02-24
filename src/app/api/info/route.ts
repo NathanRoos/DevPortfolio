@@ -12,10 +12,14 @@ export async function GET() {
       return NextResponse.json({
         contactEmail: '',
         helpInfo: '',
+        helpInfoFr: '',
         directEmail: '',
         homeTitle: 'Full Stack Developer & DevOps Developer',
+        homeTitleFr: 'Développeur Full Stack & DevOps',
         homeDescription: 'Crafting scalable applications with cutting-edge technologies.',
-        homeStack: 'Next.js • Kubernetes • Modern Cloud Infrastructure'
+        homeDescriptionFr: 'Création d’applications évolutives avec des technologies de pointe.',
+        homeStack: 'Next.js • Kubernetes • Modern Cloud Infrastructure',
+        homeStackFr: 'Next.js • Kubernetes • Infrastructure Cloud Moderne'
       });
     }
     return NextResponse.json(info);
@@ -36,19 +40,27 @@ export async function POST(request: Request) {
     update: {
       contactEmail: body.contactEmail,
       helpInfo: body.helpInfo,
+      helpInfoFr: body.helpInfoFr,
       directEmail: body.directEmail,
       homeTitle: body.homeTitle,
+      homeTitleFr: body.homeTitleFr,
       homeDescription: body.homeDescription,
+      homeDescriptionFr: body.homeDescriptionFr,
       homeStack: body.homeStack,
+      homeStackFr: body.homeStackFr,
     },
     create: {
       id: INFO_ID,
       contactEmail: body.contactEmail,
       helpInfo: body.helpInfo,
+      helpInfoFr: body.helpInfoFr || '',
       directEmail: body.directEmail,
       homeTitle: body.homeTitle || 'Full Stack Developer & DevOps Developer',
+      homeTitleFr: body.homeTitleFr || 'Développeur Full Stack & DevOps',
       homeDescription: body.homeDescription || 'Crafting scalable applications with cutting-edge technologies.',
+      homeDescriptionFr: body.homeDescriptionFr || 'Création d’applications évolutives avec des technologies de pointe.',
       homeStack: body.homeStack || 'Next.js • Kubernetes • Modern Cloud Infrastructure',
+      homeStackFr: body.homeStackFr || 'Next.js • Kubernetes • Infrastructure Cloud Moderne',
     },
   });
   return NextResponse.json({ success: true });
