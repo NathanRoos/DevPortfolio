@@ -13,32 +13,60 @@ export default function FeatureCards() {
       delay: "0s"
     },
     {
+      title: t('home.skills') || 'Skills',
+      description: t('skills.intro') || 'A comprehensive overview of my technical abilities and professional toolset.',
+      icon: "M16 7a4 4 0 01-8 0M12 3v4m0 0a4 4 0 01-4 4H7a4 4 0 01-4-4V7a4 4 0 014-4h1a4 4 0 014 4zM12 21v-4m0 0a4 4 0 014-4h1a4 4 0 014 4v1a4 4 0 01-4 4h-1a4 4 0 01-4-4z",
+      href: "/skills",
+      delay: "0.1s"
+    },
+    {
+      title: t('experience.title') || 'Experience',
+      description: t('experience.intro') || 'My professional journey and career milestones.',
+      icon: "M12 8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 10c-4.41 0-8-1.79-8-4V7c0-2.21 3.59-4 8-4s8 1.79 8 4v7c0 2.21-3.59 4-8 4z",
+      href: "/experience",
+      delay: "0.2s"
+    },
+    {
+      title: t('education.title') || 'Education',
+      description: t('education.intro') || 'Academic qualifications and certifications.',
+      icon: "M12 20l9-5-9-5-9 5 9 5zm0-10l9-5-9-5-9 5 9 5z",
+      href: "/education",
+      delay: "0.3s"
+    },
+    {
+      title: t('hobbies.title') || 'Hobbies',
+      description: t('hobbies.intro') || 'What I enjoy doing when I\'m not coding.',
+      icon: "M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z",
+      href: "/hobbies",
+      delay: "0.4s"
+    },
+    {
       title: t('home.cv'),
       description: t('home.cvDesc'),
       icon: "M12 4v16m8-8H4",
       href: "/cv",
-      delay: "0.1s"
+      delay: "0.5s"
     },
     {
       title: t('home.testimonials'),
       description: t('home.testimonialsDesc'),
       icon: "M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z",
       href: "/testimonials",
-      delay: "0.2s"
+      delay: "0.6s"
     },
     {
       title: t('home.contact'),
       description: t('home.contactDesc'),
       icon: "M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
       href: "/contact",
-      delay: "0.4s"
+      delay: "0.7s"
     },
     {
       title: t('home.architecture'),
       description: t('home.architectureDesc'),
       icon: "M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z",
       href: "/architecture",
-      delay: "0.6s"
+      delay: "0.8s"
     }
   ];
   return (
