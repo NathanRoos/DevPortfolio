@@ -23,16 +23,22 @@ export default function ManageInfoPage() {
     helpInfo: false,
     directEmail: false,
     homeTitle: false,
+    homeTitleFr: false,
     homeDescription: false,
-    homeStack: false
+    homeDescriptionFr: false,
+    homeStack: false,
+    homeStackFr: false
   });
   const [message, setMessage] = useState({
     contactEmail: "",
     helpInfo: "",
     directEmail: "",
     homeTitle: "",
+    homeTitleFr: "",
     homeDescription: "",
-    homeStack: ""
+    homeDescriptionFr: "",
+    homeStack: "",
+    homeStackFr: ""
   });
 
   useEffect(() => {
