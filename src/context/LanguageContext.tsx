@@ -1,11 +1,3 @@
-    "admin.experience.editTitle": "Edit Experience",
-    "admin.experience.editSaveButton": "Save Changes",
-    "admin.experience.editCancelButton": "Cancel",
-    "admin.experience.editButton": "Edit",
-    "admin.experience.editTitle": "Modifier l'expérience",
-    "admin.experience.editSaveButton": "Enregistrer les modifications",
-    "admin.experience.editCancelButton": "Annuler",
-    "admin.experience.editButton": "Modifier",
 "use client";
 import { createContext, useContext, useState, ReactNode } from "react";
 
@@ -16,6 +8,10 @@ export type Language = "en" | "fr";
 const translations = {
         // ...existing code...
     en: {
+                "admin.experience.editTitle": "Edit Experience",
+                "admin.experience.editSaveButton": "Save Changes",
+                "admin.experience.editCancelButton": "Cancel",
+                "admin.experience.editButton": "Edit",
             // Admin Dashboard Quick Actions
             "admin.dashboard.quickActions": "Quick Actions",
             "admin.dashboard.viewProjects": "View Projects",
@@ -422,6 +418,10 @@ const translations = {
         "admin.experience.present": "En cours",
         "admin.experience.empty": "Aucune expérience ajoutée pour le moment.",
         "admin.experience.deleteButton": "Supprimer",
+            "admin.experience.editTitle": "Modifier l'expérience",
+            "admin.experience.editSaveButton": "Enregistrer les modifications",
+            "admin.experience.editCancelButton": "Annuler",
+            "admin.experience.editButton": "Modifier",
         "nav.home": "Accueil",
         "nav.projects": "Projets",
         "nav.skills": "Compétences",
