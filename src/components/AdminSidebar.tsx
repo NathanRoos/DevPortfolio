@@ -8,7 +8,7 @@ export default function AdminSidebar() {
 
   const menuItems = [
     {
-      href: '/admin/cv',
+      href: '/manage/cv',
       label: 'CV',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -26,7 +26,7 @@ export default function AdminSidebar() {
       )
     },
     {
-      href: '/admin/projects',
+      href: '/manage/projects',
       label: 'Projects',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -35,7 +35,7 @@ export default function AdminSidebar() {
       )
     },
     {
-      href: '/admin/testimonials',
+      href: '/manage/testimonials',
       label: 'Testimonials',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -44,7 +44,7 @@ export default function AdminSidebar() {
       )
     },
     {
-      href: '/admin/skills',
+      href: '/manage/skills',
       label: 'Skills',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -53,7 +53,7 @@ export default function AdminSidebar() {
       )
     },
     {
-      href: '/admin/experience',
+      href: '/manage/experience',
       label: 'Experience',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -62,7 +62,7 @@ export default function AdminSidebar() {
       )
     },
     {
-      href: '/admin/education',
+      href: '/manage/education',
       label: 'Education',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -73,7 +73,7 @@ export default function AdminSidebar() {
       )
     },
     {
-      href: '/admin/hobbies',
+      href: '/manage/hobbies',
       label: 'Hobbies',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -82,7 +82,7 @@ export default function AdminSidebar() {
       )
     },
     {
-      href: '/admin/messages',
+      href: '/manage/messages',
       label: 'Messages',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
