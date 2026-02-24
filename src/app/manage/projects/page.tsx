@@ -60,6 +60,12 @@ export default function AdminProjects() {
     // Handle image file selection and preview
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0] || null;
+      if (file && !['image/jpeg', 'image/png', 'image/jpg', 'image/gif', 'image/webp'].includes(file.type)) {
+        alert('Only JPG, PNG, GIF, and WEBP images are allowed.');
+        setImageFile(null);
+        setImagePreview(null);
+        return;
+      }
       setImageFile(file);
       if (file) {
         const reader = new FileReader();
@@ -369,7 +375,7 @@ export default function AdminProjects() {
                     <label className="text-sm font-semibold text-primary-400 mb-2 block">Project Image</label>
                     <input
                       type="file"
-                      accept="image/*"
+                      accept="image/jpeg,image/png,image/jpg,image/gif,image/webp"
                       onChange={handleImageChange}
                       className="mb-2"
                     />
