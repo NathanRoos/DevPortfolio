@@ -13,16 +13,14 @@ interface TestimonialCardProps {
 
 export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
   return (
-    <div className="group glass-card p-8 hover:scale-105 transition-all duration-500 relative overflow-hidden">
+    <div className="group glass-card p-8 hover:scale-105 transition-all duration-500 relative overflow-hidden flex flex-col h-full">
       {/* Quote decoration */}
       <div className="absolute top-4 left-4 text-6xl text-primary-500/20 font-serif transition-all duration-300 group-hover:text-primary-500/30 group-hover:scale-110">
         "
       </div>
-      
       {/* Background glow */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-neon-orange/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-      
-      <div className="relative z-10">
+      <div className="relative z-10 flex flex-col h-full">
         {/* Star decoration */}
         <div className="flex justify-end mb-4">
           <div className="flex space-x-1">
@@ -38,20 +36,17 @@ export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
             ))}
           </div>
         </div>
-        
         {/* Testimonial text */}
-        <blockquote className="text-gray-300 text-lg leading-relaxed mb-8 font-light italic group-hover:text-gray-200 transition-colors duration-300 pl-8">
+        <blockquote className="text-gray-300 text-lg leading-relaxed mb-8 font-light italic group-hover:text-gray-200 transition-colors duration-300 pl-8 flex-1">
           {testimonial.text}
         </blockquote>
-        
         {/* Author info */}
-        <div className="flex items-center justify-between pt-6 border-t border-primary-500/20">
+        <div className="flex items-center justify-between pt-6 border-t border-primary-500/20 mt-auto">
           <div className="flex items-center space-x-4">
             {/* Avatar placeholder */}
             <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-neon-orange rounded-full flex items-center justify-center font-bold text-dark-900 text-lg group-hover:rotate-12 transition-transform duration-300">
               {testimonial.author.charAt(0).toUpperCase()}
             </div>
-            
             <div>
               <h4 className="font-semibold text-white group-hover:text-primary-300 transition-colors duration-300">
                 {testimonial.author}
@@ -61,13 +56,11 @@ export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
               </p>
             </div>
           </div>
-          
           {/* Date */}
           <div className="text-xs text-gray-500 font-mono">
             {new Date(testimonial.createdAt).toLocaleDateString()}
           </div>
         </div>
-        
         {/* Decorative elements */}
         <div className="absolute bottom-4 right-4 opacity-10 group-hover:opacity-20 transition-opacity duration-300">
           <svg className="w-8 h-8 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
