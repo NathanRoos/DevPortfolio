@@ -128,7 +128,7 @@ export default function Navbar() {
                 prefetch={false}
                 className="group px-6 py-2 text-sm font-medium text-primary-400 hover:text-white border border-primary-500/30 hover:border-primary-400 rounded-lg transition-all duration-300 hover:bg-primary-500/10 backdrop-blur-sm relative overflow-hidden"
               >
-                <span className="relative z-10">Admin Login</span>
+                <span className="relative z-10">Login</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-primary-500/10 to-neon-orange/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
               </Link>
             )}
@@ -195,7 +195,7 @@ export default function Navbar() {
                 className="block px-4 py-3 text-center text-primary-400 border border-primary-500/30 rounded-lg font-medium mt-4"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Admin Login
+                Login
               </Link>
             )}
           </div>
