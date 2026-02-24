@@ -24,7 +24,7 @@ export default function AdminDashboardClient() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await fetch('/api/admin/stats');
+        const response = await fetch('/api/manage/stats');
         if (!response.ok) throw new Error('Failed to fetch stats');
         const data = await response.json();
         setStats(data);
@@ -82,9 +82,9 @@ export default function AdminDashboardClient() {
             </div>
             {/* Quick Links */}
             <div className="flex flex-wrap justify-center gap-6">
-              <Link href="/admin/projects" className="quick-link">{t('admin.dashboard.manageProjects')}</Link>
-              <Link href="/admin/testimonials" className="quick-link">{t('admin.dashboard.manageTestimonials')}</Link>
-              <Link href="/admin/messages" className="quick-link">{t('admin.dashboard.manageMessages')}</Link>
+              <Link href="/manage/projects" className="quick-link">{t('admin.dashboard.manageProjects')}</Link>
+              <Link href="/manage/testimonials" className="quick-link">{t('admin.dashboard.manageTestimonials')}</Link>
+              <Link href="/manage/messages" className="quick-link">{t('admin.dashboard.manageMessages')}</Link>
             </div>
           </>
         )}
