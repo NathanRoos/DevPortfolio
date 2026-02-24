@@ -7,18 +7,24 @@ export default function ManageInfoPage() {
   const [form, setForm] = useState({
     contactEmail: "",
     helpInfo: "",
-    directEmail: ""
+    directEmail: "",
+    homeTitle: "",
+    homeDescription: ""
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState({
     contactEmail: false,
     helpInfo: false,
-    directEmail: false
+    directEmail: false,
+    homeTitle: false,
+    homeDescription: false
   });
   const [message, setMessage] = useState({
     contactEmail: "",
     helpInfo: "",
-    directEmail: ""
+    directEmail: "",
+    homeTitle: "",
+    homeDescription: ""
   });
 
   useEffect(() => {
@@ -28,7 +34,9 @@ export default function ManageInfoPage() {
         setForm({
           contactEmail: data.contactEmail || "",
           helpInfo: data.helpInfo || "",
-          directEmail: data.directEmail || ""
+          directEmail: data.directEmail || "",
+          homeTitle: data.homeTitle || "Full Stack Developer & DevOps Developer",
+          homeDescription: data.homeDescription || "Crafting scalable applications with cutting-edge technologies."
         });
         setLoading(false);
       });
@@ -61,6 +69,52 @@ export default function ManageInfoPage() {
       <div className="glass-card p-8 rounded-2xl max-w-2xl mx-auto">
         <h1 className="text-4xl font-bold gradient-text mb-8">Edit Site Info</h1>
         <div className="space-y-8">
+          <div>
+            <label className="block font-semibold text-primary-400 mb-2">Homepage Title</label>
+            <div className="flex gap-2">
+              <input
+                type="text"
+                name="homeTitle"
+                value={form.homeTitle}
+                onChange={handleChange}
+                className="input w-full font-bold"
+                required
+              />
+              <button
+                type="button"
+                className="btn btn-primary"
+                disabled={saving.homeTitle}
+                onClick={() => handleSave("homeTitle")}
+              >
+                {saving.homeTitle ? "Saving..." : "Save"}
+              </button>
+              <span className="text-green-500 ml-2">{message.homeTitle}</span>
+            </div>
+            <p className="text-xs text-gray-400 mt-1">This is the &lt;Full Stack Developer & DevOps Developer/&gt; text. Styling will remain unchanged.</p>
+          </div>
+          <div>
+            <label className="block font-semibold text-primary-400 mb-2">Homepage Description</label>
+            <div className="flex gap-2">
+              <input
+                type="text"
+                name="homeDescription"
+                value={form.homeDescription}
+                onChange={handleChange}
+                className="input w-full"
+                required
+              />
+              <button
+                type="button"
+                className="btn btn-primary"
+                disabled={saving.homeDescription}
+                onClick={() => handleSave("homeDescription")}
+              >
+                {saving.homeDescription ? "Saving..." : "Save"}
+              </button>
+              <span className="text-green-500 ml-2">{message.homeDescription}</span>
+            </div>
+            <p className="text-xs text-gray-400 mt-1">This is the subtitle text under your name. Styling will remain unchanged.</p>
+          </div>
           <div>
             <label className="block font-semibold text-primary-400 mb-2">Contact Email</label>
             <div className="flex gap-2">

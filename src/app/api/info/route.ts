@@ -12,7 +12,9 @@ export async function GET() {
       return NextResponse.json({
         contactEmail: '',
         helpInfo: '',
-        directEmail: ''
+        directEmail: '',
+        homeTitle: 'Full Stack Developer & DevOps Developer',
+        homeDescription: 'Crafting scalable applications with cutting-edge technologies.'
       });
     }
     return NextResponse.json(info);
@@ -34,12 +36,16 @@ export async function POST(request: Request) {
       contactEmail: body.contactEmail,
       helpInfo: body.helpInfo,
       directEmail: body.directEmail,
+      homeTitle: body.homeTitle,
+      homeDescription: body.homeDescription,
     },
     create: {
       id: INFO_ID,
       contactEmail: body.contactEmail,
       helpInfo: body.helpInfo,
       directEmail: body.directEmail,
+      homeTitle: body.homeTitle || 'Full Stack Developer & DevOps Developer',
+      homeDescription: body.homeDescription || 'Crafting scalable applications with cutting-edge technologies.',
     },
   });
   return NextResponse.json({ success: true });

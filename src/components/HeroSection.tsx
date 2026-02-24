@@ -1,9 +1,24 @@
 "use client";
+
 import Link from 'next/link';
 import { useLanguage } from '../context/LanguageContext';
+import { useEffect, useState } from 'react';
 
 export default function HeroSection() {
   const { t } = useLanguage();
+  const [siteInfo, setSiteInfo] = useState({ homeTitle: '', homeDescription: '' });
+
+  useEffect(() => {
+    fetch('/api/info')
+      .then(res => res.json())
+      .then(data => {
+        setSiteInfo({
+          homeTitle: data.homeTitle || '',
+          homeDescription: data.homeDescription || ''
+        });
+      });
+  }, []);
+
   return (
     <div className="text-center mb-20 animate-fade-in">
       <div className="mb-8 animate-slide-up">
@@ -24,12 +39,12 @@ export default function HeroSection() {
       }}>
         <span className="font-mono text-neon-orange font-bold drop-shadow-lg">&lt;</span>
         <span className="text-white font-bold">
-          {t('home.title')}
+          {siteInfo.homeTitle || t('home.title')}
         </span>
         <span className="font-mono text-neon-orange font-bold drop-shadow-lg">/&gt;</span>
       </h2>
       <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed animate-slide-up" style={{ animationDelay: '0.6s' }}>
-        {t('home.subtitle')}
+        {siteInfo.homeDescription || t('home.subtitle')}
         <span className="text-white font-semibold"> {t('home.stack')}</span>
       </p>
       <div className="flex flex-col sm:flex-row justify-center gap-4 animate-slide-up" style={{ animationDelay: '0.9s' }}>
