@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from "react";
 import ManageGuard from "../../../components/AdminGuard";
+import { useLanguage } from '../../../context/LanguageContext';
 
 export default function ManageInfoPage() {
+  const { t } = useLanguage();
   const [form, setForm] = useState({
     contactEmail: "",
     helpInfo: "",
@@ -71,10 +73,10 @@ export default function ManageInfoPage() {
   return (
     <ManageGuard>
       <div className="glass-card p-8 rounded-2xl max-w-2xl mx-auto">
-        <h1 className="text-4xl font-bold gradient-text mb-8">Edit Site Info</h1>
+        <h1 className="text-4xl font-bold gradient-text mb-8">{t('dashboard.siteinfo.title')}</h1>
         <div className="space-y-8">
           <div>
-            <label className="block font-semibold text-primary-400 mb-2">Homepage Title</label>
+            <label className="block font-semibold text-primary-400 mb-2">{t('dashboard.siteinfo.homeTitle')}</label>
             <div className="flex gap-2">
               <input
                 type="text"
@@ -94,10 +96,10 @@ export default function ManageInfoPage() {
               </button>
               <span className="text-green-500 ml-2">{message.homeTitle}</span>
             </div>
-            <p className="text-xs text-gray-400 mt-1">This is the &lt;Full Stack Developer & DevOps Developer/&gt; text. Styling will remain unchanged.</p>
+            <p className="text-xs text-gray-400 mt-1">{t('dashboard.siteinfo.homeTitleHelp')}</p>
           </div>
           <div>
-            <label className="block font-semibold text-primary-400 mb-2">Homepage Stack/Tech List</label>
+            <label className="block font-semibold text-primary-400 mb-2">{t('dashboard.siteinfo.homeStack')}</label>
             <div className="flex gap-2">
               <input
                 type="text"
@@ -117,10 +119,10 @@ export default function ManageInfoPage() {
               </button>
               <span className="text-green-500 ml-2">{message.homeStack}</span>
             </div>
-            <p className="text-xs text-gray-400 mt-1">This is the tech stack text (e.g. Next.js • Kubernetes • ...). Styling will remain unchanged.</p>
+            <p className="text-xs text-gray-400 mt-1">{t('dashboard.siteinfo.homeStackHelp')}</p>
           </div>
           <div>
-            <label className="block font-semibold text-primary-400 mb-2">Homepage Description</label>
+            <label className="block font-semibold text-primary-400 mb-2">{t('dashboard.siteinfo.homeDescription')}</label>
             <div className="flex gap-2">
               <input
                 type="text"
@@ -140,10 +142,10 @@ export default function ManageInfoPage() {
               </button>
               <span className="text-green-500 ml-2">{message.homeDescription}</span>
             </div>
-            <p className="text-xs text-gray-400 mt-1">This is the subtitle text under your name. Styling will remain unchanged.</p>
+            <p className="text-xs text-gray-400 mt-1">{t('dashboard.siteinfo.homeDescriptionHelp')}</p>
           </div>
           <div>
-            <label className="block font-semibold text-primary-400 mb-2">Contact Email</label>
+            <label className="block font-semibold text-primary-400 mb-2">{t('dashboard.siteinfo.contactEmail')}</label>
             <div className="flex gap-2">
               <input
                 type="email"
@@ -165,7 +167,7 @@ export default function ManageInfoPage() {
             {message.contactEmail && <div className="mt-1 text-green-400 text-sm">{message.contactEmail}</div>}
           </div>
           <div>
-            <label className="block font-semibold text-primary-400 mb-2">What I Can Help With</label>
+            <label className="block font-semibold text-primary-400 mb-2">{t('dashboard.siteinfo.helpInfo')}</label>
             <div className="flex gap-2">
               <textarea
                 name="helpInfo"
@@ -187,7 +189,7 @@ export default function ManageInfoPage() {
             {message.helpInfo && <div className="mt-1 text-green-400 text-sm">{message.helpInfo}</div>}
           </div>
           <div>
-            <label className="block font-semibold text-primary-400 mb-2">Direct Email (for Send Message section)</label>
+            <label className="block font-semibold text-primary-400 mb-2">{t('dashboard.siteinfo.directEmail')}</label>
             <div className="flex gap-2">
               <input
                 type="email"

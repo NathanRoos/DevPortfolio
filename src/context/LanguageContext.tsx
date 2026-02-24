@@ -8,6 +8,17 @@ export type Language = "en" | "fr";
 const translations = {
         // ...existing code...
     en: {
+        // Dashboard Site Info keys
+        "dashboard.siteinfo.title": "Edit Site Info",
+        "dashboard.siteinfo.homeTitle": "Homepage Title",
+        "dashboard.siteinfo.homeTitleHelp": "This is the <Full Stack Developer & DevOps Developer/> text. Styling will remain unchanged.",
+        "dashboard.siteinfo.homeStack": "Homepage Stack/Tech List",
+        "dashboard.siteinfo.homeStackHelp": "This is the tech stack text (e.g. Next.js • Kubernetes • ...). Styling will remain unchanged.",
+        "dashboard.siteinfo.homeDescription": "Homepage Description",
+        "dashboard.siteinfo.homeDescriptionHelp": "This is the subtitle text under your name. Styling will remain unchanged.",
+        "dashboard.siteinfo.contactEmail": "Contact Email",
+        "dashboard.siteinfo.helpInfo": "What I Can Help With",
+        "dashboard.siteinfo.directEmail": "Direct Email (for Send Message section)",
                 "admin.experience.editTitle": "Edit Experience",
                 "admin.experience.editSaveButton": "Save Changes",
                 "admin.experience.editCancelButton": "Cancel",
@@ -235,6 +246,17 @@ const translations = {
         "home.techArsenal": "Technology Arsenal",
     },
     fr: {
+        // Dashboard Site Info keys
+        "dashboard.siteinfo.title": "Modifier les infos du site",
+        "dashboard.siteinfo.homeTitle": "Titre de la page d'accueil",
+        "dashboard.siteinfo.homeTitleHelp": "Ceci est le texte <Full Stack Developer & DevOps Developer/>. Le style restera inchangé.",
+        "dashboard.siteinfo.homeStack": "Stack/Technos de la page d'accueil",
+        "dashboard.siteinfo.homeStackHelp": "Ceci est le texte de la stack technique (ex : Next.js • Kubernetes • ...). Le style restera inchangé.",
+        "dashboard.siteinfo.homeDescription": "Description de la page d'accueil",
+        "dashboard.siteinfo.homeDescriptionHelp": "Ceci est le sous-titre sous votre nom. Le style restera inchangé.",
+        "dashboard.siteinfo.contactEmail": "Email de contact",
+        "dashboard.siteinfo.helpInfo": "Comment puis-je aider",
+        "dashboard.siteinfo.directEmail": "Email direct (pour la section Envoyer un message)",
         // Public Projects page keys
         "projects.title": "Projets",
         "projects.intro": "Découvrez mon portfolio d'applications innovantes et de solutions d'infrastructure.",

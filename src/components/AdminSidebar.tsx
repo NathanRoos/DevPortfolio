@@ -105,7 +105,7 @@ export default function AdminSidebar() {
     <aside className="fixed left-0 top-[3.5rem] h-[calc(100vh-3.5rem)] w-64 glass-card border-r border-primary-500/20 backdrop-blur-xl z-20 flex flex-col">
       <div className="p-6 overflow-y-auto h-full flex-1 custom-scrollbar">
             <div className="mb-8">
-              <h1 className="text-2xl font-black gradient-text">Admin Panel</h1>
+              <h1 className="text-2xl font-black gradient-text">Dashboard Panel</h1>
               <p className="text-primary-400 font-mono text-xs">&lt;control-center/&gt;</p>
             </div>
             
