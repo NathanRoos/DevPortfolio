@@ -50,14 +50,6 @@ export default function CVPage() {
               >
                   {t('cv.button')}
               </a>
-              {previewUrl && (
-                <img
-                  src={previewUrl}
-                    alt={t('cv.preview')}
-                  className="rounded-xl shadow-lg border border-primary-700 bg-white max-w-full"
-                  style={{ maxHeight: '900px', width: 'auto' }}
-                />
-              )}
             </>
           ) : (
             <div className="py-12 text-center text-gray-400 text-xl font-semibold glass-card rounded-2xl">
