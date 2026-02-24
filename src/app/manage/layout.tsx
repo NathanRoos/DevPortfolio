@@ -20,8 +20,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
           {/* Overlay sidebar for mobile/tablet */}
           {sidebarOpen && (
-            <div className="fixed inset-0 z-40 bg-black/40 lg:hidden" onClick={() => setSidebarOpen(false)}>
-              <div className="absolute left-0 top-0 h-full w-64 bg-dark-900 shadow-xl animate-slide-in z-50" onClick={e => e.stopPropagation()}>
+            <div className="fixed inset-0 z-[1100] bg-black/40 lg:hidden" onClick={() => setSidebarOpen(false)}>
+              <div className="absolute left-0 top-0 h-full w-64 bg-dark-900 shadow-xl animate-slide-in z-[1200]" onClick={e => e.stopPropagation()}>
                 <AdminSidebar />
               </div>
             </div>
