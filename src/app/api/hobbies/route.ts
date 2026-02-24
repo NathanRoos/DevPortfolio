@@ -29,10 +29,11 @@ export async function POST(request: Request) {
     // Parse multipart form data
     const formData = await request.formData();
     const name = formData.get('name');
+    const nameFr = formData.get('nameFr');
     const iconFile = formData.get('icon');
 
-    if (typeof name !== 'string') {
-      return NextResponse.json({ error: 'Name is required' }, { status: 400 });
+    if (typeof name !== 'string' || typeof nameFr !== 'string') {
+      return NextResponse.json({ error: 'Both English and French names are required' }, { status: 400 });
     }
 
     let iconUrl: string | undefined = undefined;
@@ -61,7 +62,7 @@ export async function POST(request: Request) {
       });
     }
 
-    const validatedData = hobbySchema.parse({ name, icon: iconUrl });
+    const validatedData = hobbySchema.parse({ name, nameFr, icon: iconUrl });
     const hobby = await prisma.hobby.create({ data: validatedData });
     return NextResponse.json(hobby, { status: 201 });
   } catch (error) {

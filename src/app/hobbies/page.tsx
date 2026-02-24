@@ -54,7 +54,7 @@ export default function HobbiesPage() {
                     )}
                   </div>
                   <h3 className="text-lg font-bold text-white group-hover:text-primary-300 transition-colors">
-                    {hobby.name}
+                    {t('lang') === 'fr' ? hobby.nameFr : hobby.name}
                   </h3>
                 </div>
               );

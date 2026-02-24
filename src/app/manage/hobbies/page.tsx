@@ -9,6 +9,7 @@ import AdminHobbiesList from '../../../components/AdminHobbiesList';
 interface Hobby {
   id: string;
   name: string;
+  nameFr: string;
   icon: string | null;
 }
 
@@ -16,6 +17,7 @@ export default function AdminHobbies() {
   const [hobbies, setHobbies] = useState<Hobby[]>([]);
   const [formData, setFormData] = useState({
     name: '',
+    nameFr: '',
     icon: ''
   });
   const [iconFile, setIconFile] = useState<File | null>(null);
@@ -39,6 +41,7 @@ export default function AdminHobbies() {
     try {
       const form = new FormData();
       form.append('name', formData.name);
+      form.append('nameFr', formData.nameFr);
       if (iconFile) {
         form.append('icon', iconFile);
       } else if (formData.icon) {
@@ -51,7 +54,7 @@ export default function AdminHobbies() {
       });
 
       if (response.ok) {
-        setFormData({ name: '', icon: '' });
+        setFormData({ name: '', nameFr: '', icon: '' });
         setIconFile(null);
         fetchHobbies();
       }

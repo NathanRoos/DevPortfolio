@@ -20,6 +20,16 @@ export default function AdminHobbiesForm({ formData, setFormData, handleSubmit, 
         <input
           type="text"
           className="input"
+          placeholder={t('admin.hobbies.nameFrPlaceholder') || 'Nom (français)'}
+          value={formData.nameFr}
+          onChange={e => setFormData({ ...formData, nameFr: e.target.value })}
+          required
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type="text"
+          className="input"
           placeholder={t('admin.hobbies.iconPlaceholder')}
           value={formData.icon}
           onChange={e => setFormData({ ...formData, icon: e.target.value })}

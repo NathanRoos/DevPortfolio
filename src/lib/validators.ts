@@ -72,5 +72,6 @@ export const educationSchema = z.object({
 
 export const hobbySchema = z.object({
   name: z.string().min(1, 'Name is required'),
+  nameFr: z.string().min(1, 'French name is required'),
   icon: z.string().optional(),
 });
