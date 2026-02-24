@@ -120,7 +120,7 @@ export default function ContactForm() {
     <div className="glass-card p-8 animate-slide-up">
       <div className="mb-8">
         <h2 className="text-3xl font-bold gradient-text mb-4">{t('contact.connectTitle')}</h2>
-        <p className="text-gray-400">Ready to bring your ideas to life? Let's discuss your next project.</p>
+        <p className="text-gray-400">{t('contact.formIntro')}</p>
       </div>
       
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -130,28 +130,28 @@ export default function ContactForm() {
         <div className="grid md:grid-cols-2 gap-6">
           <div className="group">
             <label className="block text-sm font-medium text-gray-300 mb-2 group-focus-within:text-primary-400 transition-colors">
-              Name *
+              {t('contact.formNameLabel')}
             </label>
             <input
               type="text"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               className="w-full px-4 py-3 bg-dark-800/50 border border-gray-600 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-primary-500 focus:bg-dark-800/80 transition-all duration-300"
-              placeholder="Your name"
+              placeholder={t('contact.formNamePlaceholder')}
               required
             />
           </div>
           
           <div className="group">
             <label className="block text-sm font-medium text-gray-300 mb-2 group-focus-within:text-primary-400 transition-colors">
-              Email *
+              {t('contact.formEmailLabel')}
             </label>
             <input
               type="email"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               className="w-full px-4 py-3 bg-dark-800/50 border border-gray-600 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-primary-500 focus:bg-dark-800/80 transition-all duration-300"
-              placeholder="your@email.com"
+              placeholder={t('contact.formEmailPlaceholder')}
               required
             />
           </div>
@@ -159,14 +159,14 @@ export default function ContactForm() {
         
         <div className="group">
           <label className="block text-sm font-medium text-gray-300 mb-2 group-focus-within:text-primary-400 transition-colors">
-            Message *
+            {t('contact.formMessageLabel')}
           </label>
           <textarea
             value={formData.message}
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
             rows={6}
             className="w-full px-4 py-3 bg-dark-800/50 border border-gray-600 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-primary-500 focus:bg-dark-800/80 transition-all duration-300 resize-none"
-            placeholder="Tell me about your project, goals, timeline, and any specific requirements..."
+            placeholder={t('contact.formMessagePlaceholder')}
             required
           />
         </div>
@@ -179,11 +179,11 @@ export default function ContactForm() {
           {submitting ? (
             <>
               <div className="w-5 h-5 border-2 border-dark-900/30 border-t-dark-900 rounded-full animate-spin"></div>
-              <span>Sending...</span>
+              <span>{t('contact.formSending')}</span>
             </>
           ) : (
             <>
-              <span>Send Message</span>
+              <span>{t('contact.formSendButton')}</span>
               <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
               </svg>
@@ -192,7 +192,7 @@ export default function ContactForm() {
         </button>
         
         <div className="text-center text-sm text-gray-500">
-          <p>Or reach out directly: <a href={`mailto:${directEmail}`} className="text-primary-400 hover:text-primary-300 font-mono transition-colors">{directEmail}</a></p>
+          <p>{t('contact.formDirectLabel')} <a href={`mailto:${directEmail}`} className="text-primary-400 hover:text-primary-300 font-mono transition-colors">{directEmail}</a></p>
         </div>
       </form>
     </div>
