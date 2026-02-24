@@ -151,9 +151,9 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         <div className={`lg:hidden transition-all duration-300 ease-in-out transform-gpu ${
-          isMenuOpen ? 'max-h-96 opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'
+          isMenuOpen ? 'max-h-[90vh] opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'
         } overflow-hidden`}>
-          <div className="glass-card m-4 p-6 space-y-4 will-change-transform">
+          <div className="glass-card m-4 p-6 space-y-4 will-change-transform max-h-[80vh] overflow-y-auto">
             {[
               { href: '/projects', label: t('nav.projects') },
               { href: '/testimonials', label: t('nav.testimonials') },
