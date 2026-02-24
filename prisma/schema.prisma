@@ -1,3 +1,9 @@
+model SiteInfo {
+  id           Int      @id @default(1)
+  contactEmail String
+  helpInfo     String
+  directEmail  String
+}
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
