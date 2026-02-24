@@ -2,9 +2,19 @@
 "use client";
 import ContactForm from '../../components/ContactForm';
 import { useLanguage } from '../../context/LanguageContext';
+import { useEffect, useState } from 'react';
 
 export default function Contact() {
   const { t } = useLanguage();
+  const [siteInfo, setSiteInfo] = useState({ contactEmail: '', helpInfo: '' });
+  useEffect(() => {
+    fetch('/api/info')
+      .then(res => res.json())
+      .then(data => setSiteInfo({
+        contactEmail: data.contactEmail || '',
+        helpInfo: data.helpInfo || ''
+      }));
+  }, []);
   return (
     <div className="min-h-screen bg-mesh-gradient relative overflow-hidden">
       {/* Animated Background Elements */}
@@ -38,7 +48,7 @@ export default function Contact() {
                 </div>
                 <div className="ml-6">
                   <h3 className="text-xl font-bold text-white mb-2">{t('contact.emailTitle')}</h3>
-                  <p className="text-primary-400 hover:text-primary-300 transition-colors cursor-pointer">nathan.roos@example.com</p>
+                  <p className="text-primary-400 hover:text-primary-300 transition-colors cursor-pointer">{siteInfo.contactEmail || 'nathan.roos@example.com'}</p>
                 </div>
               </div>
 
@@ -74,40 +84,7 @@ export default function Contact() {
 
             <div className="mt-10 pt-8 border-t border-primary-500/20">
               <h3 className="text-xl font-bold text-white mb-6 gradient-text">{t('contact.helpTitle')}</h3>
-              <ul className="space-y-4 text-gray-300">
-                <li className="flex items-center group">
-                  <div className="w-6 h-6 bg-primary-500 rounded-full flex items-center justify-center mr-4 group-hover:scale-105 transition-transform duration-300">
-                    <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <span>{t('contact.helpWeb')}</span>
-                </li>
-                <li className="flex items-center group">
-                  <div className="w-6 h-6 bg-primary-500 rounded-full flex items-center justify-center mr-4 group-hover:scale-105 transition-transform duration-300">
-                    <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <span>{t('contact.helpCloud')}</span>
-                </li>
-                <li className="flex items-center group">
-                  <div className="w-6 h-6 bg-primary-500 rounded-full flex items-center justify-center mr-4 group-hover:scale-105 transition-transform duration-300">
-                    <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <span>{t('contact.helpK8s')}</span>
-                </li>
-                <li className="flex items-center group">
-                  <div className="w-6 h-6 bg-primary-500 rounded-full flex items-center justify-center mr-4 group-hover:scale-105 transition-transform duration-300">
-                    <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <span>{t('contact.helpArch')}</span>
-                </li>
-              </ul>
+              <div className="text-gray-300 whitespace-pre-line">{siteInfo.helpInfo}</div>
             </div>
           </div>
 
