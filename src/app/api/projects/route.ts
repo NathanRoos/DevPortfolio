@@ -63,6 +63,7 @@ export async function GET(request: Request) {
         return translation ? {
           id: project.id,
           tags: project.tags,
+          image: project.image,
           createdAt: project.createdAt,
           updatedAt: project.updatedAt,
           ...translation
