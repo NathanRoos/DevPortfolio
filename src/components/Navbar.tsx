@@ -58,18 +58,18 @@ export default function Navbar() {
           : 'none',
       }}
     >
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4">
         <div className="flex items-center h-20">
           {/* Left: Branding */}
-          <div className="flex items-center mr-8">
+          <div className="flex items-center mr-2 sm:mr-8">
             <Link href="/" className="flex items-center group">
               <span className="text-white font-bold text-2xl drop-shadow-lg leading-tight">Nathan Roos</span>
               <span className="ml-3 text-xs text-neon-orange font-mono font-semibold drop-shadow-md">&lt;DevOps Developer/&gt;</span>
             </Link>
           </div>
           {/* Center: Navigation */}
-          <div className="flex-1 flex justify-center">
-            <div className="hidden lg:flex items-center space-x-1">
+          <div className="flex-1 flex justify-center min-w-0">
+            <div className="hidden lg:flex items-center space-x-1 min-w-0">
               {navMenu.map((item) => (
                 <Link 
                   key={item.href}
@@ -84,8 +84,8 @@ export default function Navbar() {
             </div>
           </div>
           {/* Right: Controls and Mobile Menu Button */}
-          <div className="flex items-center ml-8">
-            <div className="mr-8">
+          <div className="flex items-center ml-2 sm:ml-8">
+            <div className="mr-2 sm:mr-8">
               <LanguageSwitcher />
             </div>
             {/* ...existing user/auth controls... */}
@@ -132,7 +132,7 @@ export default function Navbar() {
               )}
             </div>
             {/* Mobile menu button always at end */}
-            <div className="lg:hidden ml-2">
+            <div className="lg:hidden ml-1 flex-shrink-0">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="text-gray-300 hover:text-white p-2 rounded-lg hover:bg-primary-500/10 transition-all duration-300"
