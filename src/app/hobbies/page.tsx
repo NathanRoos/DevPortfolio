@@ -37,16 +37,28 @@ export default function HobbiesPage() {
               {t('hobbies.empty')}
             </div>
           ) : (
-            hobbies.map((hobby, index) => (
-              <div key={hobby.id} className="glass-card p-6 rounded-2xl animate-scale-in text-center group hover:bg-primary-500/10 transition-colors duration-300 transform hover:scale-105" style={{ animationDelay: `${index * 0.05}s` }}>
-                <div className="text-6xl mb-4 transform transition-transform group-hover:scale-110 group-hover:rotate-6 duration-300">
-                  {hobby.icon || '✨'}
+            hobbies.map((hobby, index) => {
+              const isUrl = typeof hobby.icon === 'string' && hobby.icon.startsWith('http');
+              return (
+                <div key={hobby.id} className="glass-card p-6 rounded-2xl animate-scale-in text-center group hover:bg-primary-500/10 transition-colors duration-300 transform hover:scale-105" style={{ animationDelay: `${index * 0.05}s` }}>
+                  <div className="mb-4 flex justify-center">
+                    {isUrl ? (
+                      <img
+                        src={hobby.icon}
+                        alt={hobby.name}
+                        className="w-16 h-16 object-contain rounded"
+                        style={{ background: '#222' }}
+                      />
+                    ) : (
+                      <span className="text-6xl transform transition-transform group-hover:scale-110 group-hover:rotate-6 duration-300">{hobby.icon || '✨'}</span>
+                    )}
+                  </div>
+                  <h3 className="text-lg font-bold text-white group-hover:text-primary-300 transition-colors">
+                    {hobby.name}
+                  </h3>
                 </div>
-                <h3 className="text-lg font-bold text-white group-hover:text-primary-300 transition-colors">
-                  {hobby.name}
-                </h3>
-              </div>
-            ))
+              );
+            })
           )}
         </div>
       </div>
