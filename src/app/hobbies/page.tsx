@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 
 export default function HobbiesPage() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [hobbies, setHobbies] = useState<any[]>([]);
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export default function HobbiesPage() {
                     )}
                   </div>
                   <h3 className="text-lg font-bold text-white group-hover:text-primary-300 transition-colors">
-                    {t('lang') === 'fr' ? hobby.nameFr : hobby.name}
+                    {language === 'fr' ? hobby.nameFr : hobby.name}
                   </h3>
                 </div>
               );
