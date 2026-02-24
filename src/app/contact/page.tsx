@@ -5,14 +5,15 @@ import { useLanguage } from '../../context/LanguageContext';
 import { useEffect, useState } from 'react';
 
 export default function Contact() {
-  const { t } = useLanguage();
-  const [siteInfo, setSiteInfo] = useState({ contactEmail: '', helpInfo: '' });
+  const { t, language } = useLanguage();
+  const [siteInfo, setSiteInfo] = useState({ contactEmail: '', helpInfo: '', helpInfoFr: '' });
   useEffect(() => {
     fetch('/api/info')
       .then(res => res.json())
       .then(data => setSiteInfo({
         contactEmail: data.contactEmail || '',
-        helpInfo: data.helpInfo || ''
+        helpInfo: data.helpInfo || '',
+        helpInfoFr: data.helpInfoFr || ''
       }));
   }, []);
   return (
@@ -84,7 +85,7 @@ export default function Contact() {
 
             <div className="mt-10 pt-8 border-t border-primary-500/20">
               <h3 className="text-xl font-bold text-white mb-6 gradient-text">{t('contact.helpTitle')}</h3>
-              <div className="text-gray-300 whitespace-pre-line">{siteInfo.helpInfo}</div>
+              <div className="text-gray-300 whitespace-pre-line">{language === 'fr' ? siteInfo.helpInfoFr : siteInfo.helpInfo}</div>
             </div>
           </div>
 
