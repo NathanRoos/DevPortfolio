@@ -117,7 +117,7 @@ export default function ContactForm() {
   return (
     <div className="glass-card p-8 animate-slide-up">
       <div className="mb-8">
-        <h2 className="text-3xl font-bold gradient-text mb-4">{typeof window !== 'undefined' ? require('../../context/LanguageContext').useLanguage().t('contact.connectTitle') : "Let's Connect"}</h2>
+        <h2 className="text-3xl font-bold gradient-text mb-4">{t('contact.connectTitle')}</h2>
         <p className="text-gray-400">Ready to bring your ideas to life? Let's discuss your next project.</p>
       </div>
       
