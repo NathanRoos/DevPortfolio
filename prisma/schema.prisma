@@ -1,21 +1,5 @@
-model SiteInfo {
-  id           Int      @id @default(1)
-  contactEmail String
-  helpInfo     String
-  helpInfoFr   String   @default("Je peux vous aider avec le développement full stack, DevOps, et l'infrastructure cloud moderne.")
-  directEmail  String
-  homeTitle    String   @default("Full Stack Developer & DevOps Developer")
-  homeTitleFr  String   @default("Développeur Full Stack & DevOps")
-  homeDescription String @default("Crafting scalable applications with cutting-edge technologies.")
-  homeDescriptionFr String @default("Création d'applications évolutives avec des technologies de pointe.")
-  homeStack    String   @default("Next.js • Kubernetes • Modern Cloud Infrastructure")
-  homeStackFr  String   @default("Next.js • Kubernetes • Infrastructure Cloud Moderne")
-}
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "linux-musl-openssl-3.0.x", "debian-openssl-3.0.x"]
 }
 
@@ -24,15 +8,137 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model SiteInfo {
+  id                Int    @id @default(1)
+  contactEmail      String
+  helpInfo          String
+  directEmail       String
+  homeDescription   String @default("Crafting scalable applications with cutting-edge technologies.")
+  homeTitle         String @default("Full Stack Developer & DevOps Developer")
+  homeStack         String @default("Next.js • Kubernetes • Modern Cloud Infrastructure")
+  helpInfoFr        String @default("Je peux vous aider avec le développement full stack, DevOps, et l'infrastructure cloud moderne.")
+  homeDescriptionFr String @default("Création d'applications évolutives avec des technologies de pointe.")
+  homeStackFr       String @default("Next.js • Kubernetes • Infrastructure Cloud Moderne")
+  homeTitleFr       String @default("Développeur Full Stack & DevOps")
+}
+
 model User {
-  id            String       @id @default(cuid())
-  email         String       @unique
-  auth0Id       String       @unique
-  name          String?
-  role          Role         @default(USER)
-  createdAt     DateTime     @default(now())
-  testimonials  Testimonial[]
-  messages      ContactMessage[]
+  id           String           @id @default(cuid())
+  email        String           @unique
+  auth0Id      String           @unique
+  name         String?
+  role         Role             @default(USER)
+  createdAt    DateTime         @default(now())
+  messages     ContactMessage[]
+  testimonials Testimonial[]
+}
+
+model Project {
+  id           String               @id @default(cuid())
+  tags         String[]
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+  translations ProjectTranslation[]
+}
+
+model ProjectTranslation {
+  id          String   @id @default(cuid())
+  projectId   String
+  language    String
+  title       String
+  description String
+  repoUrl     String?
+  liveUrl     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Testimonial {
+  id        String            @id @default(cuid())
+  userId    String?
+  author    String
+  text      String
+  rating    Int               @default(5)
+  status    TestimonialStatus @default(PENDING)
+  createdAt DateTime          @default(now())
+  user      User?             @relation(fields: [userId], references: [id])
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  userId    String?
+  name      String
+  email     String
+  message   String
+  createdAt DateTime @default(now())
+  user      User?    @relation(fields: [userId], references: [id])
+}
+
+model Skill {
+  id           String             @id @default(cuid())
+  category     String
+  proficiency  Int                @default(0)
+  icon         String?
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+  translations SkillTranslation[]
+}
+
+model SkillTranslation {
+  id       String @id @default(cuid())
+  skillId  String
+  language String
+  name     String
+  skill    Skill  @relation(fields: [skillId], references: [id], onDelete: Cascade)
+}
+
+model Experience {
+  id           String                  @id @default(cuid())
+  startDate    DateTime
+  endDate      DateTime?
+  location     String?
+  createdAt    DateTime                @default(now())
+  updatedAt    DateTime                @updatedAt
+  translations ExperienceTranslation[]
+}
+
+model ExperienceTranslation {
+  id           String     @id @default(cuid())
+  experienceId String
+  language     String
+  position     String
+  company      String
+  description  String
+  experience   Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
+}
+
+model Education {
+  id           String                 @id @default(cuid())
+  startDate    DateTime
+  endDate      DateTime?
+  createdAt    DateTime               @default(now())
+  updatedAt    DateTime               @updatedAt
+  translations EducationTranslation[]
+}
+
+model EducationTranslation {
+  id          String    @id @default(cuid())
+  educationId String
+  language    String
+  degree      String
+  institution String
+  description String?
+  education   Education @relation(fields: [educationId], references: [id], onDelete: Cascade)
+}
+
+model Hobby {
+  id        String   @id @default(cuid())
+  name      String
+  icon      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  nameFr    String
 }
 
 enum Role {
@@ -40,117 +146,8 @@ enum Role {
   ADMIN
 }
 
-model Project {
-  id          String   @id @default(cuid())
-  tags        String[]
-  image       String?  // Cloudinary image URL
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  translations ProjectTranslation[]
-}
-
-model ProjectTranslation {
-  id          String   @id @default(cuid())
-  projectId   String
-  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  language    String   // 'en' or 'fr'
-  title       String
-  description String
-  repoUrl     String?
-  liveUrl     String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
-
-model Testimonial {
-  id        String          @id @default(cuid())
-  userId    String?
-  user      User?           @relation(fields: [userId], references: [id])
-  author    String
-  text      String
-  rating    Int               @default(5)
-  status    TestimonialStatus @default(PENDING)
-  createdAt DateTime        @default(now())
-}
-
 enum TestimonialStatus {
   PENDING
   APPROVED
   REJECTED
-}
-
-model ContactMessage {
-  id        String   @id @default(cuid())
-  userId    String?
-  user      User?    @relation(fields: [userId], references: [id])
-  name      String
-  email     String
-  message   String
-  createdAt DateTime @default(now())
-}
-
-model Skill {
-  id        String   @id @default(cuid())
-  category  String   // e.g. "Frontend", "Backend", "DevOps"
-  proficiency Int    @default(0) // 0-100 or 1-5 
-  icon      String?  // Optional icon class or name
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  translations SkillTranslation[]
-}
-
-model SkillTranslation {
-  id        String   @id @default(cuid())
-  skillId   String
-  skill     Skill    @relation(fields: [skillId], references: [id], onDelete: Cascade)
-  language  String   // 'en' or 'fr'
-  name      String
-}
-
-model Experience {
-  id          String   @id @default(cuid())
-  startDate   DateTime
-  endDate     DateTime? // Null means "Present"
-  location    String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  translations ExperienceTranslation[]
-}
-
-model ExperienceTranslation {
-  id            String   @id @default(cuid())
-  experienceId  String
-  experience    Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
-  language      String   // 'en' or 'fr'
-  position      String
-  company       String
-  description   String
-}
-
-model Education {
-  id          String   @id @default(cuid())
-  startDate   DateTime
-  endDate     DateTime?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  translations EducationTranslation[]
-}
-
-model EducationTranslation {
-  id            String   @id @default(cuid())
-  educationId   String
-  education     Education @relation(fields: [educationId], references: [id], onDelete: Cascade)
-  language      String   // 'en' or 'fr'
-  degree        String
-  institution   String
-  description   String?
-}
-
-model Hobby {
-  id        String   @id @default(cuid())
-  name      String
-  nameFr    String
-  icon      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }

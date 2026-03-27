@@ -1,48 +1,3 @@
-export async function PATCH(request: Request) {
-  try {
-    const { id, translations, tags, image } = await request.json();
-    if (!id) {
-      return NextResponse.json({ error: 'Project ID is required' }, { status: 400 });
-    }
-    // Update tags in Project
-    const updatedProject = await prisma.project.update({
-      where: { id },
-      data: { tags, image },
-    });
-    // Update translations
-    if (translations && Array.isArray(translations)) {
-      for (const t of translations) {
-        await prisma.projectTranslation.update({
-          where: { id: t.id },
-          data: {
-            title: t.title,
-            description: t.description,
-            repoUrl: t.repoUrl,
-            liveUrl: t.liveUrl,
-            language: t.language
-          }
-        });
-      }
-    }
-    return NextResponse.json(updatedProject);
-  } catch (error) {
-    console.error('Error updating project:', error);
-    return NextResponse.json({ error: 'Failed to update project' }, { status: 500 });
-  }
-}
-export async function DELETE(request: Request) {
-  try {
-    const { id } = await request.json();
-    if (!id) {
-      return NextResponse.json({ error: 'Project ID is required' }, { status: 400 });
-    }
-    await prisma.project.delete({ where: { id } });
-    return NextResponse.json({ message: 'Project deleted' });
-  } catch (error) {
-    console.error('Error deleting project:', error);
-    return NextResponse.json({ error: 'Failed to delete project' }, { status: 500 });
-  }
-}
 import { NextResponse } from 'next/server';
 import { prisma } from '../../../lib/prisma';
 
@@ -52,18 +7,21 @@ export async function GET(request: Request) {
     const lang = url.searchParams.get('lang');
     const projects = await prisma.project.findMany({
       orderBy: { createdAt: 'desc' },
-      include: {
-        translations: true
+      select: {
+        id: true,
+        tags: true,
+        createdAt: true,
+        updatedAt: true,
+        translations: true,
       }
     });
     if (lang) {
-      // Public page: filter to only the translation matching the language
       const projectsWithTranslation = projects.map(project => {
         const translation = project.translations.find(t => t.language === lang);
         return translation ? {
           id: project.id,
           tags: project.tags,
-          image: project.image,
+          image: null,
           createdAt: project.createdAt,
           updatedAt: project.updatedAt,
           ...translation
@@ -71,7 +29,6 @@ export async function GET(request: Request) {
       }).filter(Boolean);
       return NextResponse.json(projectsWithTranslation);
     } else {
-      // Admin dashboard: return all translations for each project
       return NextResponse.json(projects);
     }
   } catch (error) {
@@ -83,17 +40,12 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { tags, translations, image } = body;
+    const { tags, translations } = body;
 
-    // Create the project
     const project = await prisma.project.create({
-      data: {
-        tags,
-        image
-      }
+      data: { tags }
     });
 
-    // Create translations for each language
     if (translations && Array.isArray(translations)) {
       for (const t of translations) {
         await prisma.projectTranslation.create({
@@ -116,5 +68,51 @@ export async function POST(request: Request) {
       { error: 'Failed to create project' },
       { status: 500 }
     );
+  }
+}
+
+export async function PATCH(request: Request) {
+  try {
+    const { id, translations, tags } = await request.json();
+    if (!id) {
+      return NextResponse.json({ error: 'Project ID is required' }, { status: 400 });
+    }
+    const updatedProject = await prisma.project.update({
+      where: { id },
+      data: { tags },
+      select: { id: true, tags: true, createdAt: true, updatedAt: true }
+    });
+    if (translations && Array.isArray(translations)) {
+      for (const t of translations) {
+        await prisma.projectTranslation.update({
+          where: { id: t.id },
+          data: {
+            title: t.title,
+            description: t.description,
+            repoUrl: t.repoUrl,
+            liveUrl: t.liveUrl,
+            language: t.language
+          }
+        });
+      }
+    }
+    return NextResponse.json(updatedProject);
+  } catch (error) {
+    console.error('Error updating project:', error);
+    return NextResponse.json({ error: 'Failed to update project' }, { status: 500 });
+  }
+}
+
+export async function DELETE(request: Request) {
+  try {
+    const { id } = await request.json();
+    if (!id) {
+      return NextResponse.json({ error: 'Project ID is required' }, { status: 400 });
+    }
+    await prisma.project.delete({ where: { id } });
+    return NextResponse.json({ message: 'Project deleted' });
+  } catch (error) {
+    console.error('Error deleting project:', error);
+    return NextResponse.json({ error: 'Failed to delete project' }, { status: 500 });
   }
 }

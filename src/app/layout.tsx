@@ -1,10 +1,10 @@
 import './globals.css'
 import ClientWrapper from '../components/ClientWrapper'
-  import { LanguageProvider } from '../context/LanguageContext'
+import { LanguageProvider } from '../context/LanguageContext'
 
 export const metadata = {
-  title: 'Nathan Roos | Full Stack Developer & Cloud Infrastructure Specialist',
-  description: 'Portfolio of Nathan Roos - Full Stack Developer specializing in Next.js, Kubernetes, and Modern Cloud Infrastructure. Building scalable applications with cutting-edge technologies.',
+  title: 'Nathan Roos | DevOps Engineer & Full Stack Developer',
+  description: 'Portfolio of Nathan Roos - DevOps Engineer & Full Stack Developer specializing in Kubernetes, Docker, CI/CD, and modern cloud infrastructure.',
 }
 
 export default function RootLayout({
@@ -12,15 +12,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-    return (
-      <html lang="en">
-        <body className="min-h-screen">
-          <LanguageProvider>
-            <ClientWrapper>
-              {children}
-            </ClientWrapper>
-          </LanguageProvider>
-        </body>
-      </html>
-    )
+  return (
+    <html lang="en">
+      <body className="min-h-screen">
+        <LanguageProvider>
+          <ClientWrapper>
+            {children}
+          </ClientWrapper>
+        </LanguageProvider>
+      </body>
+    </html>
+  )
 }

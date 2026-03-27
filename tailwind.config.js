@@ -53,7 +53,15 @@ module.exports = {
         'slide-up': 'slide-up 0.4s ease-out',
         'fade-in': 'fade-in 0.5s ease-out',
         'scale-in': 'scale-in 0.3s ease-out',
-        'bar-reveal': 'scale-in 1s ease-out forwards', // Simplified to scale-in
+        'bar-reveal': 'scale-in 1s ease-out forwards',
+        'marquee': 'marquee var(--duration) linear infinite',
+        'marquee-reverse': 'marquee-reverse var(--duration) linear infinite',
+        'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
+        'marquee-vertical-reverse': 'marquee-vertical-reverse var(--duration) linear infinite',
+        'shimmer': 'shimmer 2s linear infinite',
+        'beam': 'beam 3s ease-in-out infinite',
+        'pulse-slow': 'pulse 3s ease-in-out infinite',
+        'float': 'float 6s ease-in-out infinite',
       },
       keyframes: {
         'glow-pulse': {
@@ -86,6 +94,31 @@ module.exports = {
           '80%': { transform: 'scaleX(1)', opacity: '1' },
           '100%': { transform: 'scaleX(1)', opacity: '0' },
         },
+        'marquee': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(calc(-100% - var(--gap)))' },
+        },
+        'marquee-reverse': {
+          '0%': { transform: 'translateX(calc(-100% - var(--gap)))' },
+          '100%': { transform: 'translateX(0)' },
+        },
+        'marquee-vertical': {
+          '0%': { transform: 'translateY(0)' },
+          '100%': { transform: 'translateY(calc(-100% - var(--gap)))' },
+        },
+        'marquee-vertical-reverse': {
+          '0%': { transform: 'translateY(calc(-100% - var(--gap)))' },
+          '100%': { transform: 'translateY(0)' },
+        },
+        'shimmer': {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
+        'beam': {
+          '0%': { transform: 'translateX(-100%)', opacity: '0' },
+          '50%': { opacity: '1' },
+          '100%': { transform: 'translateX(100%)', opacity: '0' },
+        },
       },
       backdropBlur: {
         'xs': '2px',
@@ -94,6 +127,8 @@ module.exports = {
         'neon': '0 0 5px #f0a04b, 0 0 20px #f0a04b, 0 0 35px #f0a04b',
         'neon-sm': '0 0 2px #f0a04b, 0 0 8px #f0a04b, 0 0 16px #f0a04b',
         'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+        'glow': '0 0 15px rgba(240, 160, 75, 0.15)',
+        'glow-lg': '0 0 30px rgba(240, 160, 75, 0.2)',
       },
     },
   },
