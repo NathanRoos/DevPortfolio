@@ -1,3 +1,8 @@
+import { redirect } from "next/navigation";
+export default function ContactPage() { redirect("/"); }
+
+const _unused = null; // preserved original below
+/*
 "use client";
 
 import { useState, useEffect } from "react";
@@ -259,3 +264,4 @@ export default function ContactPage() {
     </div>
   );
 }
+*/
