@@ -2,7 +2,7 @@
 import { useLanguage } from '../context/LanguageContext';
 
 export default function AdminExperienceList({ experiences, handleDelete, handleEdit }) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   return (
     <div className="glass-card p-6 rounded-2xl col-span-2">
       <h3 className="text-2xl font-bold text-white mb-6">{t('admin.experience.listTitle')}</h3>
@@ -11,8 +11,7 @@ export default function AdminExperienceList({ experiences, handleDelete, handleE
       ) : (
         <ul className="divide-y divide-dark-700">
           {experiences.map(exp => {
-            const { language } = useLanguage();
-            const translation = exp.translations?.find((t: any) => t.language === language);
+            const translation = exp.translations?.find((tr: any) => tr.language === language);
             return (
               <li key={exp.id} className="py-4 flex flex-col md:flex-row md:items-center md:justify-between relative group">
                 <div>

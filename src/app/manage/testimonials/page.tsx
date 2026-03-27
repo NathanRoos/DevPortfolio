@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '../../../context/LanguageContext';
 import ManageGuard from '../../../components/AdminGuard';
+import { toast } from '../../../components/Toast';
 
 interface Testimonial {
   id: string;
@@ -49,7 +50,7 @@ export default function AdminTestimonials() {
       // Refresh the list
       fetchTestimonials();
     } catch (error) {
-      alert(error instanceof Error ? error.message : 'An error occurred');
+      toast(error instanceof Error ? error.message : 'An error occurred', 'error');
     }
   };
 
@@ -66,7 +67,7 @@ export default function AdminTestimonials() {
       // Refresh the list
       fetchTestimonials();
     } catch (error) {
-      alert(error instanceof Error ? error.message : 'An error occurred');
+      toast(error instanceof Error ? error.message : 'An error occurred', 'error');
     }
   };
 

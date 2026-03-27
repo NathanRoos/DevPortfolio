@@ -2,12 +2,11 @@
 import { useLanguage } from '../context/LanguageContext';
 
 export default function AdminEducationList({educationList, handleDelete, handleEdit}) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   return (
     <div className="lg:col-span-2 space-y-4">
       {educationList.map((edu) => {
-        const { language } = useLanguage();
-        const translation = edu.translations?.find((t: any) => t.language === language);
+        const translation = edu.translations?.find((tr: any) => tr.language === language);
         return (
           <div key={edu.id} className="glass-card p-6 rounded-2xl relative group">
             <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">

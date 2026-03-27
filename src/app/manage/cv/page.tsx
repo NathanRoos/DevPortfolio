@@ -1,15 +1,15 @@
 "use client";
 import { useState, useEffect } from 'react';
+import ManageGuard from '../../../components/AdminGuard';
+import { useLanguage } from '../../../context/LanguageContext';
+import { toast } from '../../../components/Toast';
 
-//Fix
 export default function ManageCVPage() {
+  const { t } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
-  const [message, setMessage] = useState('');
   const [cvUrl, setCvUrl] = useState('');
 
-
-  // Fetch current CV on mount
   useEffect(() => {
     const fetchCV = async () => {
       const res = await fetch('/api/cv');
@@ -30,7 +30,6 @@ export default function ManageCVPage() {
   const handleUpload = async () => {
     if (!file) return;
     setUploading(true);
-    setMessage('');
     const formData = new FormData();
     formData.append('file', file);
     const res = await fetch('/api/cv', {
@@ -38,63 +37,84 @@ export default function ManageCVPage() {
       body: formData,
     });
     if (res.ok) {
-      setMessage('CV uploaded successfully!');
+      toast('CV uploaded successfully!', 'success');
       const data = await res.json();
       setCvUrl(data.url);
     } else {
-      setMessage('Failed to upload CV.');
+      toast('Failed to upload CV.', 'error');
     }
     setUploading(false);
   };
 
   const handleDelete = async () => {
     setUploading(true);
-    setMessage('');
     const res = await fetch('/api/cv', { method: 'DELETE' });
     if (res.ok) {
-      setMessage('CV deleted successfully!');
+      toast('CV deleted successfully!', 'success');
       setCvUrl('');
     } else {
-      setMessage('Failed to delete CV.');
+      toast('Failed to delete CV.', 'error');
     }
     setUploading(false);
   };
 
   return (
-    <div className="max-w-2xl mx-auto py-16 px-4">
-      <h1 className="text-4xl font-bold mb-8 text-center">Manage CV</h1>
-      <div className="bg-dark-800/60 rounded-2xl shadow-lg p-8 flex flex-col items-center">
-        <input
-          type="file"
-          accept="application/pdf"
-          onChange={handleFileChange}
-          className="mb-4 block w-full text-sm text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary-600 file:text-white hover:file:bg-primary-500 transition"
-        />
-        <div className="flex gap-4 mb-6">
-          <button
-            onClick={handleUpload}
-            disabled={!file || uploading}
-            className="px-6 py-2 bg-primary-600 text-white rounded-lg font-semibold disabled:opacity-50 shadow hover:bg-primary-500 transition"
-          >
-            Upload CV
-          </button>
-          <button
-            onClick={handleDelete}
-            disabled={uploading || !cvUrl}
-            className="px-6 py-2 bg-red-600 text-white rounded-lg font-semibold disabled:opacity-50 shadow hover:bg-red-700 transition"
-          >
-            Delete CV
-          </button>
+    <ManageGuard>
+      <div>
+        <div className="mb-12 text-center animate-fade-in">
+          <h2 className="text-5xl font-black gradient-text mb-4">Manage CV</h2>
+          <p className="text-xl text-gray-300">Upload and manage your CV document</p>
         </div>
-        {message && <p className={`mt-2 text-lg font-medium ${message.includes('success') ? 'text-green-400' : 'text-red-400'}`}>{message}</p>}
-        {cvUrl ? (
-          <div className="mt-8 text-center">
-            <a href={cvUrl} target="_blank" rel="noopener noreferrer" className="underline text-primary-400 text-lg font-semibold hover:text-primary-300 transition">View Current CV</a>
+
+        <div className="max-w-2xl mx-auto glass-card rounded-2xl p-8 border border-primary-500/20">
+          <div className="space-y-6">
+            <div>
+              <label className="block text-sm font-semibold text-gray-400 mb-2">Upload PDF</label>
+              <input
+                type="file"
+                accept="application/pdf"
+                onChange={handleFileChange}
+                className="block w-full text-sm text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border file:border-primary-500/30 file:text-sm file:font-semibold file:bg-primary-500/10 file:text-primary-300 hover:file:bg-primary-500/20 transition"
+              />
+            </div>
+
+            <div className="flex gap-4">
+              <button
+                onClick={handleUpload}
+                disabled={!file || uploading}
+                className="btn btn-primary"
+              >
+                Upload CV
+              </button>
+              <button
+                onClick={handleDelete}
+                disabled={uploading || !cvUrl}
+                className="btn btn-danger"
+              >
+                Delete CV
+              </button>
+            </div>
+
+            {cvUrl ? (
+              <div className="bg-dark-800/30 rounded-xl p-6 border border-primary-500/20 text-center">
+                <svg className="w-12 h-12 text-primary-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <a href={cvUrl} target="_blank" rel="noopener noreferrer" className="text-primary-400 font-semibold hover:text-primary-300 transition underline">
+                  View Current CV
+                </a>
+              </div>
+            ) : (
+              <div className="bg-dark-800/30 rounded-xl p-6 border border-primary-500/20 text-center">
+                <svg className="w-12 h-12 text-gray-500 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+                <p className="text-gray-400 font-semibold">No CV uploaded yet.</p>
+              </div>
+            )}
           </div>
-        ) : (
-          <div className="mt-8 text-center text-gray-400 text-lg font-semibold">No CV uploaded yet.</div>
-        )}
+        </div>
       </div>
-    </div>
+    </ManageGuard>
   );
 }

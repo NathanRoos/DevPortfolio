@@ -19,7 +19,7 @@ interface Skill {
 }
 
 export default function AdminSkills() {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
   const [skills, setSkills] = useState<Skill[]>([]);
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
@@ -101,7 +101,7 @@ export default function AdminSkills() {
     <ManageGuard>
       <div>
         <div className="mb-12 text-center animate-fade-in">
-          <h2 className="text-5xl font-black gradient-text mb-4">🎨 {t('admin.skills.title')}</h2>
+          <h2 className="text-5xl font-black gradient-text mb-4">{t('admin.skills.title')}</h2>
           <p className="text-xl text-gray-300">{t('admin.skills.subtitle')}</p>
         </div>
 
@@ -117,7 +117,7 @@ export default function AdminSkills() {
                     type="text"
                     value={formData.en.name}
                     onChange={(e) => setFormData({ ...formData, en: { name: e.target.value } })}
-                    className="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-primary-500"
+                    className="input"
                     required
                   />
                 </div>
@@ -127,7 +127,7 @@ export default function AdminSkills() {
                     type="text"
                     value={formData.fr.name}
                     onChange={(e) => setFormData({ ...formData, fr: { name: e.target.value } })}
-                    className="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-primary-500"
+                    className="input"
                     required
                   />
                 </div>
@@ -138,7 +138,7 @@ export default function AdminSkills() {
                 <select
                   value={formData.category}
                   onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                  className="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-primary-500"
+                  className="input"
                 >
                   {categories.map(cat => (
                     <option key={cat} value={cat}>{cat}</option>
@@ -162,7 +162,7 @@ export default function AdminSkills() {
 
               <button
                 type="submit"
-                className="w-full py-3 bg-primary-600 hover:bg-primary-500 text-white font-bold rounded-lg transition-colors"
+                className="btn btn-primary w-full"
               >
                 {t('admin.skills.addButton')}
               </button>
@@ -181,18 +181,14 @@ export default function AdminSkills() {
                     {category}
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {categorySkills.map(skill => (
+                    {categorySkills.map(skill => {
+                      const translation = skill.translations?.find((tr: any) => tr.language === language);
+                      return (
                       <div key={skill.id} className="bg-dark-800/50 p-4 rounded-xl flex justify-between items-center group">
                         <div>
-                          {(() => {
-                            const { language } = useLanguage();
-                            const translation = skill.translations?.find((t: any) => t.language === language);
-                            return (
-                              <p className="font-semibold text-white">
-                                {translation?.name || <span className="italic text-gray-400">No translation</span>}
-                              </p>
-                            );
-                          })()}
+                          <p className="font-semibold text-white">
+                            {translation?.name || <span className="italic text-gray-400">No translation</span>}
+                          </p>
                           <div className="w-24 h-1.5 bg-gray-700 rounded-full mt-2 overflow-hidden">
                             <div 
                               className="h-full bg-primary-500 rounded-full"
@@ -209,7 +205,8 @@ export default function AdminSkills() {
                           </svg>
                         </button>
                       </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               );

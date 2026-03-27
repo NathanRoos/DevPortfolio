@@ -2,10 +2,10 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function AdminSidebar() {
-    // Import language context
-    const { t, language } = require('../context/LanguageContext').useLanguage ? require('../context/LanguageContext').useLanguage() : { t: (key) => key, language: 'en' };
+  const { t } = useLanguage();
   const pathname = usePathname();
 
   const menuItems = [

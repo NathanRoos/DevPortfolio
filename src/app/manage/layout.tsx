@@ -9,10 +9,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
     <ManageGuard>
-      <div className="h-[calc(100vh-5rem)] bg-mesh-gradient relative overflow-hidden flex">
-        {/* Animated Background Elements */}
-        <div className="fixed inset-0 cyber-grid opacity-30 pointer-events-none"></div>
-
+      <div className="h-[calc(100vh-5rem)] relative overflow-hidden flex">
         {/* Sidebar: hidden on small screens, overlay on mobile */}
         {/* Sidebar for desktop */}
         <div className="hidden lg:block">

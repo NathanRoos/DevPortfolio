@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import ManageGuard from '../../../components/AdminGuard';
 import { useLanguage } from '../../../context/LanguageContext';
+import { toast } from '../../../components/Toast';
 
 interface ContactMessage {
   id: string;
@@ -51,11 +52,11 @@ export default function AdminMessages() {
       if (response.ok) {
         setMessages((prev) => prev.filter((msg) => msg.id !== id));
       } else {
-        alert('Failed to delete message');
+        toast('Failed to delete message', 'error');
       }
     } catch (error) {
       console.error('Error deleting message:', error);
-      alert('Error deleting message');
+      toast('Error deleting message', 'error');
     } finally {
       setDeletingId(null);
     }
@@ -66,7 +67,7 @@ export default function AdminMessages() {
     <ManageGuard>
       <div>
         <div className="mb-12 text-center animate-fade-in">
-          <h2 className="text-5xl font-black gradient-text mb-4">📬 {t('admin.messages.title')}</h2>
+          <h2 className="text-5xl font-black gradient-text mb-4">{t('admin.messages.title')}</h2>
           <p className="text-xl text-gray-300">{t('admin.messages.subtitle')}
             <span className="gradient-text-alt font-semibold"> • {t('admin.messages.cta')}</span>
           </p>

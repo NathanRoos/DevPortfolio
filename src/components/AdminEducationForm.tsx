@@ -49,7 +49,7 @@ export default function AdminEducationForm({formData, setFormData, handleSubmit,
             placeholder={t('admin.education.degreePlaceholder') + ' (EN)'}
             value={formData.en.degree}
             onChange={e => setFormData({ ...formData, en: { ...formData.en, degree: e.target.value } })}
-            className="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded-lg text-white"
+            className="input"
             required
           />
           <input
@@ -57,7 +57,7 @@ export default function AdminEducationForm({formData, setFormData, handleSubmit,
             placeholder={t('admin.education.degreePlaceholder') + ' (FR)'}
             value={formData.fr.degree}
             onChange={e => setFormData({ ...formData, fr: { ...formData.fr, degree: e.target.value } })}
-            className="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded-lg text-white"
+            className="input"
             required
           />
         </div>
@@ -67,7 +67,7 @@ export default function AdminEducationForm({formData, setFormData, handleSubmit,
             placeholder={t('admin.education.institutionPlaceholder') + ' (EN)'}
             value={formData.en.institution}
             onChange={e => setFormData({ ...formData, en: { ...formData.en, institution: e.target.value } })}
-            className="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded-lg text-white"
+            className="input"
             required
           />
           <input
@@ -75,7 +75,7 @@ export default function AdminEducationForm({formData, setFormData, handleSubmit,
             placeholder={t('admin.education.institutionPlaceholder') + ' (FR)'}
             value={formData.fr.institution}
             onChange={e => setFormData({ ...formData, fr: { ...formData.fr, institution: e.target.value } })}
-            className="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded-lg text-white"
+            className="input"
             required
           />
         </div>
@@ -84,13 +84,13 @@ export default function AdminEducationForm({formData, setFormData, handleSubmit,
             placeholder={t('admin.education.descriptionPlaceholder') + ' (EN)'}
             value={formData.en.description}
             onChange={e => setFormData({ ...formData, en: { ...formData.en, description: e.target.value } })}
-            className="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded-lg text-white h-24"
+            className="input h-24"
           />
           <textarea
             placeholder={t('admin.education.descriptionPlaceholder') + ' (FR)'}
             value={formData.fr.description}
             onChange={e => setFormData({ ...formData, fr: { ...formData.fr, description: e.target.value } })}
-            className="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded-lg text-white h-24"
+            className="input h-24"
           />
         </div>
         <div className="grid grid-cols-2 gap-4">
@@ -100,7 +100,7 @@ export default function AdminEducationForm({formData, setFormData, handleSubmit,
               type="date"
               value={formData.startDate}
               onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
-              className="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded-lg text-white"
+              className="input"
               required
             />
           </div>
@@ -110,13 +110,13 @@ export default function AdminEducationForm({formData, setFormData, handleSubmit,
               type="date"
               value={formData.endDate}
               onChange={(e) => setFormData({ ...formData, endDate: e.target.value })}
-              className="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded-lg text-white"
+              className="input"
             />
           </div>
         </div>
         <button
           type="submit"
-          className="w-full py-3 bg-primary-600 hover:bg-primary-500 text-white font-bold rounded-lg transition-colors"
+          className="btn btn-primary w-full"
         >
           {editId ? 'Save Changes' : t('admin.education.addButton')}
         </button>
