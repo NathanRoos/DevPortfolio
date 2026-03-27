@@ -115,7 +115,7 @@ export default function ContactForm() {
         <p className="text-gray-400">{t('contact.formIntro')}</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} noValidate className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">
           <div className="group">
             <label className="block text-sm font-medium text-gray-300 mb-2 group-focus-within:text-primary-400 transition-colors">
@@ -127,7 +127,6 @@ export default function ContactForm() {
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               className="w-full px-4 py-3 bg-dark-800/50 border border-gray-600 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-primary-500 focus:bg-dark-800/80 transition-all duration-300"
               placeholder={t('contact.formNamePlaceholder')}
-              required
             />
           </div>
 
@@ -141,7 +140,6 @@ export default function ContactForm() {
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               className="w-full px-4 py-3 bg-dark-800/50 border border-gray-600 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-primary-500 focus:bg-dark-800/80 transition-all duration-300"
               placeholder={t('contact.formEmailPlaceholder')}
-              required
             />
           </div>
         </div>
@@ -156,7 +154,6 @@ export default function ContactForm() {
             rows={6}
             className="w-full px-4 py-3 bg-dark-800/50 border border-gray-600 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-primary-500 focus:bg-dark-800/80 transition-all duration-300 resize-none"
             placeholder={t('contact.formMessagePlaceholder')}
-            required
           />
         </div>
 

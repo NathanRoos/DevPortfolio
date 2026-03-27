@@ -15,6 +15,7 @@ import {
   FileText,
   Download,
 } from "lucide-react";
+import { toast } from "../../components/Toast";
 
 interface Testimonial {
   id: string;
@@ -55,7 +56,7 @@ export default function ContactPage() {
   const handleTestimonialSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (testimonialForm.text.trim().length < 10) {
-      alert(language === "fr" ? "Veuillez \u00e9crire au moins 10 caract\u00e8res." : "Please write at least 10 characters.");
+      toast(language === "fr" ? "Veuillez \u00e9crire au moins 10 caract\u00e8res." : "Please write at least 10 characters.", "error");
       return;
     }
     if (testimonialForm.website) { setTestimonialSuccess(true); return; }
@@ -75,7 +76,7 @@ export default function ContactPage() {
       setShowTestimonialForm(false);
       setTimeout(() => setTestimonialSuccess(false), 5000);
     } catch (err: any) {
-      alert(err.message || "Error");
+      toast(err.message || "Error", "error");
     } finally {
       setSubmittingTestimonial(false);
     }
@@ -189,7 +190,7 @@ export default function ContactPage() {
           {/* Testimonial Form */}
           {showTestimonialForm && (
             <div className="glass-card p-6 sm:p-8 rounded-2xl mb-12 max-w-xl mx-auto animate-slide-up">
-              <form onSubmit={handleTestimonialSubmit} className="space-y-5">
+              <form onSubmit={handleTestimonialSubmit} noValidate className="space-y-5">
                 <div style={{ display: "none" }} aria-hidden="true">
                   <input type="text" name="website" autoComplete="off" tabIndex={-1}
                     value={testimonialForm.website}
