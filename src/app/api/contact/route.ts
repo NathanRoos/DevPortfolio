@@ -1,3 +1,4 @@
+import { checkRateLimit } from '../../../lib/rateLimit';
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '../../../lib/prisma';
 import { contactMessageSchema } from '../../../lib/validators';
@@ -20,6 +21,12 @@ const transporter = nodemailer.createTransport({
 
 export async function POST(request: NextRequest) {
   try {
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+    const rate = checkRateLimit(ip, 'contact', 3, 5);
+    if (rate.blocked) {
+      return NextResponse.json({ error: `Rate limit exceeded. Try again in ${Math.ceil(rate.retryAfter / 60)} minutes.` }, { status: 429 });
+    }
+
     const body = await request.json();
     const validatedData = contactMessageSchema.parse(body);
     

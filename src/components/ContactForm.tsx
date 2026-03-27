@@ -3,10 +3,10 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { contactMessageSchema } from '../lib/validators';
+import { toast } from './Toast';
 
 export default function ContactForm() {
     const { t } = useLanguage();
-  // Placeholder - will implement proper auth after Auth0 setup
   const user = null;
   const [formData, setFormData] = useState({
     name: '',
@@ -15,8 +15,6 @@ export default function ContactForm() {
   });
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [errorList, setErrorList] = useState<string[]>([]);
   const [directEmail, setDirectEmail] = useState('');
 
   useEffect(() => {
@@ -28,19 +26,15 @@ export default function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    setError(null);
-    setErrorList([]);
 
     try {
-      // Validate form data on client for fast feedback
       try {
         contactMessageSchema.parse(formData);
       } catch (zodError: any) {
-        // If it's a ZodError, show only the first message
         if (zodError && Array.isArray(zodError.issues) && zodError.issues.length > 0 && typeof zodError.issues[0].message === 'string') {
-          window.alert(zodError.issues[0].message);
+          toast(zodError.issues[0].message, 'error');
         } else {
-          window.alert('Invalid input.');
+          toast('Invalid input.', 'error');
         }
         setSubmitting(false);
         return;
@@ -57,11 +51,10 @@ export default function ContactForm() {
         try {
           errorData = await response.json();
         } catch {
-          setError('Failed to send message');
+          toast('Failed to send message', 'error');
           setSubmitting(false);
           return;
         }
-        // Robustly extract a user-friendly error message
         let errorMessage = 'An error occurred.';
         if (errorData && Array.isArray(errorData.issues) && errorData.issues.length > 0 && typeof errorData.issues[0].message === 'string') {
           errorMessage = errorData.issues[0].message;
@@ -72,7 +65,7 @@ export default function ContactForm() {
         } else if (typeof errorData === 'string') {
           errorMessage = errorData;
         }
-        window.alert(errorMessage);
+        toast(errorMessage, 'error');
         setSubmitting(false);
         return;
       }
@@ -80,14 +73,13 @@ export default function ContactForm() {
       setSuccess(true);
       setFormData({ name: '', email: '', message: '' });
     } catch (error: any) {
-      // Zod validation error on client
       if (error && error.errors && Array.isArray(error.errors)) {
         const messages = error.errors.map((i: any) => typeof i.message === 'string' ? i.message : 'Invalid input.');
-        window.alert(messages[0] || 'Invalid input.');
+        toast(messages[0] || 'Invalid input.', 'error');
       } else if (error instanceof Error && typeof error.message === 'string') {
-        window.alert(error.message);
+        toast(error.message, 'error');
       } else {
-        window.alert('An error occurred');
+        toast('An error occurred', 'error');
       }
       setSubmitting(false);
       return;
@@ -122,11 +114,8 @@ export default function ContactForm() {
         <h2 className="text-3xl font-bold gradient-text mb-4">{t('contact.connectTitle')}</h2>
         <p className="text-gray-400">{t('contact.formIntro')}</p>
       </div>
-      
+
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Error messages are now shown as popups only */}
-      
-        
         <div className="grid md:grid-cols-2 gap-6">
           <div className="group">
             <label className="block text-sm font-medium text-gray-300 mb-2 group-focus-within:text-primary-400 transition-colors">
@@ -141,7 +130,7 @@ export default function ContactForm() {
               required
             />
           </div>
-          
+
           <div className="group">
             <label className="block text-sm font-medium text-gray-300 mb-2 group-focus-within:text-primary-400 transition-colors">
               {t('contact.formEmailLabel')}
@@ -156,7 +145,7 @@ export default function ContactForm() {
             />
           </div>
         </div>
-        
+
         <div className="group">
           <label className="block text-sm font-medium text-gray-300 mb-2 group-focus-within:text-primary-400 transition-colors">
             {t('contact.formMessageLabel')}
@@ -170,7 +159,7 @@ export default function ContactForm() {
             required
           />
         </div>
-        
+
         <button
           type="submit"
           disabled={submitting}
@@ -190,7 +179,7 @@ export default function ContactForm() {
             </>
           )}
         </button>
-        
+
         <div className="text-center text-sm text-gray-500">
           <p>{t('contact.formDirectLabel')} <a href={`mailto:${directEmail}`} className="text-primary-400 hover:text-primary-300 font-mono transition-colors">{directEmail}</a></p>
         </div>
